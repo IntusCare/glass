@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "files": []
+  "files": ["types/markdown.d.ts"]
 }
