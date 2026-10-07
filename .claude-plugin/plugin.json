@@ -1,6 +1,6 @@
 {
   "name": "glass-skills",
-  "version": "0.0.0",
+  "version": "1.3.2",
   "description": "Agent skills for real engineering: grilling, spec and ticket flows, TDD, code review, diagnosing bugs, domain modelling and more. Small, composable, model-agnostic, and yours to adapt.",
   "author": {
     "name": "Black Glass Inc.",
