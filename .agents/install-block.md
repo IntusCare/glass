@@ -20,7 +20,7 @@ Or, from inside a session:
 
 It's in Claude Code's official marketplace, so there's nothing to add first. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](../CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
+**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](../skills/CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
 
 ```bash
 claude plugin uninstall glass-skills@claude-plugins-official
