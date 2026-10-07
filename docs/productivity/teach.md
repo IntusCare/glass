@@ -6,7 +6,7 @@ It does not teach from what the [model](https://www.aihero.dev/ai-coding-diction
 
 ## When to reach for it
 
-You invoke this by typing `/teach`; the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own.
+Type `/teach`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) can select it when you want a guided learning program or to continue lessons in a teaching workspace. A one-off question is not a request to create that workspace.
 
 Reach for it when the learning is the project: a language, a framework, a codebase you have just joined, yoga, shaders, a certification. It is not the tool for one explanation in passing.
 

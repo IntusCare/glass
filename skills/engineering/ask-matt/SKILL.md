@@ -1,12 +1,13 @@
 ---
 name: ask-matt
-description: Ask which skill or flow fits your situation. A router over the skills in this repo.
-disable-model-invocation: true
+description: Find the right skill or flow for a task. Use when the user asks which skill to use, how the workflows connect, or what step comes next.
 ---
 
 # Ask Matt
 
-You don't remember every skill, so ask.
+You don't remember every skill, so ask. The agent can also consult this router when the next step is unclear.
+
+Every skill in this repository is model-invoked and explicitly callable. Route within the user's requested scope and preserve each workflow's confirmation gates. When the user asks only for a recommendation, recommend and stop; a route is not permission to execute every step.
 
 Before stating what a skill does or recommending a step be skipped, read that skill's SKILL.md: the summaries here are for orientation only.
 
@@ -91,6 +92,16 @@ Off the main flow entirely.
 - **`/wait-what`** is the corrective for a message that didn't land. Use it mid-conversation, inside any other skill, and the agent re-pitches what it just said with the context you were missing, in plain English, using the `GLOSSARY.md` vocabulary. It works after the fact; `/grill-with-docs` is the upfront cure, because a shared language agreed early is what stops the jargon arriving at all.
 - **`/teach`**: learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-for-agents`** is the reference for writing documents agents consume: skills, AGENTS.md, pointed-at docs.
+
+## Additional local routes
+
+These skills are available in this checkout, but are not shipped in the promoted plugin. Check availability before recommending them elsewhere.
+
+- **`/loop-me`** specifies recurring workflows across sessions; **`/chief-of-staff`** coordinates a long-running goal through subagents and schedules.
+- **`/writing-fragments`** mines raw material. Once the material exists, **`/writing-shape`** builds an article paragraph by paragraph, while **`/writing-beats`** lets the user choose the next narrative beat.
+- **`/claude-handoff`** immediately launches a Claude Code background agent. Use **`/handoff`** for a portable document without launching another agent.
+- **`/setup-ts-deep-modules`** enforces TypeScript module boundaries; **`/migrate-to-shoehorn`** replaces test assertions with partial fixtures; **`/setup-pre-commit`** configures commit-time checks.
+- **`/git-guardrails-claude-code`** installs Git safety hooks for Claude Code; **`/scaffold-exercises`** creates course exercise structures.
 
 ## Precondition
 

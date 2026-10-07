@@ -1,22 +1,21 @@
 # Skill mechanics
 
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, the invocation choice, and router skills). Everything else about writing it is the universal reference in `SKILL.md`.
+The skill-specific branch of [`writing-for-agents`](SKILL.md): frontmatter, invocation, and router skills. Everything else about writing it is the universal reference in `SKILL.md`.
 
 ## Invocation
 
-Two choices, trading the two loads:
+In this repository, every skill is **model-invoked** and explicitly callable by the user. Keep a `description` that states the job and its trigger branches, omit `disable-model-invocation`, and leave implicit invocation enabled in `agents/openai.yaml`.
 
-- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously, and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times: permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
-- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load: you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing: a one-line summary, trigger lists stripped.
+The description is the skill's top-level context pointer: permanent context load in exchange for discoverability. Keep it narrow enough that a matching task selects the right workflow rather than a larger neighbouring one. Model invocation adds agent reach without removing the human's ability to invoke the skill by name.
 
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+Invocation eligibility does not remove a workflow's confirmation points. Keep decisions with the user where the skill calls for them, even when the agent selected the skill automatically.
 
-Shared reference that two user-invoked skills both need can live in neither: with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
+A model-invoked reference skill can own material several skills need. Other skills call it instead of duplicating its reference or reaching into its folder through relative cross-links.
 
 ## Splitting by invocation
 
-The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own (a trigger word you actually use in your prompts), or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
+The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a skill when a distinct leading word should trigger it independently, or another skill must reach it. The new description adds context load, so that independent reach has to earn its cost.
 
 ## Router skills
 
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
+A **router skill** names related skills and when to reach for each, reducing the map a human or agent must remember. Read a target skill before claiming what it does. A request for routing advice earns a recommendation, not automatic execution of the recommended flow. When execution is requested, preserve the target skill's prerequisites and confirmation gates.

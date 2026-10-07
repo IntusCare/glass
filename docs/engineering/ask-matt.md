@@ -2,11 +2,11 @@
 
 `ask-matt` is the router over the skills in this repo. You describe the situation you are in (an idea you cannot start, a pile of incoming bug reports, a [session](https://www.aihero.dev/ai-coding-dictionary/session) that has run long), and it names the skill or the sequence of skills that fits, plus where the human decisions in that sequence sit.
 
-It recommends and stops. It does not grill, write a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), open a file or fire the skill it just named; what you get back is the next thing to type, and you type it. It is also a hand-written map of the skills in this repo rather than a scan of what you have installed, so it will not route you over your own skills or another author's.
+When you ask for a recommendation, it recommends and stops. It reads the target skill before describing its behaviour, but does not treat a route as permission to execute the whole flow. It is a hand-written map of this repository's skills, not a scan of every skill you have installed.
 
 ## When to reach for it
 
-You invoke this by typing `/ask-matt`; the agent won't reach for it on its own.
+Type `/ask-matt`, or the agent can consult it automatically when choosing a skill or the next step in a workflow.
 
 | Your situation | What the router gives back |
 | --- | --- |
@@ -18,7 +18,7 @@ You invoke this by typing `/ask-matt`; the agent won't reach for it on its own.
 
 ## Prerequisites
 
-The router names skills; it does not install them. Everything it points at has to be installed for the recommendation to be actionable, and it only knows the promoted skills in this repo.
+The router names skills; it does not install them. A recommended skill must be available before it can run. The main flows use promoted skills; an additional local-routes section covers the beta and miscellaneous skills available inside this checkout but excluded from the plugin.
 
 The tracker-dependent routes (triage, `to-spec`, `to-tickets`, `implement`) assume [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) has already configured an issue tracker in the repo. The router recommends them even before that has happened.
 
@@ -54,7 +54,7 @@ People keep asking for one in the README. This skill is that list. A static tabl
 
 **It told me half the skills aren't installed.**
 
-This is a known bug, and it is not fixed. Most of the skills the router routes you through set `disable-model-invocation: true`, which means the harness leaves them out of the skill list it injects into the agent's context. The agent reads that list as exhaustive and reports them missing. In one reported session, it declared the whole spec-and-tickets flow absent and rerouted to bare `/grilling` and `/tdd`. Sixteen of the plugin's twenty-seven skills carry the flag, so this is the common case rather than an edge. They are installed. Type the slash command anyway, or check `.claude-plugin/plugin.json`, which is the authority on what is present.
+Older versions marked many skills user-only, so some harnesses omitted them from the model-visible list and the router mistook that list for a complete inventory. Every current source skill allows model invocation. Inside this checkout, all buckets are linked for local discovery; the plugin still ships only the promoted buckets. If a skill appears missing, inspect its source path and restart the session if discovery has not refreshed. An installed plugin cache may still contain an older version.
 
 **It described a skill's behaviour, and the skill doesn't do that.**
 

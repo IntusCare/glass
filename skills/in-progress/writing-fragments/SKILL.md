@@ -1,7 +1,6 @@
 ---
 name: writing-fragments
-description: "Writing, explore: mine raw fragments, no structure yet."
-disable-model-invocation: true
+description: Mine raw writing fragments through an interview without imposing article structure. Use when the user wants to explore a topic and collect ideas, anecdotes, or claims before drafting.
 ---
 
 <what-to-do>

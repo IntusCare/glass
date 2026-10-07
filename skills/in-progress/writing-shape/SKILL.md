@@ -1,7 +1,6 @@
 ---
 name: writing-shape
-description: "Writing, exploit: shape raw material into an article, paragraph by paragraph."
-disable-model-invocation: true
+description: Shape existing raw material into an article paragraph by paragraph. Use when the user has notes or fragments and wants to develop an argument, choosing structure and format as the draft grows.
 ---
 
 <what-to-do>

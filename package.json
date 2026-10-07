@@ -22,6 +22,7 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "test": "turbo run test",
+    "link-skills": "bun scripts/local-skills.ts --write",
     "check": "bun run lint && turbo run build typecheck test check",
     "changeset": "bun node_modules/.bin/changeset",
     "version": "bun run changeset version && bun scripts/sync-plugin-version.mjs",

@@ -1,25 +1,29 @@
-# Model-invoked vs user-invoked
+# Skill invocation
 
-Every `SKILL.md` in this repo is a skill. The one axis that splits them is **invocation**, who can reach it:
+Every `SKILL.md` in this repo is **model-invoked**: reachable by the agent when the task fits and explicitly by the user. This applies to every bucket, including local-only and beta skills. Invocation eligibility is separate from which skills ship in the plugin.
 
-- **User-invoked**: reachable **only by the human typing its name**. Set `disable-model-invocation: true` in the frontmatter (Claude Code) and `policy.allow_implicit_invocation: false` in `agents/openai.yaml` (Codex). The `description` is **human-facing**: a one-line summary read by a person browsing slash-commands. Strip trigger lists ("Use when the user says…").
-- **Model-invoked**: reachable by **model or user**. The default: omit `disable-model-invocation` and the `policy` block from `agents/openai.yaml`. The `description` is **model-facing** and keeps rich trigger phrasing ("Use when the user wants…, mentions…, asks for…") so auto-invocation fires. The test for whether a skill should stay model-invoked: _could the model usefully reach for this autonomously?_ (Reuse is the reason to extract a skill, not the test.)
+- Omit `disable-model-invocation` from frontmatter and `policy.allow_implicit_invocation: false` from `agents/openai.yaml`.
+- Keep the `description` model-facing: state the skill's job and the distinct situations that should trigger it. Explicit invocation remains available through the harness's skill picker or command syntax.
+- Keep `interface.display_name` and `interface.short_description` in `agents/openai.yaml` for the Codex picker.
+- Preserve each workflow's confirmation gates and prerequisites. Automatic selection does not authorize unrelated work, skip a human decision, or remove tool permission checks.
 
-Each harness excludes a user-invoked skill from the model's reach in its own way, so nothing but the human can fire it: no other skill can. A user-invoked skill may invoke model-invoked skills, but it can never reach another user-invoked skill.
+The promoted bucket READMEs and top-level README list their skills under **Model-invoked**. Non-promoted buckets use flat lists.
 
-Every skill also carries an `agents/openai.yaml` beside its `SKILL.md`. It holds Codex UI metadata: `interface.display_name` and `interface.short_description` for the skill picker, and, for user-invoked skills, the `policy.allow_implicit_invocation: false` that pairs with `disable-model-invocation`. Keep the two in sync: a skill is user-invoked in both harnesses or neither.
+## Dependencies between skills
 
-Bucket `README.md`s and the top-level `README.md` group entries into **User-invoked** and **Model-invoked**.
+Dependencies are expressed as an explicit instruction to **call the Skill tool** with the named skill (`Call the Skill tool with "grilling"`), not deep `../other-skill/FILE.md` cross-references or a bare `/name` left for the model to interpret. Shared reference docs live inside the skill that owns them; other skills reach that material by calling the owning skill.
 
-## Dependencies between them
+The Skill tool takes one skill per call. A step that needs two skills is two calls: say `Call the Skill tool twice, for "grilling" and "domain-modeling"`.
 
-Dependencies are expressed as an explicit instruction to **call the Skill tool** with the named skill (`Call the Skill tool with "grilling"`), not deep `../other-skill/FILE.md` cross-references, and not a bare `/skill`-style mention left for the model to interpret. Naming the tool is what gets it fired: most harnesses expose skill invocation as a tool the model calls, and spelling that out gets a higher hit rate than dropping a `/name` into prose and hoping it's read as a command. Dropping the leading `/` also keeps this harness-neutral rather than less: a skill name on its own carries no assumption about which harness's trigger syntax it belongs to. Shared reference docs live inside the skill that owns them; other skills reach that material by calling the Skill tool with it, not by linking across folders.
+Router prose that names skills for a human to choose from is guidance, not an instruction to execute the whole flow. Keep `/skill` labels in that prose. All skills are eligible for cross-skill calls, but a workflow's explicit stop or confirmation point still applies.
 
-This is about **operative** instructions: a skill's own steps telling the agent to go run another skill right now. Router prose that just names skills for a human to pick from (`ask-matt`, bucket `README.md`s) isn't invoking anything, so it keeps `/skill`-style names as plain labels.
+## Repository-local discovery
 
-The Skill tool takes one skill per call. A step that needs two skills is two calls, not one call with two names: say so (`Call the Skill tool twice, for "grilling" and "domain-modeling"`), not "call it with X and Y," which reads as a single call taking both.
+`.devin/skills/<name>` links to `skills/<bucket>/<name>`. `.agents/skills` and `.claude/skills` link to `.devin/skills` for Codex and Claude Code compatibility. All links are relative, so a checkout can move without changing them. The source folders remain the only copies of skill content and supporting files.
 
-This whole convention only holds when the named skill is **model-invoked**. A user-invoked skill can never be reached this way, full stop: per the invariant above, no other skill can call it, including by naming it to the Skill tool. When a step's precondition is a user-invoked skill (e.g. `setup-matt-pocock-skills`), phrase it as an instruction for the human to act on: "tell the user to run `/setup-matt-pocock-skills`", never as a Skill tool call.
+Run `bun run link-skills` after adding, removing, renaming, or moving a skill. The command refreshes only repository-managed links and refuses to overwrite real files or unrelated symlinks. Commit the link changes with the source changes. `bun run check` detects missing or stale links, duplicate names, and invocation restrictions.
+
+Fresh checkouts require Git symlink support. If a harness does not notice changes during a session, restart it. Existing global or plugin installations are untouched; duplicate names follow the harness's resolution rules, so inspect the source path when testing a local edit.
 
 ## Passive vs active domain work
 

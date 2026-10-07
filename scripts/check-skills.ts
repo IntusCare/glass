@@ -1,5 +1,6 @@
 import { dirname, resolve } from "node:path";
 import { fs } from "zx";
+import { syncLocalSkills } from "./local-skills.js";
 import { validateSkillManifest } from "./skill-manifest.js";
 
 const repo = resolve(process.argv[2] ?? ".");
@@ -16,6 +17,10 @@ for (const bucket of ["engineering", "productivity"]) {
   }
 }
 
+const localCount = await syncLocalSkills(repo);
+console.log(
+  `Validated ${localCount} local skills and their invocation policies.`,
+);
 const manifest = validateSkillManifest(input, promotedSkills);
 console.log(
   `Validated ${manifest.skills.length} promoted skills for ${manifest.name}.`,

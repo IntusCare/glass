@@ -1,7 +1,6 @@
 ---
 name: loop-me
-description: Grill me about specs for the workflows I want to build, within this workspace.
-disable-model-invocation: true
+description: Interview the user to specify recurring workflows in a stateful workspace. Use when identifying loops worth delegating or turning daily routines into implementable workflow specs.
 argument-hint: "A workflow to design, or nothing to go find one"
 ---
 

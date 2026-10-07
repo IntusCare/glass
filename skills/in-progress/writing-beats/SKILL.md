@@ -1,7 +1,6 @@
 ---
 name: writing-beats
-description: Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.
-disable-model-invocation: true
+description: Assemble existing raw writing material into a journey of beats, grounding concepts before using them. Use when the user wants to choose the article's direction one narrative beat at a time.
 ---
 
 <what-to-do>

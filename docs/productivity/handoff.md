@@ -6,7 +6,7 @@ What it gives you is **portability**, not compression, so the skill is narrower 
 
 ## When to reach for it
 
-You invoke this by typing `/handoff`; the agent won't reach for it on its own. Pass a note about what the next session is for, and the skill writes the document for that purpose.
+Type `/handoff`, or the agent can select it when work needs to travel to another harness, directory, colleague, or separate session. Pass a note about what the next session is for, and the skill writes the document for that purpose.
 
 There are four triggers, and only four:
 
@@ -21,7 +21,7 @@ For anything else (same harness, same directory, you are done [grilling](https:/
 
 ## Branching is the use people skip
 
-The skill's description reads like session resumption: write a summary, end here, resume there. Read that way, it looks like a worse `/compact`, so people skip it. The fork case is the one worth knowing. You **stay in your session** and hand a copy of the accumulated context to a second agent working in parallel.
+A handoff can sound like session resumption: write a summary, end here, resume there. Read that way, it looks like a worse `/compact`, so people skip it. The description also names transfers and separate sessions to make the wider boundary clear. The fork case is the one worth knowing. You **stay in your session** and hand a copy of the accumulated context to a second agent working in parallel.
 
 That is what the detour through [prototype](https://aihero.dev/skills-prototype) uses. You are deep in a design conversation, you hit a question that only running code will settle, and you do not want to spend the thread you built on finding out. Hand off to a prototype session, get the answer, hand the answer back, and reference it from the original thread. The work crosses over twice, your original conversation stays live, and you re-explain nothing.
 
