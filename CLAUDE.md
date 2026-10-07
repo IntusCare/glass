@@ -24,8 +24,20 @@ To (re)link every skill outside `deprecated/` and `misc/` into the local harness
 
 No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, changesets, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution.
 
+## Monorepo tooling
+
+Use Bun for dependency installation and scripts. Run `bun run check` to verify formatting, lint, TypeScript, builds, tests, and promoted-skill manifest entries. Run `bun run check-plugin-version` separately before releasing.
+
+The root package orchestrates workspaces. `skills/package.json` owns the plugin release version under the `glass-skills` package name so existing changesets still resolve. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
+
 ## Agent skills
 
 ### Triage labels
 
 Canonical names, unchanged. See `docs/agents/triage-labels.md`. Issues are judged against [`SCOPE.md`](./SCOPE.md).
+
+# Scripts
+
+Never write a bash script longer than one line. Instead use bun and zx.
+
+TODO Example

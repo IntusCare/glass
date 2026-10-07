@@ -1,23 +1,17 @@
 {
-  "name": "mattpocock",
+  "name": "glass",
   "owner": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "Black Glass Inc.",
+    "url": "https://www.blackglass.com"
   },
-  "description": "Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
+  "description": "TODO",
   "plugins": [
     {
-      "name": "mattpocock-skills",
+      "name": "glass",
       "source": "./",
-      "description": "Matt Pocock's agent skills for real engineering (grilling, spec/ticket flows, TDD, code review, domain modelling and more).",
+      "description": "TODO",
       "category": "engineering",
-      "keywords": [
-        "engineering",
-        "skills",
-        "tdd",
-        "code-review",
-        "grilling"
-      ]
+      "keywords": ["engineering", "skills", "tdd", "code-review", "grilling"]
     }
   ]
 }

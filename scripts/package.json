@@ -1,0 +1,21 @@
+{
+  "name": "@glass/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "check": "bun check-skills.ts .."
+  },
+  "dependencies": {
+    "zod": "4.6.5",
+    "zx": "8.8.5"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "@types/node": "22.20.4"
+  }
+}

@@ -23,14 +23,22 @@ jobs:
         with:
           node-version: 22
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
+
+      - name: Check
+        run: bun run check
 
       - name: Create Version Pull Request
         uses: changesets/action@v1
         with:
-          version: npm run version
-          publish: npx changeset tag
+          version: bun run version
+          publish: bun run changeset tag
           commit: "chore: version skills"
           title: "chore: version skills"
         env:
