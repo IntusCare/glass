@@ -4,14 +4,22 @@
     "name": "Black Glass Inc.",
     "url": "https://www.blackglass.com"
   },
-  "description": "TODO",
+  "description": "Black Glass's agent skills marketplace: the glass-skills plugin, installed straight from the repo.",
   "plugins": [
     {
-      "name": "glass",
+      "name": "glass-skills",
       "source": "./",
-      "description": "TODO",
+      "description": "Agent skills for real engineering: grilling, spec and ticket flows, TDD, code review, diagnosing bugs, domain modelling and more. Small, composable, model-agnostic, and yours to adapt.",
       "category": "engineering",
-      "keywords": ["engineering", "skills", "tdd", "code-review", "grilling"]
+      "keywords": [
+        "engineering",
+        "skills",
+        "tdd",
+        "code-review",
+        "grilling",
+        "domain-modeling",
+        "productivity"
+      ]
     }
   ]
 }
