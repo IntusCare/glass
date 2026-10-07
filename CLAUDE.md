@@ -30,6 +30,8 @@ Use Bun for dependency installation and scripts. Run `bun run check` to verify f
 
 The root package orchestrates workspaces. `skills/package.json` owns the plugin release version under the `glass-skills` package name so existing changesets still resolve. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
 
+Markdown files are importable. Bun's default `md` loader renders them to HTML, so add `with { type: "text" }` to get the raw Markdown string: `import readme from "../README.md" with { type: "text" };`. Either way the import is a `string`, typed by `types/markdown.d.ts`, which the root `tsconfig.json` includes for every workspace. See `scripts/markdown-import.test.ts`.
+
 ## Agent skills
 
 ### Triage labels
