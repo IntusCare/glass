@@ -1,10 +1,10 @@
 {
-  "name": "blackglass",
+  "name": "glass-skills",
   "version": "0.0.0",
-  "description": "TODO",
+  "description": "Agent skills for real engineering: grilling, spec and ticket flows, TDD, code review, diagnosing bugs, domain modelling and more. Small, composable, model-agnostic, and yours to adapt.",
   "author": {
     "name": "Black Glass Inc.",
-    "url": "https://www.aihero.dev"
+    "url": "https://www.blackglass.com"
   },
   "homepage": "https://github.com/intuscare/glass",
   "repository": "https://github.com/intuscare/glass",
