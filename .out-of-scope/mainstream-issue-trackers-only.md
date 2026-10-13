@@ -8,6 +8,8 @@
 
 Requests to add a first-class backend for any other tracker are out of scope. That includes Jira, Linear, Azure DevOps, Trello, YouTrack, and new agent-focused trackers.
 
+One fork-local exception: `workon` reads a Jira ticket on `intuscare.atlassian.net` to name a branch, moves it to In Progress, and comments a Devin session link. It is a start-work shortcut, not a tracker backend: `to-spec`, `to-tickets`, and `triage` still never talk to Jira.
+
 ## Why this is out of scope
 
 Every issue-tracker backend hard-codes a CLI shape into the skills (commands, flags, output parsing). Each new backend is permanent maintenance surface, because it has to keep working as the tool's CLI evolves, and it has to keep being tested against `/to-spec`, `/to-tickets`, `/triage`, and friends. I use GitHub, so that's the backend I can actually keep correct. GitLab is close enough in shape to ride along, and local markdown needs no CLI at all.

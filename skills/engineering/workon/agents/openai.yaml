@@ -1,0 +1,3 @@
+interface:
+  display_name: "Work On"
+  short_description: "Branch off and start a Jira ticket"
