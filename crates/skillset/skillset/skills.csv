@@ -1,0 +1,103 @@
+source,path,category,name,description
+mattpocock,skills/engineering/ask-matt/SKILL.md,Getting Started,ask-matt,Ask which skill or flow fits your situation. A router over the skills in this repo.
+mattpocock,skills/engineering/setup-matt-pocock-skills/SKILL.md,Getting Started,setup-matt-pocock-skills,"Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills."
+mattpocock,skills/engineering/code-review/SKILL.md,The Main Flow,code-review,"Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to ""review since X""."
+mattpocock,skills/engineering/grill-with-docs/SKILL.md,The Main Flow,grill-with-docs,"A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go."
+mattpocock,skills/engineering/implement/SKILL.md,The Main Flow,implement,Implement a piece of work based on a spec or set of tickets.
+mattpocock,skills/engineering/retro/SKILL.md,The Main Flow,retro,Conduct a retrospective on a coding session.
+mattpocock,skills/engineering/to-spec/SKILL.md,The Main Flow,to-spec,"Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
+mattpocock,skills/engineering/to-tickets/SKILL.md,The Main Flow,to-tickets,"Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker)."
+mattpocock,skills/engineering/prototype/SKILL.md,Shaping,prototype,"Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like."
+mattpocock,skills/engineering/research/SKILL.md,Shaping,research,"Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent."
+mattpocock,skills/engineering/wayfinder/SKILL.md,Shaping,wayfinder,"Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear."
+mattpocock,skills/engineering/diagnosing-bugs/SKILL.md,Engineering,diagnosing-bugs,"Diagnosis loop for hard bugs and performance regressions. Use when the user says ""diagnose""/""debug this"", or reports something broken/throwing/failing/slow."
+mattpocock,skills/engineering/implement-spec/SKILL.md,Engineering,implement-spec,Implement the result of /to-spec and /to-tickets in code.
+mattpocock,skills/engineering/improve-codebase-architecture/SKILL.md,Engineering,improve-codebase-architecture,"Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick."
+mattpocock,skills/engineering/triage/SKILL.md,Engineering,triage,"Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs."
+mattpocock,skills/engineering/wizard/SKILL.md,Engineering,wizard,"Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself."
+mattpocock,skills/productivity/grill-me/SKILL.md,Productivity Skills,grill-me,A relentless interview to sharpen a plan or design.
+mattpocock,skills/productivity/handoff/SKILL.md,Productivity Skills,handoff,Compact the current conversation into a handoff document for another agent to pick up.
+mattpocock,skills/productivity/teach/SKILL.md,Productivity Skills,teach,"Teach the user a new skill or concept, within this workspace."
+mattpocock,skills/productivity/to-questionnaire/SKILL.md,Productivity Skills,to-questionnaire,Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+mattpocock,skills/productivity/wait-what/SKILL.md,Productivity Skills,wait-what,Stop. That last message did not land: re-pitch it.
+mattpocock,skills/productivity/writing-for-agents/SKILL.md,Productivity Skills,writing-for-agents,"Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md."
+mattpocock,skills/engineering/codebase-design/SKILL.md,Reference Skills,codebase-design,"Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary."
+mattpocock,skills/engineering/domain-modeling/SKILL.md,Reference Skills,domain-modeling,"Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR."
+mattpocock,skills/productivity/grilling/SKILL.md,Reference Skills,grilling,"Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases."
+mattpocock,skills/engineering/pr/SKILL.md,Reference Skills,pr,Use when writing a PR body.
+mattpocock,skills/engineering/tdd/SKILL.md,Reference Skills,tdd,"Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions ""red-green-refactor"", or wants integration tests."
+mattpocock,skills/in-progress/chief-of-staff/SKILL.md,In Progress (beta),chief-of-staff,Pursue a long-running goal in a single session by co-ordinating subagents.
+mattpocock,skills/in-progress/claude-handoff/SKILL.md,In Progress (beta),claude-handoff,Hand the current conversation off to a fresh background agent that picks up the work immediately.
+mattpocock,skills/in-progress/loop-me/SKILL.md,In Progress (beta),loop-me,"Grill me about specs for the workflows I want to build, within this workspace."
+mattpocock,skills/in-progress/setup-ts-deep-modules/SKILL.md,In Progress (beta),setup-ts-deep-modules,"Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. User-invoked."
+mattpocock,skills/in-progress/writing-beats/SKILL.md,In Progress (beta),writing-beats,"Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it."
+mattpocock,skills/in-progress/writing-fragments/SKILL.md,In Progress (beta),writing-fragments,"Writing, explore: mine raw fragments, no structure yet."
+mattpocock,skills/in-progress/writing-shape/SKILL.md,In Progress (beta),writing-shape,"Writing, exploit: shape raw material into an article, paragraph by paragraph."
+mattpocock,skills/misc/git-guardrails-claude-code/SKILL.md,Misc (not promoted),git-guardrails-claude-code,"Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code."
+mattpocock,skills/misc/migrate-to-shoehorn/SKILL.md,Misc (not promoted),migrate-to-shoehorn,"Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data."
+mattpocock,skills/misc/scaffold-exercises/SKILL.md,Misc (not promoted),scaffold-exercises,"Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section."
+mattpocock,skills/misc/setup-pre-commit/SKILL.md,Misc (not promoted),setup-pre-commit,"Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing."
+gstack,SKILL.md,Router,gstack,Router for the gstack skill suite.
+gstack,autoplan/SKILL.md,Sprint,autoplan,"Auto-review pipeline — reads the full CEO, design, eng, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles."
+gstack,benchmark/SKILL.md,Sprint,benchmark,Web performance regression detection.
+gstack,benchmark-models/SKILL.md,Sprint,benchmark-models,Cross-model benchmark for gstack skills.
+gstack,browse/SKILL.md,Sprint,browse,"Drive a real browser through Aside: open a page, read it, click through a flow, take screenshots, check console errors."
+gstack,canary/SKILL.md,Sprint,canary,Post-deploy canary monitoring.
+gstack,cso/SKILL.md,Sprint,cso,Security audit: supported static findings; qualified profiles add reproduction and repair candidates.
+gstack,design-consultation/SKILL.md,Sprint,design-consultation,"Design consultation: understands your product, researches the landscape, proposes a complete design system (aesthetic, typography, color, layout, spacing, motion), and generates font+color preview..."
+gstack,design-html/SKILL.md,Sprint,design-html,Design finalization: generates production-quality Pretext-native HTML/CSS.
+gstack,design-review/SKILL.md,Sprint,design-review,"Designer's eye QA: finds visual inconsistency, spacing issues, hierarchy problems, AI slop patterns, and slow interactions — then fixes them."
+gstack,design-shotgun/SKILL.md,Sprint,design-shotgun,"Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate."
+gstack,deslop-shared-libs/SKILL.md,Sprint,deslop-shared-libs,Find worthwhile shared-code extractions in recent work.
+gstack,devex-review/SKILL.md,Sprint,devex-review,Live developer experience audit.
+gstack,document-generate/SKILL.md,Sprint,document-generate,"Generate missing documentation from scratch for a feature, module, or entire project."
+gstack,document-release/SKILL.md,Sprint,document-release,Release documentation audit.
+gstack,eval-plan/SKILL.md,Sprint,eval-plan,"Preregister a paid eval (bars, arms, decoys, stop rules), dry-run it at zero cost, then run a three-item priced pilot whose spend table gates approval."
+gstack,investigate/SKILL.md,Sprint,investigate,Systematic debugging with root cause investigation.
+gstack,land-and-deploy/SKILL.md,Sprint,land-and-deploy,Land and deploy workflow.
+gstack,office-hours/SKILL.md,Sprint,office-hours,YC Office Hours — two modes.
+gstack,plan-ceo-review/SKILL.md,Sprint,plan-ceo-review,CEO/founder-mode plan review.
+gstack,plan-design-review/SKILL.md,Sprint,plan-design-review,"Designer's eye plan review — interactive, like CEO and Eng review."
+gstack,plan-devex-review/SKILL.md,Sprint,plan-devex-review,Interactive developer experience plan review.
+gstack,plan-eng-review/SKILL.md,Sprint,plan-eng-review,Eng manager-mode plan review.
+gstack,qa/SKILL.md,Sprint,qa,Fix browser/API/CLI/job/worker/webhook bugs.
+gstack,qa-only/SKILL.md,Sprint,qa-only,Report browser/API/CLI/job/worker/webhook bugs.
+gstack,retro/SKILL.md,Sprint,retro,Weekly engineering retrospective.
+gstack,review/SKILL.md,Sprint,review,Pre-landing PR review.
+gstack,scrape/SKILL.md,Sprint,scrape,"Pull data from a web page through the Aside browser — your real, already signed-in sessions."
+gstack,ship/SKILL.md,Sprint,ship,"Ship workflow: detect + merge base branch, run tests, review diff, bump VERSION, update CHANGELOG, commit, push, create PR."
+gstack,skillify/SKILL.md,Sprint,skillify,Codify the most recent successful /scrape flow into a permanent browser-skill on disk.
+gstack,spec/SKILL.md,Sprint,spec,"Turn vague intent into a precise, executable spec in five phases."
+gstack,test-audit/SKILL.md,Sprint,test-audit,Find low-value or duplicate tests and the test-only code they keep alive.
+gstack,claude-code/SKILL.md.tmpl,Multi-AI,claude-code,"Claude Code CLI second opinion for non-Claude Code hosts. Review a diff, challenge a change for failure modes, or consult Claude with read-only repo access and session continuity. Use for ""claude review"", ""claude challenge"", ""ask claude"", or an explicit Claude Code second opinion."
+gstack,codex/SKILL.md,Multi-AI,codex,OpenAI Codex CLI wrapper — three modes.
+gstack,pair-agent/SKILL.md,Multi-AI,pair-agent,Pair a remote AI agent with your browser.
+gstack,setup-gbrain/SKILL.md,Multi-AI,setup-gbrain,"Set up gbrain for this coding agent: install the CLI, initialize a local PGLite or Supabase brain, register MCP, capture per-remote trust policy."
+gstack,sync-gbrain/SKILL.md,Multi-AI,sync-gbrain,Keep gbrain current with this repo's code and refresh agent search guidance in CLAUDE.md.
+gstack,careful/SKILL.md,Safety & Utility,careful,Safety guardrails for destructive commands.
+gstack,context-restore/SKILL.md,Safety & Utility,context-restore,Restore working context saved earlier by /context-save.
+gstack,context-save/SKILL.md,Safety & Utility,context-save,Save working context.
+gstack,diagram/SKILL.md,Safety & Utility,diagram,"Turn an English description (or mermaid source) into a diagram triplet: the source, an editable .excalidraw file you can open on excalidraw.com, and rendered SVG + PNG."
+gstack,freeze/SKILL.md,Safety & Utility,freeze,Restrict file edits to a specific directory for the session.
+gstack,gstack-upgrade/SKILL.md,Safety & Utility,gstack-upgrade,Upgrade gstack to the latest version.
+gstack,guard/SKILL.md,Safety & Utility,guard,Full safety mode: destructive command warnings + directory-scoped edits.
+gstack,health/SKILL.md,Safety & Utility,health,Code quality dashboard.
+gstack,ios-clean/SKILL.md,Safety & Utility,ios-clean,Remove the DebugBridge SPM package and all #if DEBUG wiring from an iOS app.
+gstack,ios-design-review/SKILL.md,Safety & Utility,ios-design-review,Visual design audit for iOS apps on real hardware.
+gstack,ios-fix/SKILL.md,Safety & Utility,ios-fix,Autonomous iOS bug fixer.
+gstack,ios-qa/SKILL.md,Safety & Utility,ios-qa,Live-device iOS QA for SwiftUI apps.
+gstack,ios-sync/SKILL.md,Safety & Utility,ios-sync,Regenerate the iOS debug bridge against the latest upstream gstack templates.
+gstack,landing-report/SKILL.md,Safety & Utility,landing-report,Read-only queue dashboard for workspace-aware ship.
+gstack,learn/SKILL.md,Safety & Utility,learn,Manage project learnings.
+gstack,make-pdf/SKILL.md,Safety & Utility,make-pdf,Turn any markdown file into a publication-quality PDF.
+gstack,open-gstack-browser/SKILL.md,Safety & Utility,open-gstack-browser,Launch GStack Browser — AI-controlled Chromium with the sidebar extension baked in.
+gstack,plan-tune/SKILL.md,Safety & Utility,plan-tune,Self-tuning question sensitivity + developer psychographic for gstack (v1: observational).
+gstack,setup-browser-cookies/SKILL.md,Safety & Utility,setup-browser-cookies,Import cookies from your real Chromium browser into the headless browse session.
+gstack,setup-deploy/SKILL.md,Safety & Utility,setup-deploy,Configure deployment settings for /land-and-deploy.
+gstack,unfreeze/SKILL.md,Safety & Utility,unfreeze,"Clear the freeze boundary set by /freeze, allowing edits to all directories again."
+gstack,openclaw/skills/gstack-openclaw-ceo-review/SKILL.md,OpenClaw (native skills),gstack-openclaw-ceo-review,"Use when asked to review a plan, challenge a proposal, run a CEO review, poke holes in an approach, think bigger about scope, or decide whether to expand or reduce the plan."
+gstack,openclaw/skills/gstack-openclaw-investigate/SKILL.md,OpenClaw (native skills),gstack-openclaw-investigate,"Use when asked to debug, fix a bug, investigate an error, or do root cause analysis, and when users report errors, stack traces, unexpected behavior, or say something stopped working."
+gstack,openclaw/skills/gstack-openclaw-office-hours/SKILL.md,OpenClaw (native skills),gstack-openclaw-office-hours,"Use when asked to brainstorm, evaluate whether an idea is worth building, run office hours, or think through a new product idea or design direction before any code is written."
+gstack,openclaw/skills/gstack-openclaw-retro/SKILL.md,OpenClaw (native skills),gstack-openclaw-retro,"Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics with persistent history and trend tracking. Team-aware with per-person contributions, praise, and growth areas. Use when asked for weekly retro, what shipped this week, or engineering retrospective."
+gstack,browser-skills/hackernews-frontpage/SKILL.md,Browser skill (example),hackernews-frontpage,"Scrape the Hacker News front page (titles, points, comment counts)."
+gstack,contrib/add-host/SKILL.md.tmpl,Contributor-only,gstack-contrib-add-host,Contributor-only skill: create a new host config for gstack's multi-host system. NOT installed for end users. Only usable from the gstack source repo.
