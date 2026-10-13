@@ -1,7 +1,0 @@
-node_modules
-.claude/*
-!.claude/skills
-.turbo
-dist
-coverage
-*.tsbuildinfo
