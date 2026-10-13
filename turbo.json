@@ -1,6 +1,11 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
-  "globalDependencies": ["tsconfig.json", "biome.json"],
+  "$schema": "./node_modules/turbo/schema.json",
+  "globalDependencies": [
+    "tsconfig.json",
+    "biome.json",
+    "bunfig.toml",
+    "mise.toml"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -14,9 +19,8 @@
       "dependsOn": ["^build"],
       "outputs": []
     },
-    "test": {
-      "dependsOn": ["build"],
-      "outputs": ["coverage/**"]
+    "//#test": {
+      "outputs": []
     }
   }
 }

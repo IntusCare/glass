@@ -2,7 +2,7 @@
   "name": "glass",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.4.0",
+  "packageManager": "bun@1.4.3",
   "workspaces": [
     "crates/*"
   ],
@@ -12,12 +12,14 @@
     "typecheck": "turbo run typecheck",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "test": "turbo run test",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
     "check": "bun run lint && turbo run build typecheck test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "turbo": "2.11.7",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
   }
 }
