@@ -12,5 +12,9 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "exclude": ["node_modules", "**/dist", "**/coverage", "crates/skillset"]
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/coverage"
+  ]
 }
