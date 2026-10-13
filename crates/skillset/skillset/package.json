@@ -1,0 +1,16 @@
+{
+  "name": "@glass/skillset",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-plugin": "bun generate-plugin.ts",
+    "check": "bun generate-plugin.ts --check",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2"
+  }
+}

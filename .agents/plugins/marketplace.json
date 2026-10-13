@@ -1,0 +1,20 @@
+{
+  "name": "glass",
+  "interface": {
+    "displayName": "Glass"
+  },
+  "plugins": [
+    {
+      "name": "glass",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "engineering"
+    }
+  ]
+}

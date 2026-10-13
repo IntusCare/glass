@@ -4,10 +4,10 @@ export default defineConfig({
   test: {
     exclude: [
       ...configDefaults.exclude,
-      "crates/skillset/**",
+      "crates/skillset/gstack/**",
+      "crates/skillset/mattpocock/**",
       "**/dist/**",
       "**/coverage/**",
     ],
-    passWithNoTests: true,
   },
 });

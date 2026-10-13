@@ -1,0 +1,21 @@
+{
+  "name": "glass",
+  "owner": {
+    "name": "Black Glass"
+  },
+  "description": "Glass agent skills for engineering, product, and UI workflows.",
+  "plugins": [
+    {
+      "name": "glass",
+      "source": "./",
+      "description": "Glass agent skills for engineering, product, and UI workflows.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "productivity",
+        "design"
+      ]
+    }
+  ]
+}

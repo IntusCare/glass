@@ -1,0 +1,14 @@
+{
+  "name": "glass",
+  "displayName": "Glass",
+  "version": "0.1.0",
+  "description": "Glass agent skills for engineering, product, and UI workflows.",
+  "author": {
+    "name": "Black Glass"
+  },
+  "homepage": "https://github.com/IntusCare/glass",
+  "repository": "https://github.com/IntusCare/glass",
+  "keywords": ["engineering", "skills", "productivity", "design"],
+  "category": "engineering",
+  "skillsDirectory": "./crates/skillset/skillset/skills"
+}

@@ -21,6 +21,9 @@
     },
     "//#test": {
       "outputs": []
+    },
+    "check": {
+      "cache": false
     }
   }
 }
