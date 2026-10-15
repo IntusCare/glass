@@ -8,13 +8,6 @@ allowed-tools:
   - Read
   - Write
   - AskUserQuestion
-triggers:
-  - make a diagram
-  - draw a diagram
-  - create a flowchart
-  - diagram this
-  - visualize this flow
-  - architecture diagram
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

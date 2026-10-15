@@ -3,12 +3,6 @@ name: landing-report
 preamble-tier: 2
 version: 0.1.0
 description: Read-only queue dashboard for workspace-aware ship. (gstack)
-triggers:
-  - landing report
-  - version queue
-  - ship queue
-  - what version comes next
-  - show open PR versions
 allowed-tools:
   - Bash
   - Read

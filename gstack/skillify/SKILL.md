@@ -8,11 +8,6 @@ allowed-tools:
   - Read
   - Write
   - AskUserQuestion
-triggers:
-  - skillify
-  - codify this scrape
-  - save this scrape
-  - make this permanent
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

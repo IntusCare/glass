@@ -9,10 +9,6 @@ allowed-tools:
   - Write
   - Glob
   - AskUserQuestion
-triggers:
-  - weekly retro
-  - what did we ship
-  - engineering retrospective
 gbrain:
   schema: 1
   context_queries:

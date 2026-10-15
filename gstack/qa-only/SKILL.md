@@ -9,10 +9,6 @@ allowed-tools:
   - Write
   - AskUserQuestion
   - WebSearch
-triggers:
-  - qa report only
-  - just report bugs
-  - test but dont fix
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

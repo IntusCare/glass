@@ -12,11 +12,6 @@ allowed-tools:
   - Edit
   - AskUserQuestion
   - WebSearch
-triggers:
-  - brainstorm this
-  - is this worth building
-  - help me think through
-  - office hours
 gbrain:
   schema: 1
   context_queries:

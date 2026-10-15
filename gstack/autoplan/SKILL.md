@@ -3,10 +3,6 @@ name: autoplan
 preamble-tier: 3
 version: 1.0.0
 description: Auto-review pipeline — reads the full CEO, design, eng, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles. (gstack)
-triggers:
-  - run all reviews
-  - automatic review pipeline
-  - auto plan review
 allowed-tools:
   - Bash
   - Read

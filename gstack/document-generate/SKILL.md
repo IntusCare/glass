@@ -11,14 +11,6 @@ allowed-tools:
   - Grep
   - Glob
   - AskUserQuestion
-triggers:
-  - write docs for this
-  - generate documentation
-  - document this feature
-  - create a tutorial
-  - write a how-to
-  - explain this module
-  - docs for this project
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

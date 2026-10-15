@@ -12,12 +12,6 @@ allowed-tools:
   - Glob
   - AskUserQuestion
   - WebSearch
-triggers:
-  - debug this
-  - fix this bug
-  - why is this broken
-  - root cause analysis
-  - investigate this error
 hooks:
   PreToolUse:
     - matcher: "Edit"

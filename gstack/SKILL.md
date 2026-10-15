@@ -7,10 +7,6 @@ allowed-tools:
   - Bash
   - Read
   - AskUserQuestion
-triggers:
-  - gstack
-  - which gstack skill
-  - route this with gstack
 
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->

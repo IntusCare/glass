@@ -10,10 +10,6 @@ allowed-tools:
   - Glob
   - Grep
   - AskUserQuestion
-triggers:
-  - clean the ios debug bridge
-  - remove debugbridge
-  - strip the gstack ios instrumentation
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

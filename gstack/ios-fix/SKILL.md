@@ -11,10 +11,6 @@ allowed-tools:
   - Grep
   - Glob
   - AskUserQuestion
-triggers:
-  - fix this ios bug
-  - patch the iphone app
-  - auto-fix the ios issue
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

@@ -12,10 +12,6 @@ allowed-tools:
   - Grep
   - AskUserQuestion
   - WebSearch
-triggers:
-  - visual design audit
-  - design qa
-  - fix design issues
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

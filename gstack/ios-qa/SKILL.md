@@ -11,13 +11,6 @@ allowed-tools:
   - Grep
   - Glob
   - AskUserQuestion
-triggers:
-  - ios qa
-  - test the iphone app
-  - test the ipad app
-  - test my ios app
-  - find bugs on the device
-  - qa the ios app
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->
