@@ -1,6 +1,6 @@
 ---
 name: api-contract-reviewer
-description: Reviews a diff for breaking API changes: removed or retyped fields, changed status codes, pagination and versioning drift. Delegate when the diff touches public endpoints, request or response schemas, or client-facing types.
+description: "Reviews a diff for breaking API changes: removed or retyped fields, changed status codes, pagination and versioning drift. Delegate when the diff touches public endpoints, request or response schemas, or client-facing types."
 tools:
   - Read
   - Grep

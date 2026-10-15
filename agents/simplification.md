@@ -1,6 +1,6 @@
 ---
 name: simplification-reviewer
-description: Advisory review that finds unrequested structure in a diff: one-implementation abstractions, hand-rolled stdlib, dependencies duplicating platform features, and dead flexibility. Delegate on diffs over 100 lines; findings are suggestions, never coverage gaps.
+description: "Advisory review that finds unrequested structure in a diff: one-implementation abstractions, hand-rolled stdlib, dependencies duplicating platform features, and dead flexibility. Delegate on diffs over 100 lines; findings are suggestions, never coverage gaps."
 tools:
   - Read
   - Grep

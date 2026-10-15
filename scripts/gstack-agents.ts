@@ -29,7 +29,7 @@ function renderAgent(name: string, checklist: string) {
   if (!description) throw new Error(`No description for specialist: ${name}`);
   return `---
 name: ${name}-reviewer
-description: ${description}
+description: ${JSON.stringify(description)}
 tools:
 ${tools.map((tool) => `  - ${tool}`).join("\n")}
 ---

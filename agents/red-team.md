@@ -1,6 +1,6 @@
 ---
 name: red-team-reviewer
-description: Adversarial review that hunts what other reviewers missed: load, concurrency, silent failures, trust assumptions, and edge cases. Delegate last, after the other specialists, on large diffs or when a security review found critical findings.
+description: "Adversarial review that hunts what other reviewers missed: load, concurrency, silent failures, trust assumptions, and edge cases. Delegate last, after the other specialists, on large diffs or when a security review found critical findings."
 tools:
   - Read
   - Grep

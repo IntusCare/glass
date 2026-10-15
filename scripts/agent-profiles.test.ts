@@ -32,6 +32,25 @@ test("rejects fields Devin does not load", () => {
   }
 });
 
+test("rejects an unquoted description that YAML cannot parse", () => {
+  expect(() =>
+    validateAgentProfile(
+      valid.replace(
+        "description: Reviews a diff",
+        "description: Reviews: diffs",
+      ),
+    ),
+  ).toThrow("invalid YAML frontmatter");
+  expect(() =>
+    validateAgentProfile(
+      valid.replace(
+        "description: Reviews a diff",
+        'description: "Reviews: diffs"',
+      ),
+    ),
+  ).not.toThrow();
+});
+
 test("requires name and description", () => {
   expect(() =>
     validateAgentProfile(valid.replace("name: reviewer\n", "")),

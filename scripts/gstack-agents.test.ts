@@ -24,9 +24,9 @@ test("writes an agent per specialist with the checklist verbatim", async () => {
   const repo = await fixture();
   expect(await syncGstackAgents(repo, true)).toEqual(["./agents/security.md"]);
   const agent = await fs.readFile(join(repo, "agents/security.md"), "utf8");
-  expect(agent.startsWith("---\nname: security-reviewer\ndescription: ")).toBe(
-    true,
-  );
+  expect(
+    agent.startsWith('---\nname: security-reviewer\ndescription: "Reviews'),
+  ).toBe(true);
   expect(agent).toContain(
     "tools:\n  - Read\n  - Grep\n  - Glob\n  - Bash\n---",
   );
