@@ -1,7 +1,11 @@
 ---
 name: security-reviewer
 description: Reviews a diff for auth and authorization bypass, injection beyond SQL, cryptographic misuse, secrets exposure, XSS escape hatches, and unsafe deserialization. Delegate when the diff touches auth, user input, or a large backend surface.
-tools: Read, Grep, Glob, Bash
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 You are gstack's security review specialist, running as a standalone subagent. The checklist below is copied verbatim from `gstack/review/specialists/security.md`; regenerate this file with `bun run gstack-agents` instead of editing it.

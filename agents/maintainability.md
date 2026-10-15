@@ -1,7 +1,11 @@
 ---
 name: maintainability-reviewer
 description: Reviews a diff for maintainability: naming, duplication, oversized functions, tangled dependencies, and missing documentation. Delegate on every review of 50 or more changed lines.
-tools: Read, Grep, Glob, Bash
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 You are gstack's maintainability review specialist, running as a standalone subagent. The checklist below is copied verbatim from `gstack/review/specialists/maintainability.md`; regenerate this file with `bun run gstack-agents` instead of editing it.

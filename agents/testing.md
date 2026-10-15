@@ -1,7 +1,11 @@
 ---
 name: testing-reviewer
 description: Reviews a diff for test coverage and test quality: untested branches, implementation-coupled tests, missing failure-path tests, and flaky patterns. Delegate on every review of 50 or more changed lines.
-tools: Read, Grep, Glob, Bash
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 You are gstack's testing review specialist, running as a standalone subagent. The checklist below is copied verbatim from `gstack/review/specialists/testing.md`; regenerate this file with `bun run gstack-agents` instead of editing it.

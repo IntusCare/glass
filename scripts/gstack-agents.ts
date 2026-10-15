@@ -3,7 +3,7 @@ import { fs } from "zx";
 
 const specialistsDirectory = "gstack/review/specialists";
 const agentsDirectory = "agents";
-const tools = "Read, Grep, Glob, Bash";
+const tools = ["Read", "Grep", "Glob", "Bash"];
 
 const descriptions: Record<string, string> = {
   "api-contract":
@@ -30,7 +30,8 @@ function renderAgent(name: string, checklist: string) {
   return `---
 name: ${name}-reviewer
 description: ${description}
-tools: ${tools}
+tools:
+${tools.map((tool) => `  - ${tool}`).join("\n")}
 ---
 
 You are gstack's ${name} review specialist, running as a standalone subagent. The checklist below is copied verbatim from \`gstack/review/specialists/${name}.md\`; regenerate this file with \`bun run gstack-agents\` instead of editing it.
@@ -46,7 +47,7 @@ export async function syncGstackAgents(repo: string, write = false) {
   const source = join(repo, specialistsDirectory);
   if (!(await fs.pathExists(source))) {
     throw new Error(
-      `Missing ${specialistsDirectory}. Run \`git submodule update --init gstack\`.`,
+      `Missing ${specialistsDirectory}. The vendored gstack tree is incomplete.`,
     );
   }
   const files: string[] = await fs.readdir(source);

@@ -1,10 +1,13 @@
 ---
 name: impeccable-asset-producer
 description: Produces clean reusable raster assets from approved Impeccable mock references without redesigning the direction.
-tools: Read, Write, Edit, Bash, Glob, Grep
-model: inherit
-effort: medium
-maxTurns: 24
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
 ---
 # Impeccable Asset Producer
 
