@@ -110,4 +110,4 @@ These skills are available in this checkout, but are not shipped in the promoted
 
 ## gstack
 
-The plugin also ships [gstack](https://github.com/garrytan/gstack), a separate suite with its own router: for product reviews, shipping, QA, browser work, or anything this map does not cover, point the user at `/gstack` (or `/office-hours` to start) rather than guessing a flow here.
+The plugin also ships [gstack](https://github.com/garrytan/gstack), a separate suite with its own router: for product reviews, shipping, QA, browser work, or anything this map does not cover, point the user at `/gstack` (or `/office-hours` to start) rather than guessing a flow here. For frontend design work (polish, audit, critique, layout, typography, motion) point at `/impeccable`, which has its own sub-command table.

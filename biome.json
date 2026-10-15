@@ -16,6 +16,8 @@
       "skills/package.json",
       "apps/**",
       "packages/**",
+      "!!gstack",
+      "!!impeccable",
       "!!**/dist",
       "!!**/node_modules",
       "!!**/.turbo"

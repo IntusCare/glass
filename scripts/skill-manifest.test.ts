@@ -12,6 +12,15 @@ describe("validateSkillManifest", () => {
     });
   });
 
+  test("accepts impeccable skills and agents from the submodule", () => {
+    const skills = [skill, "./impeccable/plugin/skills/impeccable"];
+    const agents = ["./impeccable/plugin/agents/impeccable-documenter.md"];
+    expect(
+      validateSkillManifest({ ...manifest, skills, agents }, skills, agents)
+        .agents,
+    ).toEqual(agents);
+  });
+
   test("accepts gstack skills and generated agents", () => {
     const skills = [skill, "./gstack", "./gstack/review"];
     const agents = ["./agents/security.md"];

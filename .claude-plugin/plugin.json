@@ -103,7 +103,8 @@
     "./gstack/spec",
     "./gstack/sync-gbrain",
     "./gstack/test-audit",
-    "./gstack/unfreeze"
+    "./gstack/unfreeze",
+    "./impeccable/plugin/skills/impeccable"
   ],
   "agents": [
     "./agents/api-contract.md",
@@ -113,6 +114,10 @@
     "./agents/red-team.md",
     "./agents/security.md",
     "./agents/simplification.md",
-    "./agents/testing.md"
+    "./agents/testing.md",
+    "./impeccable/plugin/agents/impeccable-asset-producer.md",
+    "./impeccable/plugin/agents/impeccable-documenter.md",
+    "./impeccable/plugin/agents/impeccable-finish-reviewer.md",
+    "./impeccable/plugin/agents/impeccable-manual-edit-applier.md"
   ]
 }

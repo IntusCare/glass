@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check out gstack
-        run: git submodule update --init gstack
+        run: git submodule update --init gstack impeccable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

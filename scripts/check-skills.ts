@@ -15,6 +15,7 @@ for (const pattern of [
   "skills/productivity/*/SKILL.md",
   "gstack/SKILL.md",
   "gstack/*/SKILL.md",
+  "impeccable/plugin/skills/*/SKILL.md",
 ]) {
   for await (const path of new Bun.Glob(pattern).scan(repo)) {
     promotedSkills.push(`./${dirname(path)}`);
@@ -27,6 +28,18 @@ console.log(
 );
 const agents = await syncGstackAgents(repo);
 console.log(`Validated ${agents.length} agents generated from gstack.`);
+const impeccableAgents: string[] = [];
+for await (const path of new Bun.Glob("impeccable/plugin/agents/*.md").scan(
+  repo,
+)) {
+  impeccableAgents.push(`./${path}`);
+}
+if (impeccableAgents.length === 0) {
+  throw new Error(
+    "Missing impeccable/plugin/agents. Run `git submodule update --init impeccable`.",
+  );
+}
+agents.push(...impeccableAgents.sort());
 const manifest = validateSkillManifest(input, promotedSkills, agents);
 console.log(
   `Validated ${manifest.skills.length} plugin skills and ${manifest.agents.length} agents for ${manifest.name}.`,
