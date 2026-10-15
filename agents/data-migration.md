@@ -1,6 +1,6 @@
 ---
 name: data-migration-reviewer
-description: Reviews a diff for unsafe schema and data migrations: locking, irreversibility, backfills, and deploy ordering. Delegate when the diff adds or edits migrations or changes a table used in production.
+description: "Reviews a diff for unsafe schema and data migrations: locking, irreversibility, backfills, and deploy ordering. Delegate when the diff adds or edits migrations or changes a table used in production."
 tools:
   - Read
   - Grep

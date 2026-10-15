@@ -1,6 +1,6 @@
 ---
 name: maintainability-reviewer
-description: Reviews a diff for maintainability: naming, duplication, oversized functions, tangled dependencies, and missing documentation. Delegate on every review of 50 or more changed lines.
+description: "Reviews a diff for maintainability: naming, duplication, oversized functions, tangled dependencies, and missing documentation. Delegate on every review of 50 or more changed lines."
 tools:
   - Read
   - Grep

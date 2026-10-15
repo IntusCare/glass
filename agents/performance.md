@@ -1,6 +1,6 @@
 ---
 name: performance-reviewer
-description: Reviews a diff for performance regressions: N+1 queries, missing indexes, unbounded loops, blocking I/O, and heavy frontend work. Delegate when the diff touches backend data access or frontend rendering.
+description: "Reviews a diff for performance regressions: N+1 queries, missing indexes, unbounded loops, blocking I/O, and heavy frontend work. Delegate when the diff touches backend data access or frontend rendering."
 tools:
   - Read
   - Grep

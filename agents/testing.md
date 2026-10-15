@@ -1,6 +1,6 @@
 ---
 name: testing-reviewer
-description: Reviews a diff for test coverage and test quality: untested branches, implementation-coupled tests, missing failure-path tests, and flaky patterns. Delegate on every review of 50 or more changed lines.
+description: "Reviews a diff for test coverage and test quality: untested branches, implementation-coupled tests, missing failure-path tests, and flaky patterns. Delegate on every review of 50 or more changed lines."
 tools:
   - Read
   - Grep

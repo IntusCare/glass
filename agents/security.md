@@ -1,6 +1,6 @@
 ---
 name: security-reviewer
-description: Reviews a diff for auth and authorization bypass, injection beyond SQL, cryptographic misuse, secrets exposure, XSS escape hatches, and unsafe deserialization. Delegate when the diff touches auth, user input, or a large backend surface.
+description: "Reviews a diff for auth and authorization bypass, injection beyond SQL, cryptographic misuse, secrets exposure, XSS escape hatches, and unsafe deserialization. Delegate when the diff touches auth, user input, or a large backend surface."
 tools:
   - Read
   - Grep

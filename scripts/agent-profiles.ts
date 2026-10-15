@@ -3,35 +3,38 @@ import { fs } from "zx";
 
 const allowedKeys = new Set(["name", "description", "tools"]);
 
-function parseFrontmatter(content: string) {
+function parseFrontmatter(content: string): Record<string, unknown> {
   const frontmatter = /^---\n([\s\S]*?)\n---\n/.exec(content)?.[1];
   if (frontmatter === undefined) throw new Error("missing frontmatter");
-  const fields = new Map<string, string[]>();
-  let current: string | undefined;
-  for (const line of frontmatter.split("\n")) {
-    const item = /^ {2}- (.+)$/.exec(line)?.[1];
-    if (item && current) {
-      fields.get(current)?.push(item);
-      continue;
-    }
-    const [, key, value] = /^([A-Za-z-]+):\s*(.*)$/.exec(line) ?? [];
-    if (!key) throw new Error(`unparseable frontmatter line: ${line}`);
-    current = key;
-    fields.set(key, value ? [value] : []);
+  let parsed: unknown;
+  try {
+    parsed = Bun.YAML.parse(frontmatter);
+  } catch (error) {
+    throw new Error(`invalid YAML frontmatter: ${(error as Error).message}`);
   }
-  return fields;
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+    throw new Error("frontmatter must be a YAML mapping");
+  }
+  return parsed as Record<string, unknown>;
 }
 
 export function validateAgentProfile(content: string) {
   const fields = parseFrontmatter(content);
-  for (const key of fields.keys()) {
+  for (const key of Object.keys(fields)) {
     if (!allowedKeys.has(key)) throw new Error(`unsupported field: ${key}`);
   }
   for (const key of ["name", "description"]) {
-    if (fields.get(key)?.length !== 1) throw new Error(`missing ${key}`);
+    const value = fields[key];
+    if (typeof value !== "string" || value.trim() === "") {
+      throw new Error(`missing ${key}`);
+    }
   }
-  const tools = fields.get("tools");
-  if (tools && tools.some((tool) => tool.includes(","))) {
+  const tools = fields.tools;
+  if (
+    tools !== undefined &&
+    (!Array.isArray(tools) ||
+      tools.some((tool) => typeof tool !== "string" || tool.includes(",")))
+  ) {
     throw new Error("tools must be a YAML list, not a comma-separated string");
   }
 }
