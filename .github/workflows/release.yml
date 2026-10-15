@@ -17,8 +17,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: true
+
+      - name: Check out gstack
+        run: git submodule update --init gstack
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
