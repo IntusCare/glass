@@ -238,3 +238,7 @@ General workflow tools, not code-specific.
 
 - **[grilling](./skills/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `triage`, `wayfinder` and `improve-codebase-architecture`.
 - **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+
+### gstack
+
+[garrytan/gstack](https://github.com/garrytan/gstack) ships alongside these skills as the `gstack` git submodule. The plugin lists its router (`/gstack`) and all of its skills (`/review`, `/qa`, `/ship`, `/investigate`, `/office-hours`, and the rest; see [gstack/README.md](./gstack/README.md)), plus eight review subagents generated from gstack's review specialists under [`agents/`](./agents/): `api-contract-reviewer`, `data-migration-reviewer`, `maintainability-reviewer`, `performance-reviewer`, `red-team-reviewer`, `security-reviewer`, `simplification-reviewer`, and `testing-reviewer`. Clone with `--recurse-submodules`, or run `git submodule update --init gstack`.

@@ -12,6 +12,14 @@ Install commands are copied verbatim from [.agents/install-block.md](./.agents/i
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
+## gstack
+
+[garrytan/gstack](https://github.com/garrytan/gstack) is vendored as the `gstack` git submodule and shipped through the same plugin. Run `git submodule update --init gstack` after cloning; `bun run check` fails without it. `.claude-plugin/plugin.json` lists `./gstack` (its router skill) and every `./gstack/<name>` directory that holds a `SKILL.md` (symlinked aliases such as `connect-chrome` are skipped), and `bun run check` requires that list to match the submodule exactly. Bumping the submodule means re-syncing that list and regenerating the agents.
+
+`agents/*.md` are subagent profiles generated from `gstack/review/specialists/*.md`: one `<name>-reviewer` per checklist, listed in `plugin.json`'s `agents` array. Never edit them by hand; change the description map in `scripts/gstack-agents.ts` or bump the submodule, then run `bun run gstack-agents`. `bun run check` fails when they are stale. The checklist text inside them is gstack's verbatim, so the no-em-dash rule below does not apply to those copied sections.
+
+gstack skills are not linked into `.devin/skills`, are not routed by `ask-matt` (gstack ships its own `/gstack` router), and get no docs page. Their `SKILL.md` files expect gstack's `./setup` to have installed `~/.claude/skills/gstack/bin`; without it they run in gstack's documented degraded mode.
+
 Each bucket folder has a `README.md` that lists every skill in the bucket with a one-line description, with the skill name linked to its `SKILL.md`. The promoted buckets' `README.md`s and the top-level `README.md` list skills under **Model-invoked**; non-promoted bucket `README.md`s (`misc/`, `in-progress/`) use a flat list.
 
 Skills in `engineering/` and `productivity/` also have a human-facing docs page at `docs/<bucket>/<skill-name>.md` (the docs tree mirrors those two bucket folders under `skills/`). The published URL is `https://aihero.dev/skills-<skill-name>` regardless of bucket: the docs path is repo organisation only. When you add, rename, or change the behaviour of a skill in `engineering/` or `productivity/`, create or re-sync its docs page following [.agents/writing-docs.md](./.agents/writing-docs.md). A finished page carries four sections: **What it does**, **When to reach for it**, **Common questions**, and **It's working if**. `writing-docs.md` holds the template, the section order, and where to hunt for the questions. Skills in the non-promoted buckets (`misc/`, `in-progress/`, `deprecated/`) get **no** docs page. The one exception is a promoted skill removed outright: its page stays, marked archived (see `writing-docs.md`).
