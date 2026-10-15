@@ -1,5 +1,6 @@
 import { dirname, resolve } from "node:path";
 import { fs } from "zx";
+import { syncGstackAgents } from "./gstack-agents.js";
 import { syncLocalSkills } from "./local-skills.js";
 import { validateSkillManifest } from "./skill-manifest.js";
 
@@ -9,10 +10,14 @@ const input: unknown = await fs.readJson(
 );
 const promotedSkills: string[] = [];
 
-for (const bucket of ["engineering", "productivity"]) {
-  for await (const path of new Bun.Glob(`skills/${bucket}/*/SKILL.md`).scan(
-    repo,
-  )) {
+for (const pattern of [
+  "skills/engineering/*/SKILL.md",
+  "skills/productivity/*/SKILL.md",
+  "gstack/SKILL.md",
+  "gstack/*/SKILL.md",
+  "impeccable/plugin/skills/*/SKILL.md",
+]) {
+  for await (const path of new Bun.Glob(pattern).scan(repo)) {
     promotedSkills.push(`./${dirname(path)}`);
   }
 }
@@ -21,7 +26,21 @@ const localCount = await syncLocalSkills(repo);
 console.log(
   `Validated ${localCount} local skills and their invocation policies.`,
 );
-const manifest = validateSkillManifest(input, promotedSkills);
+const agents = await syncGstackAgents(repo);
+console.log(`Validated ${agents.length} agents generated from gstack.`);
+const impeccableAgents: string[] = [];
+for await (const path of new Bun.Glob("impeccable/plugin/agents/*.md").scan(
+  repo,
+)) {
+  impeccableAgents.push(`./${path}`);
+}
+if (impeccableAgents.length === 0) {
+  throw new Error(
+    "Missing impeccable/plugin/agents. Run `git submodule update --init impeccable`.",
+  );
+}
+agents.push(...impeccableAgents.sort());
+const manifest = validateSkillManifest(input, promotedSkills, agents);
 console.log(
-  `Validated ${manifest.skills.length} promoted skills for ${manifest.name}.`,
+  `Validated ${manifest.skills.length} plugin skills and ${manifest.agents.length} agents for ${manifest.name}.`,
 );

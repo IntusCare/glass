@@ -107,3 +107,7 @@ These skills are available in this checkout, but are not shipped in the promoted
 ## Precondition
 
 **`/setup-matt-pocock-skills`**: run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
+
+## gstack
+
+The plugin also ships [gstack](https://github.com/garrytan/gstack), a separate suite with its own router: for product reviews, shipping, QA, browser work, or anything this map does not cover, point the user at `/gstack` (or `/office-hours` to start) rather than guessing a flow here. For frontend design work (polish, audit, critique, layout, typography, motion) point at `/impeccable`, which has its own sub-command table.
