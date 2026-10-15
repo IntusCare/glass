@@ -27,7 +27,9 @@ test("writes an agent per specialist with the checklist verbatim", async () => {
   expect(agent.startsWith("---\nname: security-reviewer\ndescription: ")).toBe(
     true,
   );
-  expect(agent).toContain("tools: Read, Grep, Glob, Bash");
+  expect(agent).toContain(
+    "tools:\n  - Read\n  - Grep\n  - Glob\n  - Bash\n---",
+  );
   expect(agent).toContain("## Categories\n\n- Example\n");
   expect(await syncGstackAgents(repo)).toEqual(["./agents/security.md"]);
 });
@@ -56,8 +58,10 @@ test("rejects a specialist without a description", async () => {
   );
 });
 
-test("requires the submodule to be checked out", async () => {
+test("requires the vendored specialists directory", async () => {
   const repo = await fs.mkdtemp(join(tmpdir(), "glass-gstack-agents-"));
   fixtures.push(repo);
-  await expect(syncGstackAgents(repo)).rejects.toThrow("git submodule update");
+  await expect(syncGstackAgents(repo)).rejects.toThrow(
+    "Missing gstack/review/specialists",
+  );
 });

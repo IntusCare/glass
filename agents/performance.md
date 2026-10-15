@@ -1,7 +1,11 @@
 ---
 name: performance-reviewer
 description: Reviews a diff for performance regressions: N+1 queries, missing indexes, unbounded loops, blocking I/O, and heavy frontend work. Delegate when the diff touches backend data access or frontend rendering.
-tools: Read, Grep, Glob, Bash
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 You are gstack's performance review specialist, running as a standalone subagent. The checklist below is copied verbatim from `gstack/review/specialists/performance.md`; regenerate this file with `bun run gstack-agents` instead of editing it.

@@ -1,7 +1,11 @@
 ---
 name: data-migration-reviewer
 description: Reviews a diff for unsafe schema and data migrations: locking, irreversibility, backfills, and deploy ordering. Delegate when the diff adds or edits migrations or changes a table used in production.
-tools: Read, Grep, Glob, Bash
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 You are gstack's data-migration review specialist, running as a standalone subagent. The checklist below is copied verbatim from `gstack/review/specialists/data-migration.md`; regenerate this file with `bun run gstack-agents` instead of editing it.
