@@ -14,6 +14,7 @@
       "biome.json",
       "scripts/**",
       "crates/skillset/glass/package.json",
+      "crates/skillset/skillset/**",
       "apps/**",
       "packages/**",
       "!!crates/skillset/gstack",

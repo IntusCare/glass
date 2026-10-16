@@ -1,8 +1,29 @@
-# Matt Pocock Skills
+# Glass Skills
 
-A collection of agent skills (slash commands and behaviors) loaded by Claude Code. Skills are organized into buckets and consumed by per-repo configuration emitted by `/setup-matt-pocock-skills`.
+A plugin that ships a curated set of agent skills (slash commands and behaviors) drawn from several upstream skill collections plus Glass's own, loaded by Claude Code and Devin.
 
 ## Language
+
+### Skill inventory
+
+**Suite**:
+One collection of skills under `crates/skillset/`: Glass's own or an upstream project tracked as a submodule (mattpocock, gstack, impeccable).
+_Avoid_: crate, library, vendored copy
+
+**Skill**:
+A directory holding a `SKILL.md` that an agent can load. Identified within the plugin by its path relative to `crates/skillset/`.
+
+**Category**:
+The folder that groups a **Skill** inside its **Suite** (`engineering`, `productivity`, `in-progress`); a flat **Suite** has the suite's own name as its only category.
+_Avoid_: bucket
+
+**Pick**:
+A **Skill** chosen to ship in the plugin, optionally under a new **Category** or name.
+
+**Skillset**:
+The set of all **Picks**: what the plugin ships.
+
+### Issue tracking
 
 **Issue tracker**:
 The tool that hosts a repo's issues: GitHub Issues, Linear, a local `.scratch/` markdown convention, or similar. Skills like `to-tickets`, `to-spec`, and `triage` read from and write to it.
@@ -20,6 +41,8 @@ A canonical state-machine label applied to an **Issue** during triage (e.g. `nee
 
 ## Relationships
 
+- A **Suite** holds many **Skills**, each in one **Category**
+- The **Skillset** is the set of **Picks**, each a **Skill** from some **Suite**
 - An **Issue tracker** holds many **Issues**
 - An **Issue** carries one **Triage role** at a time
 - A **Decision ticket** is an **Issue** (a child of a `wayfinder:map`)
