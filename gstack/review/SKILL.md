@@ -13,11 +13,6 @@ allowed-tools:
   - Agent
   - AskUserQuestion
   - WebSearch
-triggers:
-  - review this pr
-  - code review
-  - check my diff
-  - pre-landing review
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

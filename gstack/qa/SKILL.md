@@ -12,10 +12,6 @@ allowed-tools:
   - Grep
   - AskUserQuestion
   - WebSearch
-triggers:
-  - qa test this
-  - find bugs on site
-  - test the site
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

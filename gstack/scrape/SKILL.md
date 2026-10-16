@@ -7,12 +7,6 @@ allowed-tools:
   - Bash
   - Read
   - AskUserQuestion
-triggers:
-  - scrape this page
-  - get data from
-  - pull from
-  - extract from
-  - what is on
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

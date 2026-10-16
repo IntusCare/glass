@@ -11,10 +11,6 @@ allowed-tools:
   - AskUserQuestion
   - Bash
   - WebSearch
-triggers:
-  - review architecture
-  - eng plan review
-  - check the implementation plan
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

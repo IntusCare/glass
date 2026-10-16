@@ -4,6 +4,7 @@ import { validateAgentProfiles } from "./agent-profiles.js";
 import { syncGstackAgents } from "./gstack-agents.js";
 import { syncLocalSkills } from "./local-skills.js";
 import { validateSkillManifest } from "./skill-manifest.js";
+import { syncVendoredSkills } from "./vendored-skills.js";
 
 const repo = resolve(process.argv[2] ?? ".");
 const input: unknown = await fs.readJson(
@@ -27,6 +28,8 @@ const localCount = await syncLocalSkills(repo);
 console.log(
   `Validated ${localCount} local skills and their invocation policies.`,
 );
+const vendoredCount = await syncVendoredSkills(repo);
+console.log(`Validated ${vendoredCount} vendored skills for Devin.`);
 const agents = await syncGstackAgents(repo);
 console.log(`Validated ${agents.length} agents generated from gstack.`);
 const impeccableAgents: string[] = [];

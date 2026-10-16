@@ -2,10 +2,6 @@
 name: guard
 version: 0.1.0
 description: "Full safety mode: destructive command warnings + directory-scoped edits. (gstack)"
-triggers:
-  - full safety mode
-  - guard against mistakes
-  - maximum safety
 allowed-tools:
   - Bash
   - Read

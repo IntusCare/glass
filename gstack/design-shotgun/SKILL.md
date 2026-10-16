@@ -3,10 +3,6 @@ name: design-shotgun
 preamble-tier: 2
 version: 1.0.0
 description: "Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate. (gstack)"
-triggers:
-  - explore design variants
-  - show me design options
-  - visual design brainstorm
 allowed-tools:
   - Bash
   - Read

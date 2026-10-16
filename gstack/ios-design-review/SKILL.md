@@ -9,10 +9,6 @@ allowed-tools:
   - Glob
   - Grep
   - AskUserQuestion
-triggers:
-  - review the ios design
-  - audit the iphone app visuals
-  - design qa the ios app
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->

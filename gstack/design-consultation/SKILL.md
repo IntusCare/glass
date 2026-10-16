@@ -12,10 +12,6 @@ allowed-tools:
   - Grep
   - AskUserQuestion
   - WebSearch
-triggers:
-  - design system
-  - create a brand
-  - design from scratch
 gbrain:
   schema: 1
   context_queries:

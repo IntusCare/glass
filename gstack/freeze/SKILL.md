@@ -2,10 +2,6 @@
 name: freeze
 version: 0.1.0
 description: Restrict file edits to a specific directory for the session. (gstack)
-triggers:
-  - freeze edits to directory
-  - lock editing scope
-  - restrict file changes
 allowed-tools:
   - Bash
   - Read

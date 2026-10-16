@@ -10,10 +10,6 @@ allowed-tools:
   - Glob
   - Bash
   - AskUserQuestion
-triggers:
-  - design plan review
-  - review ux plan
-  - check design decisions
 ---
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->
