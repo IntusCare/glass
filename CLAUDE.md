@@ -54,6 +54,15 @@ Use Bun for dependency installation and scripts. Run `bun run check` to verify f
 
 The root package orchestrates workspaces. `crates/skillset/glass/package.json` owns the plugin release version under the `glass-skills` package name so existing changesets still resolve. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
 
+### Skill index
+
+`crates/skillset/skillset/skills.csv` is the reviewed pick list for the plugin: one row per skill found under `crates/skillset/<suite>/` (every suite except `skillset` itself, skipping dot-directories, `node_modules`, and `test`/`tests`/`fixtures` paths, and symlink aliases). `bun run index-skills` regenerates it; the `@glass/skillset` workspace's `check` script runs the same indexer with `--check`, so `bun run check` fails when the csv is stale (after a submodule bump, run `bun run index-skills` and commit the result). Columns, sorted by `path`:
+
+- Script-owned, rewritten every run: `path` (relative to `crates/skillset/`), `category` (the skill directory's parent folder, or the suite name when the parent is the suite root or a folder named `skills`), `name` (frontmatter `name`, else the directory name), `description`, and `url` (frontmatter `url` or `homepage`, else a per-suite rule: mattpocock skills with an upstream docs page link to `https://aihero.dev/skills-<name>`, Glass skills with a `docs/<category>/<name>.md` page link to it on GitHub, impeccable links to `https://impeccable.style`, gstack has no page).
+- Human-owned, preserved verbatim: `new_category` and `new_name` (blank means unchanged) and `status` once it is `picked` or `skipped`. The script sets `new` for a skill not yet in the csv (or one that came back after being `deleted`) and `deleted` for a row whose skill is gone from disk; delete those rows by hand once you have seen them. `new` rows are allowed by `check`: reviewing is a human step.
+
+Only `picked` rows are meant to ship; why the set is curated this way is in [docs/adr/0003-curate-shipped-skills-with-skills-csv.md](./docs/adr/0003-curate-shipped-skills-with-skills-csv.md).
+
 Markdown files are importable. Bun's default `md` loader renders them to HTML, so add `with { type: "text" }` to get the raw Markdown string: `import readme from "../README.md" with { type: "text" };`. Either way the import is a `string`, typed by `types/markdown.d.ts`, which the root `tsconfig.json` includes for every workspace. See `scripts/markdown-import.test.ts`.
 
 ## Agent skills
@@ -72,6 +81,4 @@ Single-context: one root `GLOSSARY.md` plus `docs/adr/`. See `docs/agents/domain
 
 # Scripts
 
-Never write a bash script longer than one line. Instead use bun and zx.
-
-TODO Example
+Never write a bash script longer than one line. Instead use bun and zx. [crates/skillset/skillset/skillset/index-skills.ts](./crates/skillset/skillset/skillset/index-skills.ts) is the example: a `.ts` file that imports `fs` from `zx`, exports its logic for `bun test`, and runs as a CLI under `if (import.meta.main)`.

@@ -1,0 +1,22 @@
+{
+  "name": "@glass/skillset",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Indexes the skills in every suite under crates/skillset into skills.csv",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "check": "bun skillset/index-skills.ts --check",
+    "index-skills": "bun skillset/index-skills.ts"
+  },
+  "dependencies": {
+    "papaparse": "5.5.3",
+    "zx": "8.8.5"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "@types/node": "22.20.4",
+    "@types/papaparse": "5.3.16"
+  }
+}

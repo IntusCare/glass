@@ -1,0 +1,106 @@
+status,path,category,name,new_category,new_name,description,url
+new,glass/engineering/workon,engineering,workon,,,"Start work on a Jira ticket by creating or switching to its branch and moving the ticket to In Progress. Use when the user says ""workon"" or ""work on"" with a Jira key or URL, or wants a branch for a Jira ticket.",https://github.com/intuscare/glass/blob/main/docs/engineering/workon.md
+new,gstack,gstack,gstack,,,Router for the gstack skill suite. (gstack),
+new,gstack/autoplan,gstack,autoplan,,,"Auto-review pipeline — reads the full CEO, design, eng, and DX review skills from disk and runs them sequentially with auto-decisions using 6 decision principles. (gstack)",
+new,gstack/benchmark,gstack,benchmark,,,Web performance regression detection. (gstack),
+new,gstack/benchmark-models,gstack,benchmark-models,,,Cross-model benchmark for gstack skills. (gstack),
+new,gstack/browse,gstack,browse,,,"Drive a real browser through Aside: open a page, read it, click through a flow, take screenshots, check console errors. (gstack)",
+new,gstack/browser-skills/hackernews-frontpage,browser-skills,hackernews-frontpage,,,"Scrape the Hacker News front page (titles, points, comment counts).",
+new,gstack/canary,gstack,canary,,,Post-deploy canary monitoring. (gstack),
+new,gstack/capy/skill/gstack,skill,gstack,,,"Install and use gstack in Capy and Claude Code. Load at session start to check this machine, and for gstack planning, code review, debugging, QA, design, security, documentation, and shipping workflows.",
+new,gstack/careful,gstack,careful,,,Safety guardrails for destructive commands. (gstack),
+new,gstack/codex,gstack,codex,,,OpenAI Codex CLI wrapper — three modes. (gstack),
+new,gstack/context-restore,gstack,context-restore,,,Restore working context saved earlier by /context-save. (gstack),
+new,gstack/context-save,gstack,context-save,,,Save working context. (gstack),
+new,gstack/cso,gstack,cso,,,Security audit: supported static findings; qualified profiles add reproduction and repair candidates. (gstack),
+new,gstack/design-consultation,gstack,design-consultation,,,"Design consultation: understands your product, researches the landscape, proposes a complete design system (aesthetic, typography, color, layout, spacing, motion), and generates font+color preview... (gstack)",
+new,gstack/design-html,gstack,design-html,,,Design finalization: generates production-quality Pretext-native HTML/CSS. (gstack),
+new,gstack/design-review,gstack,design-review,,,"Designer's eye QA: finds visual inconsistency, spacing issues, hierarchy problems, AI slop patterns, and slow interactions — then fixes them. (gstack)",
+new,gstack/design-shotgun,gstack,design-shotgun,,,"Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate. (gstack)",
+new,gstack/deslop-shared-libs,gstack,deslop-shared-libs,,,Find worthwhile shared-code extractions in recent work. (gstack),
+new,gstack/devex-review,gstack,devex-review,,,Live developer experience audit. (gstack),
+new,gstack/diagram,gstack,diagram,,,"Turn an English description (or mermaid source) into a diagram triplet: the source, an editable .excalidraw file you can open on excalidraw.com, and rendered SVG + PNG. (gstack)",
+new,gstack/document-generate,gstack,document-generate,,,"Generate missing documentation from scratch for a feature, module, or entire project. (gstack)",
+new,gstack/document-release,gstack,document-release,,,Release documentation audit. (gstack),
+new,gstack/eval-plan,gstack,eval-plan,,,"Preregister a paid eval (bars, arms, decoys, stop rules), dry-run it at zero cost,
+then run a three-item priced pilot whose spend table gates approval. (gstack)",
+new,gstack/freeze,gstack,freeze,,,Restrict file edits to a specific directory for the session. (gstack),
+new,gstack/gstack-upgrade,gstack,gstack-upgrade,,,Upgrade gstack to the latest version.,
+new,gstack/guard,gstack,guard,,,Full safety mode: destructive command warnings + directory-scoped edits. (gstack),
+new,gstack/health,gstack,health,,,Code quality dashboard. (gstack),
+new,gstack/investigate,gstack,investigate,,,Systematic debugging with root cause investigation. (gstack),
+new,gstack/ios-clean,gstack,ios-clean,,,Remove the DebugBridge SPM package and all #if DEBUG wiring from an iOS app. (gstack),
+new,gstack/ios-design-review,gstack,ios-design-review,,,Visual design audit for iOS apps on real hardware. (gstack),
+new,gstack/ios-fix,gstack,ios-fix,,,Autonomous iOS bug fixer. (gstack),
+new,gstack/ios-qa,gstack,ios-qa,,,Live-device iOS QA for SwiftUI apps. (gstack),
+new,gstack/ios-sync,gstack,ios-sync,,,Regenerate the iOS debug bridge against the latest upstream gstack templates. (gstack),
+new,gstack/land-and-deploy,gstack,land-and-deploy,,,Land and deploy workflow. (gstack),
+new,gstack/landing-report,gstack,landing-report,,,Read-only queue dashboard for workspace-aware ship. (gstack),
+new,gstack/learn,gstack,learn,,,Manage project learnings.,
+new,gstack/make-pdf,gstack,make-pdf,,,Turn any markdown file into a publication-quality PDF. (gstack),
+new,gstack/office-hours,gstack,office-hours,,,YC Office Hours — two modes. (gstack),
+new,gstack/open-gstack-browser,gstack,open-gstack-browser,,,Launch GStack Browser — AI-controlled Chromium with the sidebar extension baked in.,
+new,gstack/openclaw/skills/gstack-openclaw-ceo-review,gstack,gstack-openclaw-ceo-review,,,"Use when asked to review a plan, challenge a proposal, run a CEO review, poke holes in an approach, think bigger about scope, or decide whether to expand or reduce the plan.",
+new,gstack/openclaw/skills/gstack-openclaw-investigate,gstack,gstack-openclaw-investigate,,,"Use when asked to debug, fix a bug, investigate an error, or do root cause analysis, and when users report errors, stack traces, unexpected behavior, or say something stopped working.",
+new,gstack/openclaw/skills/gstack-openclaw-office-hours,gstack,gstack-openclaw-office-hours,,,"Use when asked to brainstorm, evaluate whether an idea is worth building, run office hours, or think through a new product idea or design direction before any code is written.",
+new,gstack/openclaw/skills/gstack-openclaw-retro,gstack,gstack-openclaw-retro,,,"Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics with persistent history and trend tracking. Team-aware with per-person contributions, praise, and growth areas. Use when asked for weekly retro, what shipped this week, or engineering retrospective.",
+new,gstack/pair-agent,gstack,pair-agent,,,Pair a remote AI agent with your browser. (gstack),
+new,gstack/plan-ceo-review,gstack,plan-ceo-review,,,CEO/founder-mode plan review. (gstack),
+new,gstack/plan-design-review,gstack,plan-design-review,,,"Designer's eye plan review — interactive, like CEO and Eng review. (gstack)",
+new,gstack/plan-devex-review,gstack,plan-devex-review,,,Interactive developer experience plan review. (gstack),
+new,gstack/plan-eng-review,gstack,plan-eng-review,,,Eng manager-mode plan review. (gstack),
+new,gstack/plan-tune,gstack,plan-tune,,,Self-tuning question sensitivity + developer psychographic for gstack (v1: observational). (gstack),
+new,gstack/qa,gstack,qa,,,Fix browser/API/CLI/job/worker/webhook bugs. (gstack),
+new,gstack/qa-only,gstack,qa-only,,,Report browser/API/CLI/job/worker/webhook bugs. (gstack),
+new,gstack/retro,gstack,retro,,,Weekly engineering retrospective. (gstack),
+new,gstack/review,gstack,review,,,Pre-landing PR review. (gstack),
+new,gstack/scrape,gstack,scrape,,,"Pull data from a web page through the Aside browser — your real, already signed-in sessions. (gstack)",
+new,gstack/setup-browser-cookies,gstack,setup-browser-cookies,,,Import cookies from your real Chromium browser into the headless browse session. (gstack),
+new,gstack/setup-deploy,gstack,setup-deploy,,,Configure deployment settings for /land-and-deploy.,
+new,gstack/setup-gbrain,gstack,setup-gbrain,,,"Set up gbrain for this coding agent: install the CLI, initialize a local PGLite or Supabase brain, register MCP, capture per-remote trust policy. (gstack)",
+new,gstack/ship,gstack,ship,,,"Ship workflow: detect + merge base branch, run tests, review diff, bump VERSION, update CHANGELOG, commit, push, create PR. (gstack)",
+new,gstack/skillify,gstack,skillify,,,Codify the most recent successful /scrape flow into a permanent browser-skill on disk. (gstack),
+new,gstack/spec,gstack,spec,,,"Turn vague intent into a precise, executable spec in five phases. (gstack)",
+new,gstack/sync-gbrain,gstack,sync-gbrain,,,Keep gbrain current with this repo's code and refresh agent search guidance in CLAUDE.md. (gstack),
+new,gstack/test-audit,gstack,test-audit,,,Find low-value or duplicate tests and the test-only code they keep alive. (gstack),
+new,gstack/unfreeze,gstack,unfreeze,,,"Clear the freeze boundary set by /freeze, allowing edits to all directories again. (gstack)",
+new,impeccable/cursor-plugin/skills/impeccable,impeccable,impeccable,,,"Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, empty states, and native iOS or Android screens. Handles UX review, hierarchy, layout, typography, color, motion, UX copy, accessibility, responsive behavior, edge cases, and capturing or documenting design systems (DESIGN.md, tokens). Also for making bland UI bolder, loud UI quieter, or ambitious visual effects. Not for backend-only or non-UI tasks.",https://impeccable.style
+new,impeccable/plugin/skills/impeccable,impeccable,impeccable,,,"Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, empty states, and native iOS or Android screens. Handles UX review, hierarchy, layout, typography, color, motion, UX copy, accessibility, responsive behavior, edge cases, and capturing or documenting design systems (DESIGN.md, tokens). Also for making bland UI bolder, loud UI quieter, or ambitious visual effects. Not for backend-only or non-UI tasks.",https://impeccable.style
+new,mattpocock/skills/engineering/ask-matt,engineering,ask-matt,,,Ask which skill or flow fits your situation. A router over the skills in this repo.,https://aihero.dev/skills-ask-matt
+new,mattpocock/skills/engineering/code-review,engineering,code-review,,,"Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to ""review since X"".",https://aihero.dev/skills-code-review
+new,mattpocock/skills/engineering/codebase-design,engineering,codebase-design,,,"Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",https://aihero.dev/skills-codebase-design
+new,mattpocock/skills/engineering/diagnosing-bugs,engineering,diagnosing-bugs,,,"Diagnosis loop for hard bugs and performance regressions. Use when the user says ""diagnose""/""debug this"", or reports something broken/throwing/failing/slow.",https://aihero.dev/skills-diagnosing-bugs
+new,mattpocock/skills/engineering/domain-modeling,engineering,domain-modeling,,,"Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR.",https://aihero.dev/skills-domain-modeling
+new,mattpocock/skills/engineering/grill-with-docs,engineering,grill-with-docs,,,"A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",https://aihero.dev/skills-grill-with-docs
+new,mattpocock/skills/engineering/implement,engineering,implement,,,Implement a piece of work based on a spec or set of tickets.,https://aihero.dev/skills-implement
+new,mattpocock/skills/engineering/implement-spec,engineering,implement-spec,,,Implement the result of /to-spec and /to-tickets in code.,https://aihero.dev/skills-implement-spec
+new,mattpocock/skills/engineering/improve-codebase-architecture,engineering,improve-codebase-architecture,,,"Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",https://aihero.dev/skills-improve-codebase-architecture
+new,mattpocock/skills/engineering/pr,engineering,pr,,,Use when writing a PR body.,https://aihero.dev/skills-pr
+new,mattpocock/skills/engineering/prototype,engineering,prototype,,,"Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",https://aihero.dev/skills-prototype
+new,mattpocock/skills/engineering/research,engineering,research,,,"Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",https://aihero.dev/skills-research
+new,mattpocock/skills/engineering/retro,engineering,retro,,,Conduct a retrospective on a coding session.,https://aihero.dev/skills-retro
+new,mattpocock/skills/engineering/setup-matt-pocock-skills,engineering,setup-matt-pocock-skills,,,"Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",https://aihero.dev/skills-setup-matt-pocock-skills
+new,mattpocock/skills/engineering/tdd,engineering,tdd,,,"Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions ""red-green-refactor"", or wants integration tests.",https://aihero.dev/skills-tdd
+new,mattpocock/skills/engineering/to-spec,engineering,to-spec,,,"Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed.",https://aihero.dev/skills-to-spec
+new,mattpocock/skills/engineering/to-tickets,engineering,to-tickets,,,"Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).",https://aihero.dev/skills-to-tickets
+new,mattpocock/skills/engineering/triage,engineering,triage,,,"Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs.",https://aihero.dev/skills-triage
+new,mattpocock/skills/engineering/wayfinder,engineering,wayfinder,,,"Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",https://aihero.dev/skills-wayfinder
+new,mattpocock/skills/engineering/wizard,engineering,wizard,,,"Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",https://aihero.dev/skills-wizard
+new,mattpocock/skills/in-progress/chief-of-staff,in-progress,chief-of-staff,,,Pursue a long-running goal in a single session by co-ordinating subagents.,
+new,mattpocock/skills/in-progress/claude-handoff,in-progress,claude-handoff,,,Hand the current conversation off to a fresh background agent that picks up the work immediately.,
+new,mattpocock/skills/in-progress/loop-me,in-progress,loop-me,,,"Grill me about specs for the workflows I want to build, within this workspace.",
+new,mattpocock/skills/in-progress/setup-ts-deep-modules,in-progress,setup-ts-deep-modules,,,"Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. User-invoked.",
+new,mattpocock/skills/in-progress/writing-beats,in-progress,writing-beats,,,"Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+new,mattpocock/skills/in-progress/writing-fragments,in-progress,writing-fragments,,,"Writing, explore: mine raw fragments, no structure yet.",
+new,mattpocock/skills/in-progress/writing-shape,in-progress,writing-shape,,,"Writing, exploit: shape raw material into an article, paragraph by paragraph.",
+new,mattpocock/skills/misc/git-guardrails-claude-code,misc,git-guardrails-claude-code,,,"Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.",
+new,mattpocock/skills/misc/migrate-to-shoehorn,misc,migrate-to-shoehorn,,,"Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+new,mattpocock/skills/misc/scaffold-exercises,misc,scaffold-exercises,,,"Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+new,mattpocock/skills/misc/setup-pre-commit,misc,setup-pre-commit,,,"Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.",
+new,mattpocock/skills/productivity/grill-me,productivity,grill-me,,,A relentless interview to sharpen a plan or design.,https://aihero.dev/skills-grill-me
+new,mattpocock/skills/productivity/grilling,productivity,grilling,,,"Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",https://aihero.dev/skills-grilling
+new,mattpocock/skills/productivity/handoff,productivity,handoff,,,Compact the current conversation into a handoff document for another agent to pick up.,https://aihero.dev/skills-handoff
+new,mattpocock/skills/productivity/teach,productivity,teach,,,"Teach the user a new skill or concept, within this workspace.",https://aihero.dev/skills-teach
+new,mattpocock/skills/productivity/to-questionnaire,productivity,to-questionnaire,,,Turn a decision you can't fully answer into a questionnaire for someone else to fill in.,https://aihero.dev/skills-to-questionnaire
+new,mattpocock/skills/productivity/wait-what,productivity,wait-what,,,Stop. That last message did not land: re-pitch it.,https://aihero.dev/skills-wait-what
+new,mattpocock/skills/productivity/writing-for-agents,productivity,writing-for-agents,,,"Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",https://aihero.dev/skills-writing-for-agents
