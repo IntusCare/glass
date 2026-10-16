@@ -1,3 +1,15 @@
+/**
+ * Index all the skills in crates/skillset/ except crates/skillset/skillset and patch skills.csv removing removed skills and adding new skills. skills.csv should contain the following columns:
+ * - status: new/deleted/picked
+ * - path: path to the skill relative to the crates/skillset directory.
+ * - category: The category of the skill
+ * - name: the name of the skill
+ & - new_category: the new category of the skill
+ * - new_name: the new name of the skill if it has been renamed
+ * - description: the skill's description.
+ * Keep the csv sorted by path
+ */
+
 import { basename, dirname, join, relative, resolve } from "node:path";
 import Papa from "papaparse";
 import { fs } from "zx";
@@ -91,7 +103,7 @@ export async function discoverSkills(repo: string): Promise<Skill[]> {
     skills.push({
       suite,
       path: skillDir,
-      category: parent === "skills" ? suite : (parent ?? suite),
+      category: parent === "skills" ? suite : parent ?? suite,
       name: text(frontmatter.name) || basename(skillDir),
       description: text(frontmatter.description),
       frontmatter,
@@ -119,7 +131,9 @@ export function parseCsv(source: string): Row[] {
   });
   if (parsed.errors.length)
     throw new Error(
-      `Invalid ${csvPath}: ${parsed.errors.map((error) => `${error.message} (row ${error.row})`).join("; ")}`,
+      `Invalid ${csvPath}: ${parsed.errors
+        .map((error) => `${error.message} (row ${error.row})`)
+        .join("; ")}`,
     );
   return parsed.data.map((record) => {
     const row = Object.fromEntries(
@@ -135,7 +149,13 @@ export function parseCsv(source: string): Row[] {
 }
 
 export function serializeCsv(rows: Row[]) {
-  return `${Papa.unparse({ fields: [...columns], data: rows.map((row) => columns.map((column) => row[column])) }, { newline: "\n" })}\n`;
+  return `${Papa.unparse(
+    {
+      fields: [...columns],
+      data: rows.map((row) => columns.map((column) => row[column])),
+    },
+    { newline: "\n" },
+  )}\n`;
 }
 
 export async function indexSkills(
@@ -199,6 +219,10 @@ if (import.meta.main) {
   );
   const summary = await syncSkillsCsv(repo, !check);
   console.log(
-    `${relative(repo, join(repo, csvPath))}: ${summary.total} skills, ${summary.new} new, ${summary.picked} picked, ${summary.deleted} deleted${summary.changed ? " (updated)" : ""}`,
+    `${relative(repo, join(repo, csvPath))}: ${summary.total} skills, ${
+      summary.new
+    } new, ${summary.picked} picked, ${summary.deleted} deleted${
+      summary.changed ? " (updated)" : ""
+    }`,
   );
 }
