@@ -43,7 +43,7 @@ Or, from inside a session:
 
 It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./crates/skillset/CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
+**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./crates/skillset/glass/CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
 
 ```bash
 claude plugin uninstall glass-skills@claude-plugins-official
@@ -105,8 +105,8 @@ This is just the same in the AI age. There is a communication gap between you an
 
 **The Fix** is to use:
 
-- [`/grill-me`](./crates/skillset/productivity/grill-me/SKILL.md) - for non-code uses
-- [`/grill-with-docs`](./crates/skillset/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./crates/skillset/productivity/grill-me/SKILL.md), but adds more goodies (see below)
+- [`/grill-me`](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md) - for non-code uses
+- [`/grill-with-docs`](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
 
 These are my most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
 
@@ -136,7 +136,7 @@ This concision pays off session after session.
 
 </details>
 
-This is built into [`/grill-with-docs`](./crates/skillset/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
+This is built into [`/grill-with-docs`](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
 
 It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
 
@@ -161,9 +161,9 @@ It's time to look at your feedback loops. Without feedback on how the code it pr
 
 For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
 
-I've built a **[`/tdd`](./crates/skillset/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
+I've built a **[`/tdd`](./crates/skillset/mattpocock/skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
 
-For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
+For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/mattpocock/skills/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
 
 ### #4: We Built A Ball Of Mud
 
@@ -181,9 +181,9 @@ For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/engine
 
 This is built in to every layer of these skills:
 
-- [`/to-spec`](./crates/skillset/engineering/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
+- [`/to-spec`](./crates/skillset/mattpocock/skills/engineering/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
 
-And crucially, [`/improve-codebase-architecture`](./crates/skillset/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
+And crucially, [`/improve-codebase-architecture`](./crates/skillset/mattpocock/skills/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
 
 ### Summary
 
@@ -191,58 +191,62 @@ Software engineering fundamentals matter more than ever. These skills are my bes
 
 ## Reference
 
-Every skill is **model-invoked**: you can invoke it explicitly, or the agent can reach for it automatically when the task fits. Each workflow's prerequisites and human confirmation points still apply.
+The Matt Pocock suite comes from [mattpocock/skills](https://github.com/mattpocock/skills) as a submodule at `crates/skillset/mattpocock`, tracking `main`. Its invocation policies are upstream's: user-invoked skills require an explicit request, while model-invoked skills can also be selected automatically. Glass's own `workon` skill and release metadata live in `crates/skillset/glass`.
 
-Inside this repository, Devin, Claude Code, and Codex discover the source skills through checked-in relative symlinks. Edit under `crates/skillset/` to work on the live source. After adding, removing, renaming, or moving a skill, run `bun run link-skills` and include the link changes in your commit; `bun run check` validates them. Git must preserve symlinks. Restart the agent if discovery does not refresh, and check the skill's source path if you also have an installed copy.
+After cloning, run `git submodule update --init`. Devin, Claude Code, and Codex discover Glass and Matt Pocock skills through relative symlinks. To upgrade Matt Pocock's suite, run `git submodule update --remote crates/skillset/mattpocock`, then `bun run link-skills`, re-sync the plugin manifest, and commit the new gitlink and links. The gitlink pins a commit; `branch = main` selects the branch for remote updates. Edit Glass skills under `crates/skillset/glass`; keep submodules unmodified. Git must preserve symlinks. Restart the agent if discovery does not refresh.
 
 ### Engineering
 
 Skills I use daily for code work.
 
+**User-invoked**
+
+- **[ask-matt](./crates/skillset/mattpocock/skills/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the upstream skills.
+- **[grill-with-docs](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md)**: Interview about a design while recording terminology and decisions.
+- **[triage](./crates/skillset/mattpocock/skills/engineering/triage/SKILL.md)**: Move issues through triage roles.
+- **[improve-codebase-architecture](./crates/skillset/mattpocock/skills/engineering/improve-codebase-architecture/SKILL.md)**: Survey deepening opportunities, then explore a chosen candidate.
+- **[setup-matt-pocock-skills](./crates/skillset/mattpocock/skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure issue tracking, triage labels, and domain docs.
+- **[to-spec](./crates/skillset/mattpocock/skills/engineering/to-spec/SKILL.md)**: Turn a conversation into a spec.
+- **[to-tickets](./crates/skillset/mattpocock/skills/engineering/to-tickets/SKILL.md)**: Split a plan into tracer-bullet tickets with blocking edges.
+- **[implement](./crates/skillset/mattpocock/skills/engineering/implement/SKILL.md)**: Build a spec or tickets with TDD and code review.
+- **[implement-spec](./crates/skillset/mattpocock/skills/engineering/implement-spec/SKILL.md)**: Implement a whole ticket graph on one integration branch.
+- **[wayfinder](./crates/skillset/mattpocock/skills/engineering/wayfinder/SKILL.md)**: Map a large uncertain effort as decision tickets.
+- **[retro](./crates/skillset/mattpocock/skills/engineering/retro/SKILL.md)**: Propose improvements to the coding agent's environment after a session.
+
 **Model-invoked**
 
-- **[ask-matt](./crates/skillset/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the skills in this repo.
-- **[grill-with-docs](./crates/skillset/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
-- **[triage](./crates/skillset/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
-- **[improve-codebase-architecture](./crates/skillset/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-matt-pocock-skills](./crates/skillset/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
-- **[to-spec](./crates/skillset/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
-- **[to-tickets](./crates/skillset/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
-- **[implement](./crates/skillset/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.
-- **[implement-spec](./crates/skillset/engineering/implement-spec/SKILL.md)**: Implement a whole spec on one integration branch. Works the tickets as a task graph, running implementer subagents across the ready frontier for maximum concurrency, then closes out with `/code-review`.
-- **[wayfinder](./crates/skillset/engineering/wayfinder/SKILL.md)**: Plan a huge chunk of work, more than one agent session can hold, as a shared map of decision tickets on the issue tracker, and resolve them one at a time until the way to the destination is clear.
-- **[retro](./crates/skillset/engineering/retro/SKILL.md)**: Suggest improvements to the coding agent's environment (navigation, automated checks, coding standards, steering files, tooling) after a session, most severe first.
-
-- **[prototype](./crates/skillset/engineering/prototype/SKILL.md)**: Build a throwaway prototype to answer a design question, either a single shareable HTML file for state/logic questions, or several radically different UI variations toggleable from one route.
-- **[diagnosing-bugs](./crates/skillset/engineering/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
-- **[research](./crates/skillset/engineering/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
-- **[tdd](./crates/skillset/engineering/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
-- **[domain-modeling](./crates/skillset/engineering/domain-modeling/SKILL.md)**: Actively build and sharpen a project's domain model: challenge terms against the glossary, stress-test with edge-case scenarios, and update `GLOSSARY.md` and ADRs inline.
-- **[codebase-design](./crates/skillset/engineering/codebase-design/SKILL.md)**: Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
-- **[code-review](./crates/skillset/engineering/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
-- **[pr](./crates/skillset/engineering/pr/SKILL.md)**: The shape a pull request body should take: a summary as the smallest visual that makes the change clear, before/after evidence that it works, and a merge-danger call (one-way or two-way door, plus blast radius).
-- **[wizard](./crates/skillset/engineering/wizard/SKILL.md)**: Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover.
-- **[workon](./crates/skillset/engineering/workon/SKILL.md)**: Start a Jira ticket: create or switch to its `<KEY>-<slug>` branch, move the ticket to In Progress, and link the Devin session on it.
+- **[prototype](./crates/skillset/mattpocock/skills/engineering/prototype/SKILL.md)**: Build a throwaway program to answer a design question.
+- **[diagnosing-bugs](./crates/skillset/mattpocock/skills/engineering/diagnosing-bugs/SKILL.md)**: Diagnose hard bugs through a reproducible feedback loop.
+- **[research](./crates/skillset/mattpocock/skills/engineering/research/SKILL.md)**: Investigate primary sources and capture cited findings.
+- **[tdd](./crates/skillset/mattpocock/skills/engineering/tdd/SKILL.md)**: Build features and fixes one tested vertical slice at a time.
+- **[domain-modeling](./crates/skillset/mattpocock/skills/engineering/domain-modeling/SKILL.md)**: Sharpen domain language and record it in glossary entries and ADRs.
+- **[codebase-design](./crates/skillset/mattpocock/skills/engineering/codebase-design/SKILL.md)**: Design deep modules with small interfaces and testable seams.
+- **[code-review](./crates/skillset/mattpocock/skills/engineering/code-review/SKILL.md)**: Review a diff against repository standards and its originating spec.
+- **[pr](./crates/skillset/mattpocock/skills/engineering/pr/SKILL.md)**: Write a PR body with a clear summary, validation, and merge risks.
+- **[wizard](./crates/skillset/mattpocock/skills/engineering/wizard/SKILL.md)**: Generate an interactive wizard for steps only a human can perform.
+- **[workon](./crates/skillset/glass/engineering/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
 
 ### Productivity
 
 General workflow tools, not code-specific.
 
+**User-invoked**
+
+- **[grill-me](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md)**: Sharpen a plan through a stateless interview.
+- **[handoff](./crates/skillset/mattpocock/skills/productivity/handoff/SKILL.md)**: Write a portable handoff document for another session.
+- **[teach](./crates/skillset/mattpocock/skills/productivity/teach/SKILL.md)**: Learn a topic across sessions in a teaching workspace.
+- **[to-questionnaire](./crates/skillset/mattpocock/skills/productivity/to-questionnaire/SKILL.md)**: Draft questions for someone who holds information you need.
+- **[wait-what](./crates/skillset/mattpocock/skills/productivity/wait-what/SKILL.md)**: Re-pitch an explanation with simpler language and missing context.
+
 **Model-invoked**
 
-- **[grill-me](./crates/skillset/productivity/grill-me/SKILL.md)**: Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved.
-- **[handoff](./crates/skillset/productivity/handoff/SKILL.md)**: Compact the current conversation into a handoff document so another agent can continue the work.
-- **[teach](./crates/skillset/productivity/teach/SKILL.md)**: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- **[to-questionnaire](./crates/skillset/productivity/to-questionnaire/SKILL.md)**: Turn a decision you can't answer alone into a Markdown questionnaire for the one person who can, filled in async, or together over a meeting. It grills you about the send (who it's for, what you need back), not the subject.
-- **[wait-what](./crates/skillset/productivity/wait-what/SKILL.md)**: Fire this the moment a message doesn't land. The agent re-pitches it with the context you're missing, in plain English, using your `GLOSSARY.md` vocabulary.
-
-- **[grilling](./crates/skillset/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `triage`, `wayfinder` and `improve-codebase-architecture`.
-- **[writing-for-agents](./crates/skillset/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+- **[grilling](./crates/skillset/mattpocock/skills/productivity/grilling/SKILL.md)**: The reusable interview discipline behind the planning workflows.
+- **[writing-for-agents](./crates/skillset/mattpocock/skills/productivity/writing-for-agents/SKILL.md)**: Write and sharpen documents that agents consume.
 
 ### gstack
 
-[garrytan/gstack](https://github.com/garrytan/gstack) ships alongside these skills as a git submodule at [`crates/gstack/`](./crates/gstack/), tracking upstream `main`. The plugin lists its router (`/gstack`) and all of its skills (`/review`, `/qa`, `/ship`, `/investigate`, `/office-hours`, and the rest; see [crates/gstack/README.md](./crates/gstack/README.md)), plus eight review subagents generated from gstack's review specialists under [`agents/`](./agents/): `api-contract-reviewer`, `data-migration-reviewer`, `maintainability-reviewer`, `performance-reviewer`, `red-team-reviewer`, `security-reviewer`, `simplification-reviewer`, and `testing-reviewer`.
+[garrytan/gstack](https://github.com/garrytan/gstack) ships alongside these skills as a git submodule at [`crates/skillset/gstack/`](./crates/skillset/gstack/), tracking upstream `main`. The plugin lists its router (`/gstack`) and all of its skills (`/review`, `/qa`, `/ship`, `/investigate`, `/office-hours`, and the rest; see [crates/skillset/gstack/README.md](./crates/skillset/gstack/README.md)), plus eight review subagents generated from gstack's review specialists under [`agents/`](./agents/): `api-contract-reviewer`, `data-migration-reviewer`, `maintainability-reviewer`, `performance-reviewer`, `red-team-reviewer`, `security-reviewer`, `simplification-reviewer`, and `testing-reviewer`.
 
 ### impeccable
 
-[pbakaus/impeccable](https://github.com/pbakaus/impeccable) (design fluency for frontend work: `/impeccable polish`, `audit`, `critique`, and 20 more sub-commands) is a git submodule at [`crates/impeccable/`](./crates/impeccable/), tracking upstream `main`. The plugin lists its [`impeccable`](./crates/impeccable/plugin/skills/impeccable/SKILL.md) skill straight from that tree and its four subagents (`impeccable-asset-producer`, `impeccable-documenter`, `impeccable-finish-reviewer`, `impeccable-manual-edit-applier`) as generated copies under [`agents/`](./agents/). After cloning, run `git submodule update --init` to populate both.
+[pbakaus/impeccable](https://github.com/pbakaus/impeccable) (design fluency for frontend work: `/impeccable polish`, `audit`, `critique`, and 20 more sub-commands) is a git submodule at [`crates/skillset/impeccable/`](./crates/skillset/impeccable/), tracking upstream `main`. The plugin lists its [`impeccable`](./crates/skillset/impeccable/plugin/skills/impeccable/SKILL.md) skill straight from that tree and its four subagents (`impeccable-asset-producer`, `impeccable-documenter`, `impeccable-finish-reviewer`, `impeccable-manual-edit-applier`) as generated copies under [`agents/`](./agents/). After cloning, run `git submodule update --init` to populate all three upstream suites.

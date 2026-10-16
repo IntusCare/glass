@@ -1,8 +1,12 @@
 [submodule "crates/gstack"]
-	path = crates/gstack
+	path = crates/skillset/gstack
 	url = https://github.com/garrytan/gstack.git
 	branch = main
 [submodule "crates/impeccable"]
-	path = crates/impeccable
+	path = crates/skillset/impeccable
 	url = https://github.com/pbakaus/impeccable.git
+	branch = main
+[submodule "crates/mattpocock"]
+	path = crates/skillset/mattpocock
+	url = https://github.com/mattpocock/skills.git
 	branch = main

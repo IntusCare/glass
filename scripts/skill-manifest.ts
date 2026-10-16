@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const skillPath =
-  /^\.\/crates\/(skillset\/(engineering|productivity)\/[a-z0-9-]+|gstack(\/[a-z0-9-]+)?|impeccable\/plugin\/skills\/[a-z0-9-]+)$/;
+  /^\.\/crates\/skillset\/((glass|mattpocock\/skills)\/(engineering|productivity)\/[a-z0-9-]+|gstack(\/[a-z0-9-]+)?|impeccable\/plugin\/skills\/[a-z0-9-]+)$/;
 const agentPath = /^\.\/agents\/[a-z0-9-]+\.md$/;
 
 function unique(items: string[]) {

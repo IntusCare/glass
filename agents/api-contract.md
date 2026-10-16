@@ -8,7 +8,7 @@ tools:
   - Bash
 ---
 
-You are gstack's api-contract review specialist, running as a standalone subagent. The checklist below is copied verbatim from `crates/gstack/review/specialists/api-contract.md`; regenerate this file with `bun run agents` instead of editing it.
+You are gstack's api-contract review specialist, running as a standalone subagent. The checklist below is copied verbatim from `crates/skillset/gstack/review/specialists/api-contract.md`; regenerate this file with `bun run agents` instead of editing it.
 
 Ignore the checklist's `Scope:` line: the caller already decided to dispatch you. Get the diff with `git diff "$(git merge-base <base> HEAD)"` using the base the caller names (default `origin/main`), read the full content of changed files when a hunk is not enough, then apply the checklist. Report findings in the checklist's JSON format, one object per line, or `NO FINDINGS` and nothing else.
 

@@ -40,11 +40,14 @@ async function fixture() {
   const repo = await fs.mkdtemp(join(tmpdir(), "glass-agents-"));
   fixtures.push(repo);
   await fs.outputFile(
-    join(repo, "crates/gstack/review/specialists/security.md"),
+    join(repo, "crates/skillset/gstack/review/specialists/security.md"),
     "# Security Specialist Review Checklist\n\nScope: When SCOPE_AUTH=true\n\n---\n\n## Categories\n\n- Example\n",
   );
   await fs.outputFile(
-    join(repo, "crates/impeccable/plugin/agents/impeccable-documenter.md"),
+    join(
+      repo,
+      "crates/skillset/impeccable/plugin/agents/impeccable-documenter.md",
+    ),
     upstreamAgent,
   );
   return repo;
@@ -99,7 +102,7 @@ test("reports missing, stale, and orphaned agents without writing", async () => 
 test("rejects a specialist without a description", async () => {
   const repo = await fixture();
   await fs.outputFile(
-    join(repo, "crates/gstack/review/specialists/unknown.md"),
+    join(repo, "crates/skillset/gstack/review/specialists/unknown.md"),
     "x\n",
   );
   await expect(syncAgents(repo, true)).rejects.toThrow(
@@ -111,10 +114,10 @@ test("requires both submodules to be checked out", async () => {
   const repo = await fs.mkdtemp(join(tmpdir(), "glass-agents-"));
   fixtures.push(repo);
   await expect(syncAgents(repo)).rejects.toThrow(
-    "Missing crates/gstack/review/specialists",
+    "Missing crates/skillset/gstack/review/specialists",
   );
-  await fs.ensureDir(join(repo, "crates/gstack/review/specialists"));
+  await fs.ensureDir(join(repo, "crates/skillset/gstack/review/specialists"));
   await expect(syncAgents(repo)).rejects.toThrow(
-    "Missing crates/impeccable/plugin/agents",
+    "Missing crates/skillset/impeccable/plugin/agents",
   );
 });

@@ -12,20 +12,28 @@ const input: unknown = await fs.readJson(
 const promotedSkills: string[] = [];
 
 for (const pattern of [
-  "crates/skillset/engineering/*/SKILL.md",
-  "crates/skillset/productivity/*/SKILL.md",
-  "crates/gstack/SKILL.md",
-  "crates/gstack/*/SKILL.md",
-  "crates/impeccable/plugin/skills/*/SKILL.md",
+  "crates/skillset/glass/engineering/*/SKILL.md",
+  "crates/skillset/glass/productivity/*/SKILL.md",
+  "crates/skillset/mattpocock/skills/engineering/*/SKILL.md",
+  "crates/skillset/mattpocock/skills/productivity/*/SKILL.md",
+  "crates/skillset/gstack/SKILL.md",
+  "crates/skillset/gstack/*/SKILL.md",
+  "crates/skillset/impeccable/plugin/skills/*/SKILL.md",
 ]) {
   for await (const path of new Bun.Glob(pattern).scan(repo)) {
     promotedSkills.push(`./${dirname(path)}`);
   }
 }
-if (!promotedSkills.some((skill) => skill.startsWith("./crates/gstack/"))) {
-  throw new Error(
-    "No gstack skills found. Run `git submodule update --init` to check out crates/gstack and crates/impeccable.",
-  );
+for (const suite of ["gstack", "impeccable", "mattpocock"]) {
+  if (
+    !promotedSkills.some((skill) =>
+      skill.startsWith(`./crates/skillset/${suite}/`),
+    )
+  ) {
+    throw new Error(
+      `No ${suite} skills found. Run \`git submodule update --init\` to check out crates/skillset/${suite}.`,
+    );
+  }
 }
 
 const localCount = await syncLocalSkills(repo);

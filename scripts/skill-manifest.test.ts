@@ -1,10 +1,17 @@
 import { describe, expect, test } from "bun:test";
 import { validateSkillManifest } from "./skill-manifest.js";
 
-const skill = "./crates/skillset/engineering/tdd";
+const skill = "./crates/skillset/mattpocock/skills/engineering/tdd";
 const manifest = { name: "glass", version: "0.0.0", skills: [skill] };
 
 describe("validateSkillManifest", () => {
+  test("accepts Glass skills alongside the upstream suite", () => {
+    const skills = [skill, "./crates/skillset/glass/engineering/workon"];
+    expect(
+      validateSkillManifest({ ...manifest, skills }, skills).skills,
+    ).toEqual(skills);
+  });
+
   test("accepts a manifest containing exactly the promoted skills", () => {
     expect(validateSkillManifest(manifest, [skill])).toEqual({
       ...manifest,
@@ -13,7 +20,10 @@ describe("validateSkillManifest", () => {
   });
 
   test("accepts impeccable skills and generated agents", () => {
-    const skills = [skill, "./crates/impeccable/plugin/skills/impeccable"];
+    const skills = [
+      skill,
+      "./crates/skillset/impeccable/plugin/skills/impeccable",
+    ];
     const agents = ["./agents/impeccable-documenter.md"];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents)
@@ -22,7 +32,11 @@ describe("validateSkillManifest", () => {
   });
 
   test("accepts gstack skills and generated agents", () => {
-    const skills = [skill, "./crates/gstack", "./crates/gstack/review"];
+    const skills = [
+      skill,
+      "./crates/skillset/gstack",
+      "./crates/skillset/gstack/review",
+    ];
     const agents = ["./agents/security.md"];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents),
@@ -42,7 +56,10 @@ describe("validateSkillManifest", () => {
   test("rejects skills outside the promoted buckets", () => {
     expect(() =>
       validateSkillManifest(
-        { ...manifest, skills: ["./crates/skillset/misc/example"] },
+        {
+          ...manifest,
+          skills: ["./crates/skillset/mattpocock/skills/misc/example"],
+        },
         [],
       ),
     ).toThrow();
@@ -54,7 +71,7 @@ describe("validateSkillManifest", () => {
         {
           ...manifest,
           agents: [
-            "./crates/impeccable/plugin/agents/impeccable-documenter.md",
+            "./crates/skillset/impeccable/plugin/agents/impeccable-documenter.md",
           ],
         },
         [skill],
@@ -66,9 +83,11 @@ describe("validateSkillManifest", () => {
     expect(() =>
       validateSkillManifest(manifest, [
         skill,
-        "./crates/skillset/productivity/teach",
+        "./crates/skillset/mattpocock/skills/productivity/teach",
       ]),
-    ).toThrow("Missing: ./crates/skillset/productivity/teach");
+    ).toThrow(
+      "Missing: ./crates/skillset/mattpocock/skills/productivity/teach",
+    );
   });
 
   test("reports manifest entries that do not exist on disk", () => {

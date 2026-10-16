@@ -16,8 +16,11 @@ async function fixture(pluginVersion: string) {
     name: "glass",
     private: true,
   });
-  await fs.outputJson(join(repo, "crates/skillset/package.json"), {
+  await fs.outputJson(join(repo, "crates/skillset/glass/package.json"), {
     version: "1.3.1",
+  });
+  await fs.outputJson(join(repo, "crates/skillset/mattpocock/package.json"), {
+    version: "9.9.9",
   });
   await fs.outputJson(join(repo, ".claude-plugin/plugin.json"), {
     name: "glass",
@@ -30,7 +33,7 @@ async function fixture(pluginVersion: string) {
   return repo;
 }
 
-test("checks the skills workspace version rather than the root package", async () => {
+test("checks the Glass workspace version rather than the root or upstream package", async () => {
   const repo = await fixture("1.3.1");
   const result = await $({
     cwd: repo,

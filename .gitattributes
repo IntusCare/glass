@@ -1,2 +1,3 @@
-crates/gstack/** linguist-vendored
-crates/impeccable/** linguist-vendored
+crates/skillset/gstack/** linguist-vendored
+crates/skillset/impeccable/** linguist-vendored
+crates/skillset/mattpocock/** linguist-vendored

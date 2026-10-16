@@ -1,8 +1,8 @@
 import { basename, join, resolve } from "node:path";
 import { fs } from "zx";
 
-const specialistsDirectory = "crates/gstack/review/specialists";
-const impeccableDirectory = "crates/impeccable/plugin/agents";
+const specialistsDirectory = "crates/skillset/gstack/review/specialists";
+const impeccableDirectory = "crates/skillset/impeccable/plugin/agents";
 const agentsDirectory = "agents";
 const tools = ["Read", "Grep", "Glob", "Bash"];
 const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/;
