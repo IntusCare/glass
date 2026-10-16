@@ -1,6 +1,6 @@
 # Changes to `misc/` skills
 
-The skills under `skills/misc/` (`git-guardrails-claude-code`, `migrate-to-shoehorn`, `scaffold-exercises`, `setup-pre-commit`, and anything else that lands there) are frozen. Bug reports, feature requests and PRs against them are closed.
+The skills under `crates/skillset/misc/` (`git-guardrails-claude-code`, `migrate-to-shoehorn`, `scaffold-exercises`, `setup-pre-commit`, and anything else that lands there) are frozen. Bug reports, feature requests and PRs against them are closed.
 
 ## Why this is out of scope
 

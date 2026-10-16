@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { validateSkillManifest } from "./skill-manifest.js";
 
-const skill = "./skills/engineering/tdd";
+const skill = "./crates/skillset/engineering/tdd";
 const manifest = { name: "glass", version: "0.0.0", skills: [skill] };
 
 describe("validateSkillManifest", () => {
@@ -12,9 +12,9 @@ describe("validateSkillManifest", () => {
     });
   });
 
-  test("accepts vendored impeccable skills and agents", () => {
-    const skills = [skill, "./impeccable/plugin/skills/impeccable"];
-    const agents = ["./impeccable/plugin/agents/impeccable-documenter.md"];
+  test("accepts impeccable skills and generated agents", () => {
+    const skills = [skill, "./crates/impeccable/plugin/skills/impeccable"];
+    const agents = ["./agents/impeccable-documenter.md"];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents)
         .agents,
@@ -22,7 +22,7 @@ describe("validateSkillManifest", () => {
   });
 
   test("accepts gstack skills and generated agents", () => {
-    const skills = [skill, "./gstack", "./gstack/review"];
+    const skills = [skill, "./crates/gstack", "./crates/gstack/review"];
     const agents = ["./agents/security.md"];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents),
@@ -42,7 +42,7 @@ describe("validateSkillManifest", () => {
   test("rejects skills outside the promoted buckets", () => {
     expect(() =>
       validateSkillManifest(
-        { ...manifest, skills: ["./skills/misc/example"] },
+        { ...manifest, skills: ["./crates/skillset/misc/example"] },
         [],
       ),
     ).toThrow();
@@ -51,7 +51,12 @@ describe("validateSkillManifest", () => {
   test("rejects agents outside the agents directory", () => {
     expect(() =>
       validateSkillManifest(
-        { ...manifest, agents: ["./gstack/review/specialists/security.md"] },
+        {
+          ...manifest,
+          agents: [
+            "./crates/impeccable/plugin/agents/impeccable-documenter.md",
+          ],
+        },
         [skill],
       ),
     ).toThrow();
@@ -59,8 +64,11 @@ describe("validateSkillManifest", () => {
 
   test("reports promoted skills missing from the manifest", () => {
     expect(() =>
-      validateSkillManifest(manifest, [skill, "./skills/productivity/teach"]),
-    ).toThrow("Missing: ./skills/productivity/teach");
+      validateSkillManifest(manifest, [
+        skill,
+        "./crates/skillset/productivity/teach",
+      ]),
+    ).toThrow("Missing: ./crates/skillset/productivity/teach");
   });
 
   test("reports manifest entries that do not exist on disk", () => {

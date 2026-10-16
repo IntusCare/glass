@@ -1,10 +1,9 @@
 import { dirname, resolve } from "node:path";
 import { fs } from "zx";
 import { validateAgentProfiles } from "./agent-profiles.js";
-import { syncGstackAgents } from "./gstack-agents.js";
+import { syncAgents } from "./agents.js";
 import { syncLocalSkills } from "./local-skills.js";
 import { validateSkillManifest } from "./skill-manifest.js";
-import { syncVendoredSkills } from "./vendored-skills.js";
 
 const repo = resolve(process.argv[2] ?? ".");
 const input: unknown = await fs.readJson(
@@ -13,37 +12,30 @@ const input: unknown = await fs.readJson(
 const promotedSkills: string[] = [];
 
 for (const pattern of [
-  "skills/engineering/*/SKILL.md",
-  "skills/productivity/*/SKILL.md",
-  "gstack/SKILL.md",
-  "gstack/*/SKILL.md",
-  "impeccable/plugin/skills/*/SKILL.md",
+  "crates/skillset/engineering/*/SKILL.md",
+  "crates/skillset/productivity/*/SKILL.md",
+  "crates/gstack/SKILL.md",
+  "crates/gstack/*/SKILL.md",
+  "crates/impeccable/plugin/skills/*/SKILL.md",
 ]) {
   for await (const path of new Bun.Glob(pattern).scan(repo)) {
     promotedSkills.push(`./${dirname(path)}`);
   }
+}
+if (!promotedSkills.some((skill) => skill.startsWith("./crates/gstack/"))) {
+  throw new Error(
+    "No gstack skills found. Run `git submodule update --init` to check out crates/gstack and crates/impeccable.",
+  );
 }
 
 const localCount = await syncLocalSkills(repo);
 console.log(
   `Validated ${localCount} local skills and their invocation policies.`,
 );
-const vendoredCount = await syncVendoredSkills(repo);
-console.log(`Validated ${vendoredCount} vendored skills for Devin.`);
-const agents = await syncGstackAgents(repo);
-console.log(`Validated ${agents.length} agents generated from gstack.`);
-const impeccableAgents: string[] = [];
-for await (const path of new Bun.Glob("impeccable/plugin/agents/*.md").scan(
-  repo,
-)) {
-  impeccableAgents.push(`./${path}`);
-}
-if (impeccableAgents.length === 0) {
-  throw new Error(
-    "Missing impeccable/plugin/agents. The vendored impeccable tree is incomplete.",
-  );
-}
-agents.push(...impeccableAgents.sort());
+const agents = await syncAgents(repo);
+console.log(
+  `Validated ${agents.length} agents generated from gstack and impeccable.`,
+);
 await validateAgentProfiles(repo, agents);
 console.log(
   `Validated ${agents.length} agent profiles against the Devin subagent format.`,
