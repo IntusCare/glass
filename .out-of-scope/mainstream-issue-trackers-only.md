@@ -1,6 +1,6 @@
 # Issue tracker integrations: GitHub, GitLab and local markdown only
 
-`setup-matt-pocock-skills` offers first-class support for exactly three issue trackers, one per seed template in `skills/engineering/setup-matt-pocock-skills/`:
+`setup-matt-pocock-skills` offers first-class support for exactly three issue trackers, one per seed template in `crates/skillset/engineering/setup-matt-pocock-skills/`:
 
 - **GitHub** (`issue-tracker-github.md`, via `gh`)
 - **GitLab** (`issue-tracker-gitlab.md`, via `glab`)

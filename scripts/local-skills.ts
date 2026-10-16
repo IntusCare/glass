@@ -2,6 +2,7 @@ import { basename, dirname, join, resolve } from "node:path";
 import { z } from "zod";
 import { fs } from "zx";
 
+const skillsDirectory = "crates/skillset";
 const buckets = [
   "engineering",
   "productivity",
@@ -25,9 +26,9 @@ const codexSchema = z.object({
 async function discoverSkills(repo: string) {
   const skills = new Map<string, string>();
   for (const bucket of buckets) {
-    for await (const path of new Bun.Glob(`skills/${bucket}/*/SKILL.md`).scan(
-      repo,
-    )) {
+    for await (const path of new Bun.Glob(
+      `${skillsDirectory}/${bucket}/*/SKILL.md`,
+    ).scan(repo)) {
       const source = await fs.readFile(join(repo, path), "utf8");
       const frontmatter = source.match(
         /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/,
@@ -56,7 +57,7 @@ async function discoverSkills(repo: string) {
       ) {
         throw new Error(`Skill must allow user and model invocation: ${path}`);
       }
-      skills.set(name, `../../skills/${bucket}/${name}`);
+      skills.set(name, `../../${skillsDirectory}/${bucket}/${name}`);
     }
   }
   if (!skills.size) throw new Error(`No skills found in ${repo}`);
@@ -64,7 +65,9 @@ async function discoverSkills(repo: string) {
 }
 
 function isManagedLink(name: string, target: string) {
-  return buckets.some((bucket) => target === `../../skills/${bucket}/${name}`);
+  return buckets.some(
+    (bucket) => target === `../../${skillsDirectory}/${bucket}/${name}`,
+  );
 }
 
 export async function syncLocalSkills(repo: string, write = false) {

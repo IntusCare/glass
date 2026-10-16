@@ -19,7 +19,7 @@ Router prose that names skills for a human to choose from is guidance, not an in
 
 ## Repository-local discovery
 
-`.devin/skills/<name>` links to `skills/<bucket>/<name>`. `.agents/skills` and `.claude/skills` link to `.devin/skills` for Codex and Claude Code compatibility. All links are relative, so a checkout can move without changing them. The source folders remain the only copies of skill content and supporting files.
+`.devin/skills/<name>` links to `crates/skillset/<bucket>/<name>`. `.agents/skills` and `.claude/skills` link to `.devin/skills` for Codex and Claude Code compatibility. All links are relative, so a checkout can move without changing them. The source folders remain the only copies of skill content and supporting files.
 
 Run `bun run link-skills` after adding, removing, renaming, or moving a skill. The command refreshes only repository-managed links and refuses to overwrite real files or unrelated symlinks. Commit the link changes with the source changes. `bun run check` detects missing or stale links, duplicate names, and invocation restrictions.
 

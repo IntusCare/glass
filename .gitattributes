@@ -1,2 +1,2 @@
-gstack/** linguist-vendored
-impeccable/** linguist-vendored
+crates/gstack/** linguist-vendored
+crates/impeccable/** linguist-vendored
