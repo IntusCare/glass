@@ -39,3 +39,7 @@ Verified 2026-08-05, on Claude Code 2.1.222, against the live listing:
 - `claude plugin details glass-skills` then reports version 1.2.0 and loads the promoted skills.
 - The listing's `source` is `{"source": "url", "url": "https://github.com/intuscare/glass.git", "sha": …}`: the **sha is pinned**, so a release reaches installed users when that pin moves, not the moment we tag. At the time of writing the pin sits two commits behind `main`, which is why it lists 22 skills rather than the 24 in `plugin.json`.
 - The in-session `/plugin install glass-skills` was **not** exercised: `/plugin` is unavailable in headless (`claude -p`) sessions. It runs the same resolver as the CLI, and the documented example form is `/plugin install <name>@claude-plugins-official`.
+
+## Update, 2026-10-16
+
+The bucket folders described above now live under `crates/skillset/` rather than `skills/`, next to the `crates/gstack` and `crates/impeccable` submodules the plugin also ships. The constraint is unchanged: the promoted set still spans two bucket folders, so the Codex single-path problem stands and the deferral holds.
