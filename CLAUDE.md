@@ -81,4 +81,4 @@ Single-context: one root `GLOSSARY.md` plus `docs/adr/`. See `docs/agents/domain
 
 # Scripts
 
-Never write a bash script longer than one line. Instead use bun and zx. [crates/skillset/skillset/skillset/index-skills.ts](./crates/skillset/skillset/skillset/index-skills.ts) is the example: a `.ts` file that imports `fs` from `zx`, exports its logic for `bun test`, and runs as a CLI under `if (import.meta.main)`.
+Never write a bash script longer than one line. Instead use bun and zx. [crates/skillset/skillset/skillset/index-skills.ts](./crates/skillset/skillset/skillset/index-skills.ts) is the example: an executable `.ts` file (`#!/usr/bin/env bun` shebang, `chmod +x`) that imports `fs` from `zx`, exports its logic for `bun test`, and runs as a CLI under `if (import.meta.main)`.
