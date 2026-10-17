@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "bin": {
+    "skillset+extract": "skillset/extract-skills.ts",
+    "skillset+index": "skillset/index-skills.ts"
+  },
   "description": "Indexes the skills in every suite under crates/skillset into skills.csv",
   "scripts": {
     "typecheck": "tsc --noEmit",

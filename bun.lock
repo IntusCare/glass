@@ -8,6 +8,7 @@
         "@biomejs/biome": "2.5.14",
         "@changesets/changelog-github": "^0.7.0",
         "@changesets/cli": "^2.30.0",
+        "@glass/skillset": "workspace:*",
         "turbo": "2.11.5",
         "typescript": "7.0.2",
       },
@@ -19,6 +20,10 @@
     "crates/skillset/skillset": {
       "name": "@glass/skillset",
       "version": "0.0.0",
+      "bin": {
+        "skillset+extract": "skillset/extract-skills.ts",
+        "skillset+index": "skillset/index-skills.ts",
+      },
       "dependencies": {
         "@glass/scripts": "workspace:*",
         "papaparse": "5.5.3",
