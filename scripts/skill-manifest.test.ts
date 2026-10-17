@@ -1,18 +1,18 @@
 import { describe, expect, test } from "bun:test";
 import { validateSkillManifest } from "./skill-manifest.js";
 
-const skill = "./crates/skillset/mattpocock/skills/engineering/tdd";
+const skill = "./crates/skillset/skillset/skillset/eng/tdd";
 const manifest = { name: "glass", version: "0.0.0", skills: [skill] };
 
 describe("validateSkillManifest", () => {
-  test("accepts Glass skills alongside the upstream suite", () => {
-    const skills = [skill, "./crates/skillset/glass/engineering/workon"];
+  test("accepts generated Picks from different suites", () => {
+    const skills = [skill, "./crates/skillset/skillset/skillset/eng/workon"];
     expect(
       validateSkillManifest({ ...manifest, skills }, skills).skills,
     ).toEqual(skills);
   });
 
-  test("accepts a manifest containing exactly the promoted skills", () => {
+  test("accepts a manifest containing exactly the Picks", () => {
     expect(validateSkillManifest(manifest, [skill])).toEqual({
       ...manifest,
       agents: [],
@@ -22,9 +22,11 @@ describe("validateSkillManifest", () => {
   test("accepts impeccable skills and generated agents", () => {
     const skills = [
       skill,
-      "./crates/skillset/impeccable/plugin/skills/impeccable",
+      "./crates/skillset/skillset/skillset/design/impeccable",
     ];
-    const agents = ["./agents/impeccable-documenter.md"];
+    const agents = [
+      "./crates/skillset/skillset/skillset/infra/impeccable/plugin/agents/impeccable-documenter.md",
+    ];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents)
         .agents,
@@ -34,10 +36,12 @@ describe("validateSkillManifest", () => {
   test("accepts gstack skills and generated agents", () => {
     const skills = [
       skill,
-      "./crates/skillset/gstack",
-      "./crates/skillset/gstack/review",
+      "./crates/skillset/skillset/skillset/eng/gstack",
+      "./crates/skillset/skillset/skillset/eng/review",
     ];
-    const agents = ["./agents/security.md"];
+    const agents = [
+      "./crates/skillset/skillset/skillset/infra/gstack/review/specialists/security.md",
+    ];
     expect(
       validateSkillManifest({ ...manifest, skills, agents }, skills, agents),
     ).toEqual({ ...manifest, skills, agents });
@@ -53,7 +57,7 @@ describe("validateSkillManifest", () => {
     ).toThrow("duplicates");
   });
 
-  test("rejects skills outside the promoted buckets", () => {
+  test("rejects direct upstream skills", () => {
     expect(() =>
       validateSkillManifest(
         {
@@ -65,7 +69,7 @@ describe("validateSkillManifest", () => {
     ).toThrow();
   });
 
-  test("rejects agents outside the agents directory", () => {
+  test("rejects direct upstream agents", () => {
     expect(() =>
       validateSkillManifest(
         {
@@ -79,14 +83,14 @@ describe("validateSkillManifest", () => {
     ).toThrow();
   });
 
-  test("reports promoted skills missing from the manifest", () => {
+  test("reports Picks missing from the manifest", () => {
     expect(() =>
       validateSkillManifest(manifest, [
         skill,
-        "./crates/skillset/mattpocock/skills/productivity/teach",
+        "./crates/skillset/skillset/skillset/productivity/teach",
       ]),
     ).toThrow(
-      "Missing: ./crates/skillset/mattpocock/skills/productivity/teach",
+      "Missing: ./crates/skillset/skillset/skillset/productivity/teach",
     );
   });
 
@@ -98,7 +102,23 @@ describe("validateSkillManifest", () => {
 
   test("reports generated agents missing from the manifest", () => {
     expect(() =>
-      validateSkillManifest(manifest, [skill], ["./agents/testing.md"]),
-    ).toThrow("Missing: ./agents/testing.md");
+      validateSkillManifest(
+        manifest,
+        [skill],
+        [
+          "./crates/skillset/skillset/skillset/infra/gstack/review/specialists/testing.md",
+        ],
+      ),
+    ).toThrow("Missing:");
+  });
+
+  test("allows no Picks and rejects exposing infra as a skill", () => {
+    expect(
+      validateSkillManifest({ ...manifest, skills: [] }, []).skills,
+    ).toEqual([]);
+    const hidden = "./crates/skillset/skillset/skillset/infra/helper";
+    expect(() =>
+      validateSkillManifest({ ...manifest, skills: [hidden] }, [hidden]),
+    ).toThrow();
   });
 });

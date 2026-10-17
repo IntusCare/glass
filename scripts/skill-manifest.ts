@@ -1,8 +1,9 @@
 import { z } from "zod";
 
 const skillPath =
-  /^\.\/crates\/skillset\/((glass|mattpocock\/skills)\/(engineering|productivity)\/[a-z0-9-]+|gstack(\/[a-z0-9-]+)?|impeccable\/plugin\/skills\/[a-z0-9-]+)$/;
-const agentPath = /^\.\/agents\/[a-z0-9-]+\.md$/;
+  /^\.\/crates\/skillset\/skillset\/skillset\/(?!infra\/)[a-z0-9-]+\/[a-z0-9-]+$/;
+const agentPath =
+  /^\.\/crates\/skillset\/skillset\/skillset\/infra\/[a-z0-9-]+\/(?:[a-zA-Z0-9_-]+\/)*[a-z0-9-]+\.md$/;
 
 function unique(items: string[]) {
   return new Set(items).size === items.length;
@@ -13,7 +14,6 @@ export const skillManifestSchema = z.object({
   version: z.string().min(1),
   skills: z
     .array(z.string().regex(skillPath))
-    .min(1)
     .refine(unique, { message: "Skills must not contain duplicates" }),
   agents: z
     .array(z.string().regex(agentPath))
@@ -33,11 +33,11 @@ function diff(kind: string, actual: string[], expected: string[]) {
 
 export function validateSkillManifest(
   input: unknown,
-  promotedSkills: string[],
+  pickedSkills: string[],
   agents: string[] = [],
 ) {
   const manifest = skillManifestSchema.parse(input);
-  diff("skills", manifest.skills, promotedSkills);
+  diff("skills", manifest.skills, pickedSkills);
   diff("agents", manifest.agents, agents);
   return manifest;
 }

@@ -1,4 +1,4 @@
-import { basename, join, resolve } from "node:path";
+import { join } from "node:path";
 import { fs } from "zx";
 
 const specialistsDirectory = "crates/skillset/gstack/review/specialists";
@@ -40,7 +40,7 @@ ${agentTools.map((tool) => `  - ${tool}`).join("\n")}
 `;
 }
 
-function renderReviewer(name: string, checklist: string) {
+export function renderReviewer(name: string, checklist: string) {
   const description = descriptions[name];
   if (!description) throw new Error(`No description for specialist: ${name}`);
   return `${renderFrontmatter(`${name}-reviewer`, description, tools)}
@@ -76,7 +76,7 @@ export function trimAgentProfile(source: string) {
   );
 }
 
-async function expectedAgents(repo: string) {
+export async function expectedAgents(repo: string) {
   const expected = new Map<string, string>();
   const specialists = join(repo, specialistsDirectory);
   if (!(await fs.pathExists(specialists))) {
@@ -110,43 +110,4 @@ async function expectedAgents(repo: string) {
     }
   }
   return expected;
-}
-
-export async function syncAgents(repo: string, write = false) {
-  repo = resolve(repo);
-  const expected = await expectedAgents(repo);
-  const target = join(repo, agentsDirectory);
-  const existingFiles: string[] = (await fs.pathExists(target))
-    ? await fs.readdir(target)
-    : [];
-  const existing = existingFiles.map((file) => `${agentsDirectory}/${file}`);
-  const stale: string[] = [];
-  for (const path of new Set([...expected.keys(), ...existing])) {
-    const content = expected.get(path);
-    const fullPath = join(repo, path);
-    const current = (await fs.pathExists(fullPath))
-      ? await fs.readFile(fullPath, "utf8")
-      : undefined;
-    if (current === content) continue;
-    stale.push(path);
-    if (!write) continue;
-    if (content === undefined) await fs.remove(fullPath);
-    else await fs.outputFile(fullPath, content);
-  }
-  if (stale.length && !write) {
-    throw new Error(
-      `Generated agents are missing or stale. Run \`bun run agents\`.\n${stale.join("\n")}`,
-    );
-  }
-  return Array.from(expected.keys(), (path) => `./${path}`);
-}
-
-if (import.meta.main) {
-  const agents = await syncAgents(
-    resolve(import.meta.dir, ".."),
-    process.argv.includes("--write"),
-  );
-  console.log(
-    `Validated ${agents.length} agents generated from gstack and impeccable (${basename(agentsDirectory)}/).`,
-  );
 }

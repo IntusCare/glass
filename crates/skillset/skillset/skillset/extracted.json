@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "files": {
+    ".agents/skills": {
+      "kind": "link",
+      "target": "../.devin/skills"
+    },
+    ".claude/skills": {
+      "kind": "link",
+      "target": "../.devin/skills"
+    },
+    ".devin/skills/workon": {
+      "kind": "link",
+      "target": "../../crates/skillset/skillset/skillset/eng/workon"
+    },
+    "crates/skillset/skillset/skillset/eng/workon/SKILL.md": {
+      "kind": "file",
+      "hash": "09b33e8e9eecaeeb76e14e6dca0481321ae0869d4606db03fe52320731b23fc2",
+      "mode": 420
+    },
+    "crates/skillset/skillset/skillset/eng/workon/agents/openai.yaml": {
+      "kind": "file",
+      "hash": "846a67cf04ab4869aba86e580fd0ec3fb4da395244b9ffba933bd4a380640b08",
+      "mode": 420
+    }
+  },
+  "skills": [
+    "./crates/skillset/skillset/skillset/eng/workon"
+  ],
+  "agents": []
+}

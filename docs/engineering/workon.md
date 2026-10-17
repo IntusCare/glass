@@ -8,6 +8,8 @@ The ticket key is the branch's identity, not its full name. The branch is `<KEY>
 
 Type `/workon PROJ-123` (or paste the ticket's URL), or the agent reaches for it automatically when you ask to start work on a Jira ticket. With no key, it asks for one.
 
+Glass ships a generated copy of this Pick. The source remains under `crates/skillset/glass`; the installed copy works without source submodules. Other workflows linked below require their own installation or selection in the curated Skillset.
+
 | Your situation | Reach for |
 | --- | --- |
 | A Jira ticket is ready and you want to start on it | `workon` |

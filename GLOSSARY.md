@@ -18,10 +18,13 @@ The folder that groups a **Skill** inside its **Suite** (`engineering`, `product
 _Avoid_: bucket
 
 **Pick**:
-A **Skill** chosen to ship in the plugin, optionally under a new **Category** or name.
+A **Skill** chosen to ship as a discoverable entry point in the plugin, optionally under a new **Category**, name, or description.
 
 **Skillset**:
-The set of all **Picks**: what the plugin ships.
+The set of all **Picks**, accompanied by the **Support material** they need.
+
+**Support material**:
+Instructions, scripts, assets, and subagent profiles included because a **Pick** needs them. This includes unpicked skills used as internal instructions rather than discoverable entry points.
 
 ### Issue tracking
 
@@ -42,7 +45,8 @@ A canonical state-machine label applied to an **Issue** during triage (e.g. `nee
 ## Relationships
 
 - A **Suite** holds many **Skills**, each in one **Category**
-- The **Skillset** is the set of **Picks**, each a **Skill** from some **Suite**
+- The **Skillset** contains **Picks**, each a **Skill** from some **Suite**, and their **Support material**
+- **Support material** can depend on further **Support material**
 - An **Issue tracker** holds many **Issues**
 - An **Issue** carries one **Triage role** at a time
 - A **Decision ticket** is an **Issue** (a child of a `wayfinder:map`)

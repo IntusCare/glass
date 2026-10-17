@@ -14,6 +14,8 @@
 
 My agent skills that I use every day to do real engineering - not vibe coding.
 
+Glass ships the reviewed Picks in [`skills.csv`](./crates/skillset/skillset/skillset/skills.csv), as committed copies that work without source submodules. The current Pick is [workon](./crates/skillset/skillset/skillset/eng/workon/SKILL.md). The engineering principles below describe the wider source collections; selection determines which workflows are installed.
+
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
 These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
@@ -60,7 +62,7 @@ claude plugin install glass-skills@glass
 npx skills@latest add intuscare/glass
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
+Pick the skills you want, and which coding agents to install them on. For the curated set and its shared support files, use the plugin bundle. An installer that copies only individual skill directories must also preserve their relative paths to `infra/`.
 
 A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
@@ -79,13 +81,9 @@ It writes the skills into your repo as ordinary files you own and can edit. Noth
 
 </details>
 
-### 2. Run `/setup-matt-pocock-skills`
+### 2. Run a Pick
 
-In your agent, run it once per repo. It will:
-
-- Ask you which issue tracker you want to use (GitHub, GitLab, local files, or anything else you describe)
-- Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-- Ask you where you want to save any docs we create
+The current bundle provides `/workon <JIRA-KEY>`. Connect the Atlassian integration first. See [workon](./docs/engineering/workon.md) for behavior and prerequisites.
 
 ### 3. Bam - you're ready to go.
 
@@ -191,62 +189,14 @@ Software engineering fundamentals matter more than ever. These skills are my bes
 
 ## Reference
 
-The Matt Pocock suite comes from [mattpocock/skills](https://github.com/mattpocock/skills) as a submodule at `crates/skillset/mattpocock`, tracking `main`. Its invocation policies are upstream's: user-invoked skills require an explicit request, while model-invoked skills can also be selected automatically. Glass's own `workon` skill and release metadata live in `crates/skillset/glass`.
+### Model-invoked
 
-After cloning, run `git submodule update --init`. Devin, Claude Code, and Codex discover Glass and Matt Pocock skills through relative symlinks. To upgrade Matt Pocock's suite, run `git submodule update --remote crates/skillset/mattpocock`, then `bun run link-skills`, re-sync the plugin manifest, and commit the new gitlink and links. The gitlink pins a commit; `branch = main` selects the branch for remote updates. Edit Glass skills under `crates/skillset/glass`; keep submodules unmodified. Git must preserve symlinks. Restart the agent if discovery does not refresh.
+- **[workon](./crates/skillset/skillset/skillset/eng/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
 
-### Engineering
+Every Pick supports automatic selection and explicit invocation. Workflow prerequisites and confirmation steps still apply. Required unpicked skills ship as support instructions rather than additional discoverable skills.
 
-Skills I use daily for code work.
+### Source collections and curation
 
-**User-invoked**
+The source suites are Glass's own [`glass/`](./crates/skillset/glass/), [mattpocock/skills](https://github.com/mattpocock/skills), [garrytan/gstack](https://github.com/garrytan/gstack), and [pbakaus/impeccable](https://github.com/pbakaus/impeccable). The upstream suites are pinned submodules, left unmodified. Their full catalogs are available for review in the CSV, but only Picks ship.
 
-- **[ask-matt](./crates/skillset/mattpocock/skills/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the upstream skills.
-- **[grill-with-docs](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md)**: Interview about a design while recording terminology and decisions.
-- **[triage](./crates/skillset/mattpocock/skills/engineering/triage/SKILL.md)**: Move issues through triage roles.
-- **[improve-codebase-architecture](./crates/skillset/mattpocock/skills/engineering/improve-codebase-architecture/SKILL.md)**: Survey deepening opportunities, then explore a chosen candidate.
-- **[setup-matt-pocock-skills](./crates/skillset/mattpocock/skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure issue tracking, triage labels, and domain docs.
-- **[to-spec](./crates/skillset/mattpocock/skills/engineering/to-spec/SKILL.md)**: Turn a conversation into a spec.
-- **[to-tickets](./crates/skillset/mattpocock/skills/engineering/to-tickets/SKILL.md)**: Split a plan into tracer-bullet tickets with blocking edges.
-- **[implement](./crates/skillset/mattpocock/skills/engineering/implement/SKILL.md)**: Build a spec or tickets with TDD and code review.
-- **[implement-spec](./crates/skillset/mattpocock/skills/engineering/implement-spec/SKILL.md)**: Implement a whole ticket graph on one integration branch.
-- **[wayfinder](./crates/skillset/mattpocock/skills/engineering/wayfinder/SKILL.md)**: Map a large uncertain effort as decision tickets.
-- **[retro](./crates/skillset/mattpocock/skills/engineering/retro/SKILL.md)**: Propose improvements to the coding agent's environment after a session.
-
-**Model-invoked**
-
-- **[prototype](./crates/skillset/mattpocock/skills/engineering/prototype/SKILL.md)**: Build a throwaway program to answer a design question.
-- **[diagnosing-bugs](./crates/skillset/mattpocock/skills/engineering/diagnosing-bugs/SKILL.md)**: Diagnose hard bugs through a reproducible feedback loop.
-- **[research](./crates/skillset/mattpocock/skills/engineering/research/SKILL.md)**: Investigate primary sources and capture cited findings.
-- **[tdd](./crates/skillset/mattpocock/skills/engineering/tdd/SKILL.md)**: Build features and fixes one tested vertical slice at a time.
-- **[domain-modeling](./crates/skillset/mattpocock/skills/engineering/domain-modeling/SKILL.md)**: Sharpen domain language and record it in glossary entries and ADRs.
-- **[codebase-design](./crates/skillset/mattpocock/skills/engineering/codebase-design/SKILL.md)**: Design deep modules with small interfaces and testable seams.
-- **[code-review](./crates/skillset/mattpocock/skills/engineering/code-review/SKILL.md)**: Review a diff against repository standards and its originating spec.
-- **[pr](./crates/skillset/mattpocock/skills/engineering/pr/SKILL.md)**: Write a PR body with a clear summary, validation, and merge risks.
-- **[wizard](./crates/skillset/mattpocock/skills/engineering/wizard/SKILL.md)**: Generate an interactive wizard for steps only a human can perform.
-- **[workon](./crates/skillset/glass/engineering/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
-
-### Productivity
-
-General workflow tools, not code-specific.
-
-**User-invoked**
-
-- **[grill-me](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md)**: Sharpen a plan through a stateless interview.
-- **[handoff](./crates/skillset/mattpocock/skills/productivity/handoff/SKILL.md)**: Write a portable handoff document for another session.
-- **[teach](./crates/skillset/mattpocock/skills/productivity/teach/SKILL.md)**: Learn a topic across sessions in a teaching workspace.
-- **[to-questionnaire](./crates/skillset/mattpocock/skills/productivity/to-questionnaire/SKILL.md)**: Draft questions for someone who holds information you need.
-- **[wait-what](./crates/skillset/mattpocock/skills/productivity/wait-what/SKILL.md)**: Re-pitch an explanation with simpler language and missing context.
-
-**Model-invoked**
-
-- **[grilling](./crates/skillset/mattpocock/skills/productivity/grilling/SKILL.md)**: The reusable interview discipline behind the planning workflows.
-- **[writing-for-agents](./crates/skillset/mattpocock/skills/productivity/writing-for-agents/SKILL.md)**: Write and sharpen documents that agents consume.
-
-### gstack
-
-[garrytan/gstack](https://github.com/garrytan/gstack) ships alongside these skills as a git submodule at [`crates/skillset/gstack/`](./crates/skillset/gstack/), tracking upstream `main`. The plugin lists its router (`/gstack`) and all of its skills (`/review`, `/qa`, `/ship`, `/investigate`, `/office-hours`, and the rest; see [crates/skillset/gstack/README.md](./crates/skillset/gstack/README.md)), plus eight review subagents generated from gstack's review specialists under [`agents/`](./agents/): `api-contract-reviewer`, `data-migration-reviewer`, `maintainability-reviewer`, `performance-reviewer`, `red-team-reviewer`, `security-reviewer`, `simplification-reviewer`, and `testing-reviewer`.
-
-### impeccable
-
-[pbakaus/impeccable](https://github.com/pbakaus/impeccable) (design fluency for frontend work: `/impeccable polish`, `audit`, `critique`, and 20 more sub-commands) is a git submodule at [`crates/skillset/impeccable/`](./crates/skillset/impeccable/), tracking upstream `main`. The plugin lists its [`impeccable`](./crates/skillset/impeccable/plugin/skills/impeccable/SKILL.md) skill straight from that tree and its four subagents (`impeccable-asset-producer`, `impeccable-documenter`, `impeccable-finish-reviewer`, `impeccable-manual-edit-applier`) as generated copies under [`agents/`](./agents/). After cloning, run `git submodule update --init` to populate all three upstream suites.
+Contributors initialize submodules, run `bun run index-skills`, review Picks and overrides, then run `bun run extract-skills`. Commit the generated copies and links together. `bun run check` verifies that source, CSV, output, and discovery agree. See [the extraction workflow](./docs/extract-skills.md) for reference rules, cleanup, and validation. Installed copies do not require submodules.

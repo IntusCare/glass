@@ -2,7 +2,7 @@ import { afterEach, expect, test } from "bun:test";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fs } from "zx";
-import { syncAgents, trimAgentProfile } from "./agents.js";
+import { expectedAgents as legacyAgents, trimAgentProfile } from "./agents.js";
 
 const fixtures: string[] = [];
 
@@ -54,8 +54,8 @@ async function fixture() {
 }
 
 const expectedAgents = [
-  "./agents/impeccable-documenter.md",
-  "./agents/security.md",
+  "agents/impeccable-documenter.md",
+  "agents/security.md",
 ];
 
 test("trims upstream agent frontmatter to name, description, and a tools list", () => {
@@ -69,10 +69,11 @@ test("trims upstream agent frontmatter to name, description, and a tools list", 
   );
 });
 
-test("writes a reviewer per specialist and a trimmed copy of each impeccable agent", async () => {
+test("renders legacy profiles so extraction can verify ownership before migration", async () => {
   const repo = await fixture();
-  expect((await syncAgents(repo, true)).sort()).toEqual(expectedAgents);
-  const agent = await fs.readFile(join(repo, "agents/security.md"), "utf8");
+  const output = await legacyAgents(repo);
+  expect([...output.keys()].sort()).toEqual(expectedAgents);
+  const agent = output.get("agents/security.md") ?? "";
   expect(
     agent.startsWith('---\nname: security-reviewer\ndescription: "Reviews'),
   ).toBe(true);
@@ -80,23 +81,8 @@ test("writes a reviewer per specialist and a trimmed copy of each impeccable age
     "tools:\n  - Read\n  - Grep\n  - Glob\n  - Bash\n---",
   );
   expect(agent).toContain("## Categories\n\n- Example\n");
-  expect(
-    await fs.readFile(join(repo, "agents/impeccable-documenter.md"), "utf8"),
-  ).toBe(trimmedAgent);
-  expect((await syncAgents(repo)).sort()).toEqual(expectedAgents);
-});
-
-test("reports missing, stale, and orphaned agents without writing", async () => {
-  const repo = await fixture();
-  await expect(syncAgents(repo)).rejects.toThrow("agents/security.md");
-  await syncAgents(repo, true);
-  await fs.appendFile(join(repo, "agents/security.md"), "edited\n");
-  await fs.outputFile(join(repo, "agents/orphan.md"), "orphan\n");
-  await expect(syncAgents(repo)).rejects.toThrow(
-    /security\.md[\s\S]*orphan\.md|orphan\.md[\s\S]*security\.md/,
-  );
-  await syncAgents(repo, true);
-  expect(await fs.pathExists(join(repo, "agents/orphan.md"))).toBe(false);
+  expect(output.get("agents/impeccable-documenter.md")).toBe(trimmedAgent);
+  expect(await fs.pathExists(join(repo, "agents"))).toBe(false);
 });
 
 test("rejects a specialist without a description", async () => {
@@ -105,7 +91,7 @@ test("rejects a specialist without a description", async () => {
     join(repo, "crates/skillset/gstack/review/specialists/unknown.md"),
     "x\n",
   );
-  await expect(syncAgents(repo, true)).rejects.toThrow(
+  await expect(legacyAgents(repo)).rejects.toThrow(
     "No description for specialist: unknown",
   );
 });
@@ -113,11 +99,11 @@ test("rejects a specialist without a description", async () => {
 test("requires both submodules to be checked out", async () => {
   const repo = await fs.mkdtemp(join(tmpdir(), "glass-agents-"));
   fixtures.push(repo);
-  await expect(syncAgents(repo)).rejects.toThrow(
+  await expect(legacyAgents(repo)).rejects.toThrow(
     "Missing crates/skillset/gstack/review/specialists",
   );
   await fs.ensureDir(join(repo, "crates/skillset/gstack/review/specialists"));
-  await expect(syncAgents(repo)).rejects.toThrow(
+  await expect(legacyAgents(repo)).rejects.toThrow(
     "Missing crates/skillset/impeccable/plugin/agents",
   );
 });

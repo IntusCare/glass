@@ -139,6 +139,7 @@ test("preserves human columns, refreshes script columns, and flips statuses", as
           status: "picked",
           new_category: "engineering",
           new_name: "land",
+          new_description: "Ship the reviewed changes",
         }
       : row.path === "mattpocock/skills/misc/scaffold"
         ? { ...row, status: "skipped" }
@@ -151,6 +152,7 @@ test("preserves human columns, refreshes script columns, and flips statuses", as
     name: "gone",
     new_category: "",
     new_name: "",
+    new_description: "",
     description: "",
     url: "",
   });
@@ -162,6 +164,7 @@ test("preserves human columns, refreshes script columns, and flips statuses", as
     new_category: "engineering",
     new_name: "land",
     description: "Updated",
+    new_description: "Ship the reviewed changes",
   });
   expect(byPath.get("mattpocock/skills/misc/scaffold")?.status).toBe("skipped");
   expect(byPath.get("gstack/gone")?.status).toBe("deleted");
@@ -184,6 +187,7 @@ test("csv round-trips and rejects unknown statuses", () => {
       name: "ship",
       new_category: "",
       new_name: "",
+      new_description: "",
       description: 'Commas, "quotes" and\nnewlines',
       url: "",
     },
@@ -193,7 +197,7 @@ test("csv round-trips and rejects unknown statuses", () => {
   expect(parseCsv(csv)).toEqual(rows);
   expect(parseCsv("")).toEqual([]);
   expect(() =>
-    parseCsv(`${columns.join(",")}\nmaybe,gstack/ship,,,,,,\n`),
+    parseCsv(`${columns.join(",")}\nmaybe,gstack/ship,,,,,,,\n`),
   ).toThrow('unknown status "maybe"');
 });
 

@@ -6,8 +6,9 @@
   "description": "Indexes the skills in every suite under crates/skillset into skills.csv",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "QUIET=true bun test",
-    "check": "bun skillset/index-skills.ts --check",
+    "test": "QUIET=true bun test skillset/*.test.ts",
+    "check": "bun skillset/index-skills.ts --check && bun skillset/extract-skills.ts --check",
+    "extract-skills": "bun skillset/extract-skills.ts",
     "index-skills": "bun skillset/index-skills.ts"
   },
   "dependencies": {

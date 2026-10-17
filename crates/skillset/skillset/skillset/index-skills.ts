@@ -24,6 +24,7 @@ export const columns = [
   "name",
   "new_category",
   "new_name",
+  "new_description",
   "description",
   "url",
 ] as const;
@@ -203,6 +204,7 @@ export async function indexSkills(
       name: skill.name,
       new_category: row?.new_category ?? "",
       new_name: row?.new_name ?? "",
+      new_description: row?.new_description ?? "",
       description: skill.description,
       url: await urlFor(repo, skill),
     });

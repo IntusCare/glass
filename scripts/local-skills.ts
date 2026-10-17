@@ -1,11 +1,9 @@
+import type { Dirent } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
 import { z } from "zod";
 import { fs } from "zx";
 
-const skillsDirectories = [
-  "crates/skillset/glass",
-  "crates/skillset/mattpocock/skills",
-];
+const skillsDirectories = ["crates/skillset/skillset/skillset"];
 const buckets = [
   "engineering",
   "productivity",
@@ -34,7 +32,13 @@ async function discoverSkills(repo: string) {
         `Missing ${skillsDirectory}. Run \`git submodule update --init\` before refreshing links.`,
       );
     }
-    for (const bucket of buckets) {
+    const entries: Dirent[] = await fs.readdir(join(repo, skillsDirectory), {
+      withFileTypes: true,
+    });
+    const categories = entries
+      .filter((entry) => entry.isDirectory() && entry.name !== "infra")
+      .map((entry) => entry.name);
+    for (const bucket of categories) {
       for await (const path of new Bun.Glob(
         `${skillsDirectory}/${bucket}/*/SKILL.md`,
       ).scan(repo)) {
@@ -57,13 +61,12 @@ async function discoverSkills(repo: string) {
           ),
         );
         if (
-          path.startsWith("crates/skillset/glass/") &&
-          (metadata["disable-model-invocation"] ||
-            metadata["user-invocable"] === false ||
-            (metadata.triggers &&
-              (!metadata.triggers.includes("model") ||
-                !metadata.triggers.includes("user"))) ||
-            codex.policy?.allow_implicit_invocation === false)
+          metadata["disable-model-invocation"] ||
+          metadata["user-invocable"] === false ||
+          (metadata.triggers &&
+            (!metadata.triggers.includes("model") ||
+              !metadata.triggers.includes("user"))) ||
+          codex.policy?.allow_implicit_invocation === false
         ) {
           throw new Error(
             `Skill must allow user and model invocation: ${path}`,
@@ -73,18 +76,27 @@ async function discoverSkills(repo: string) {
       }
     }
   }
-  if (!skills.size) throw new Error(`No skills found in ${repo}`);
   return skills;
 }
 
-function isManagedLink(name: string, target: string) {
+export function isLegacySkillLink(name: string, target: string) {
   return [
-    ...skillsDirectories,
+    "crates/skillset/glass",
+    "crates/skillset/mattpocock/skills",
     "crates/glass",
     "crates/mattpocock/skills",
     "crates/skillset",
   ].some((directory) =>
     buckets.some((bucket) => target === `../../${directory}/${bucket}/${name}`),
+  );
+}
+
+function isManagedLink(name: string, target: string) {
+  return (
+    isLegacySkillLink(name, target) ||
+    new RegExp(
+      `^\\.\\./\\.\\./crates/skillset/skillset/skillset/[a-z0-9-]+/${name}$`,
+    ).test(target)
   );
 }
 
@@ -128,6 +140,12 @@ export async function syncLocalSkills(repo: string, write = false) {
     const target = desired.get(path);
     const stat = await fs.lstat(fullPath, { throwIfNoEntry: false });
     if (stat) {
+      if (
+        !target &&
+        (!stat.isSymbolicLink() ||
+          !isManagedLink(basename(path), await fs.readlink(fullPath)))
+      )
+        continue;
       if (!stat.isSymbolicLink())
         throw new Error(`Refusing to replace non-symlink: ${path}`);
       const current = await fs.readlink(fullPath);
