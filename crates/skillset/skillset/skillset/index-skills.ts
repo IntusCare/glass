@@ -15,7 +15,7 @@ import Papa from "papaparse";
 import { fs } from "zx";
 
 export const suitesRoot = "crates/skillset";
-export const csvPath = "crates/skillset/skillset/skills.csv";
+export const csvPath = "crates/skillset/skillset/skillset/skills.csv";
 export const columns = [
   "status",
   "path",

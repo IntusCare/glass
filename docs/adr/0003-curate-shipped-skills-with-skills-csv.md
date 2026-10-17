@@ -2,7 +2,7 @@
 
 The plugin now draws on four suites under `crates/skillset/` (Glass's own plus the mattpocock, gstack, and impeccable submodules), and upstream trees carry skills we do not want to ship: fixtures, per-harness duplicates, OpenClaw variants, and buckets upstream itself does not promote. Until now the manifest was derived from hard-coded glob patterns per suite (`crates/skillset/glass/engineering/*`, `crates/skillset/gstack/*`, ...), so every upstream addition shipped automatically and every exclusion needed a new pattern.
 
-We decided to curate instead: `bun run index-skills` indexes every `SKILL.md` across the suites into `crates/skillset/skillset/skills.csv`, and a human reviews each row, marking it `picked` or `skipped` and optionally giving it a new category or name. Only `picked` rows ship; a downstream generator materialises them under `crates/skillset/skillset/<category>/<name>`, which also gives installers that fetch without submodules a committed copy to load.
+We decided to curate instead: `bun run index-skills` indexes every `SKILL.md` across the suites into `crates/skillset/skillset/skillset/skills.csv`, and a human reviews each row, marking it `picked` or `skipped` and optionally giving it a new category or name. Only `picked` rows ship; a downstream generator materialises them under `crates/skillset/skillset/<category>/<name>`, which also gives installers that fetch without submodules a committed copy to load.
 
 ## Considered options
 
