@@ -146,7 +146,7 @@ async function urlFor(repo: string, skill: Skill) {
     text(skill.frontmatter.url) ||
     text(skill.frontmatter.homepage) ||
     (await urlRules[skill.suite]?.(repo, skill)) ||
-    `${glassBlob}/${suitesRoot}/${skill.path}/SKILL.md`
+    ""
   );
 }
 

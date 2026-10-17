@@ -82,11 +82,11 @@ test("derives category, name, description and url per suite", async () => {
     category: "gstack",
     name: "gstack",
     description: "Router",
-    url: "https://github.com/intuscare/glass/blob/main/crates/skillset/gstack/SKILL.md",
+    url: "",
   });
   expect(byPath.get("gstack/ship")).toMatchObject({
     category: "gstack",
-    url: "https://github.com/intuscare/glass/blob/main/crates/skillset/gstack/ship/SKILL.md",
+    url: "",
   });
   expect(byPath.get("gstack/browser-skills/hackernews")?.category).toBe(
     "browser-skills",
@@ -101,7 +101,7 @@ test("derives category, name, description and url per suite", async () => {
   });
   expect(byPath.get("mattpocock/skills/misc/scaffold")).toMatchObject({
     category: "misc",
-    url: "https://github.com/intuscare/glass/blob/main/crates/skillset/mattpocock/skills/misc/scaffold/SKILL.md",
+    url: "",
   });
 });
 
