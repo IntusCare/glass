@@ -21,8 +21,8 @@
       "name": "@glass/skillset",
       "version": "0.0.0",
       "bin": {
-        "skillset+extract": "skillset/extract-skills.ts",
-        "skillset+index": "skillset/index-skills.ts",
+        "skillset.extract": "skillset/extract-skills.ts",
+        "skillset.index": "skillset/index-skills.ts",
       },
       "dependencies": {
         "@glass/scripts": "workspace:*",
