@@ -1,6 +1,6 @@
 # Extracting the curated Skillset
 
-`skills.csv` selects the plugin's discoverable entry points. Sources live under `crates/skillset/<suite>/`; output and tooling live under `crates/skillset/skillset/skillset/`. See [ADR 0003](./adr/0003-curate-shipped-skills-with-skills-csv.md) for the design decisions.
+`skills.csv` selects the plugin's discoverable entry points. Sources live under `crates/skillset/<suite>/`; tooling and the CSV live under `crates/skillset/skillset/skillset/`. Generated output goes in that directory's `skillset/` subdirectory. See [ADR 0003](./adr/0003-curate-shipped-skills-with-skills-csv.md) for the design decisions.
 
 ## Updating the bundle
 
@@ -14,13 +14,13 @@
 
 ## Output and ownership
 
-A Pick becomes `<category>/<name>/SKILL.md` with normalized Claude Code, Devin, and Codex invocation metadata. Names are unique across categories. Its effective description is copied exactly; workflow confirmation steps stay intact.
+A Pick becomes `skillset/<category>/<name>/SKILL.md` relative to the tooling directory, with normalized Claude Code, Devin, and Codex invocation metadata. Names are unique across categories. Its effective description is copied exactly; workflow confirmation steps stay intact.
 
-Support files live under `infra/<suite>/<source-relative-path>`. Unpicked skill bodies become `instructions.md`, with callers rewritten to read them. Picks remain Skill tool calls using their final names. Dependencies are shared and traversed recursively, including cycles. Required gstack specialist checklists and Impeccable profiles are converted to the shared agent format and registered; other profiles can be declared in rules.
+Support files live under `skillset/infra/<suite>/<source-relative-path>`. Unpicked skill bodies become `instructions.md`, with callers rewritten to read them. Picks remain Skill tool calls using their final names. Dependencies are shared and traversed recursively, including cycles. Required gstack specialist checklists and Impeccable profiles are converted to the shared agent format and registered; other profiles can be declared in rules.
 
 `infra` is reserved and never linked as a skill. Keep the complete generated tree when installing: copying only a Pick's directory can discard shared dependencies. Source submodules are needed for regeneration, not for using the generated bundle.
 
-`extracted.json` records generated file hashes, modes, links, and discovery entries. Extraction validates everything before writing. Missing output is regenerated; edited generated files stop extraction. Restore those files and put durable edits in Glass-owned source, CSV overrides, or rules. Upstream source submodules remain unmodified.
+`extracted.json`, beside the CSV, records generated file hashes, modes, links, and discovery entries. Extraction validates everything before writing. Missing output is regenerated; edited generated files stop extraction. Restore those files and put durable edits in Glass-owned source, CSV overrides, or rules. Upstream source submodules remain unmodified.
 
 Renaming or unpicking removes obsolete generated files and unused dependencies. Zero Picks is valid. Unrelated files are preserved. On the first run, legacy source links and matching generated `agents/` files are migrated; a legacy agent that differs from its old generator's output blocks migration.
 

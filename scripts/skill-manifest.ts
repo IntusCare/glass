@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 const skillPath =
-  /^\.\/crates\/skillset\/skillset\/skillset\/(?!infra\/)[a-z0-9-]+\/[a-z0-9-]+$/;
+  /^\.\/crates\/skillset\/skillset\/skillset\/skillset\/(?!infra\/)[a-z0-9-]+\/[a-z0-9-]+$/;
 const agentPath =
-  /^\.\/crates\/skillset\/skillset\/skillset\/infra\/[a-z0-9-]+\/(?:[a-zA-Z0-9_-]+\/)*[a-z0-9-]+\.md$/;
+  /^\.\/crates\/skillset\/skillset\/skillset\/skillset\/infra\/[a-z0-9-]+\/(?:[a-zA-Z0-9_-]+\/)*[a-z0-9-]+\.md$/;
 
 function unique(items: string[]) {
   return new Set(items).size === items.length;

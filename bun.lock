@@ -20,6 +20,7 @@
       "name": "@glass/skillset",
       "version": "0.0.0",
       "dependencies": {
+        "@glass/scripts": "workspace:*",
         "papaparse": "5.5.3",
         "zx": "8.8.5",
       },

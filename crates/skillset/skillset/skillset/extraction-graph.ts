@@ -1,19 +1,17 @@
 import { basename, dirname, join, posix } from "node:path";
+import { validateAgentProfile } from "@glass/scripts/agent-profiles";
+import { renderReviewer, trimAgentProfile } from "@glass/scripts/agents";
 import { fs } from "zx";
-import { validateAgentProfile } from "../../../../scripts/agent-profiles.js";
-import {
-  renderReviewer,
-  trimAgentProfile,
-} from "../../../../scripts/agents.js";
 import {
   type GeneratedFile,
   outputRoot,
   safePath,
   textFile,
+  toolingRoot,
 } from "./generated-files.js";
 import type { Row } from "./index-skills.js";
 
-export const rulesPath = `${outputRoot}/extraction-rules.json`;
+export const rulesPath = `${toolingRoot}/extraction-rules.json`;
 const skillDirectoryVariable = `\${CLAUDE_SKILL_DIR}/`;
 export type FileRule = {
   dependencies?: string[];

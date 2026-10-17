@@ -1,6 +1,6 @@
 # Skill invocation
 
-Generated Picks under `crates/skillset/skillset/skillset/` are **model-invoked**: reachable automatically and explicitly. Upstream submodules preserve their original policies. Extraction normalizes metadata only in the generated copies.
+Generated Picks under `crates/skillset/skillset/skillset/skillset/` are **model-invoked**: reachable automatically and explicitly. Upstream submodules preserve their original policies. Extraction normalizes metadata only in the generated copies.
 
 - Omit `disable-model-invocation` from frontmatter and `policy.allow_implicit_invocation: false` from `agents/openai.yaml`.
 - Keep the `description` model-facing: state the skill's job and the distinct situations that should trigger it. Explicit invocation remains available through the harness's skill picker or command syntax.

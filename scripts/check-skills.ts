@@ -11,8 +11,11 @@ const input: unknown = await fs.readJson(
   resolve(repo, ".claude-plugin/plugin.json"),
 );
 const skills: string[] = [];
-for await (const path of new Bun.Glob(`${root}/*/*/SKILL.md`).scan(repo)) {
-  if (!path.startsWith(`${root}/infra/`)) skills.push(`./${dirname(path)}`);
+for await (const path of new Bun.Glob(`${root}/skillset/*/*/SKILL.md`).scan(
+  repo,
+)) {
+  if (!path.startsWith(`${root}/skillset/infra/`))
+    skills.push(`./${dirname(path)}`);
 }
 
 const localCount = await syncLocalSkills(repo);

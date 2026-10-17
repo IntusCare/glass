@@ -14,7 +14,7 @@ Each skill entry in the top-level `README.md` must link the skill name to its `S
 
 ## Third-party skill suites
 
-`crates/skillset/` holds the source suites. `glass/` is Glass's own workspace, retaining `workon` and the plugin release version and changelog. `mattpocock`, `gstack`, and `impeccable` are git submodules tracking upstream `main`, declared in `.gitmodules`; nothing under them is edited here. Contributors and CI initialize submodules to index, extract, and check. Installed skills load committed output under `crates/skillset/skillset/skillset/` and do not need submodules. After a submodule update, run `bun run index-skills`, review the CSV, then `bun run extract-skills`. Commit the new gitlinks, CSV, and generated changes.
+`crates/skillset/` holds the source suites. `glass/` is Glass's own workspace, retaining `workon` and the plugin release version and changelog. `mattpocock`, `gstack`, and `impeccable` are git submodules tracking upstream `main`, declared in `.gitmodules`; nothing under them is edited here. Contributors and CI initialize submodules to index, extract, and check. Installed skills load committed output under `crates/skillset/skillset/skillset/skillset/` and do not need submodules. After a submodule update, run `bun run index-skills`, review the CSV, then `bun run extract-skills`. Commit the new gitlinks, CSV, and generated changes.
 
 ### mattpocock
 
@@ -49,6 +49,8 @@ Generated Picks are model-invoked and user-reachable. Upstream source policies r
 No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, changesets, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution.
 
 ## Monorepo tooling
+
+Import specifiers may contain at most one `../` segment. Use workspace package exports or configured aliases for deeper imports.
 
 Use Bun for dependency installation and scripts. Run `bun run check` to verify formatting, lint, TypeScript, builds, tests, and promoted-skill manifest entries. Run `bun run check-plugin-version` separately before releasing.
 

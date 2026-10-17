@@ -1,13 +1,14 @@
 import { afterEach, expect, test } from "bun:test";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { renderReviewer } from "@glass/scripts/agents";
 import { fs } from "zx";
-import { renderReviewer } from "../../../../scripts/agents.js";
 import { extractSkills } from "./extract-skills.js";
 import { csvPath, indexSkills, serializeCsv } from "./index-skills.js";
 
 const fixtures: string[] = [];
-const output = "crates/skillset/skillset/skillset";
+const tooling = "crates/skillset/skillset/skillset";
+const output = `${tooling}/skillset`;
 
 afterEach(async () => {
   await Promise.all(fixtures.splice(0).map((path) => fs.remove(path)));
@@ -214,7 +215,7 @@ test("explicit rules include dynamic dependencies and only required agent profil
     join(repo, "crates/skillset/impeccable/plugin/agents/unused.md"),
     "Not required.\n",
   );
-  await fs.outputJson(join(repo, output, "extraction-rules.json"), {
+  await fs.outputJson(join(repo, tooling, "extraction-rules.json"), {
     files: {
       "glass/engineering/start/SKILL.md": {
         references: { "$TOOLS/check": "gstack/bin/check" },
@@ -372,6 +373,7 @@ test("rejects collisions, stale input, unknown calls, and unsafe destinations be
   await skill(repo, "glass/engineering/start");
   await pick(repo, ["glass/engineering/start"]);
   await fs.ensureDir(join(repo, "outside"));
+  await fs.ensureDir(join(repo, output));
   await fs.symlink(join(repo, "outside"), join(repo, output, "eng"));
   await expect(extractSkills(repo, true)).rejects.toThrow(
     "non-directory parent",
@@ -423,7 +425,7 @@ test("script runtime rewrites explicitly anchor helpers instead of relying on th
   );
   await pick(repo, ["glass/engineering/start"]);
   await expect(extractSkills(repo, true)).rejects.toThrow("extraction rule");
-  await fs.outputJson(join(repo, output, "extraction-rules.json"), {
+  await fs.outputJson(join(repo, tooling, "extraction-rules.json"), {
     files: {
       "glass/engineering/start/run.sh": {
         rewrites: { '"$TOOLS/helper.sh"': '"$(dirname "$0")/helper.sh"' },

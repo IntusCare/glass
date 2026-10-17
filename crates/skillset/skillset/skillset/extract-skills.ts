@@ -1,9 +1,18 @@
 #!/usr/bin/env bun
+/**
+ * Extract skills from skills.csv into the generated skillset.
+ * 1. Copy picked skills to skillset/<category>/<name>/SKILL.md, applying CSV name and category overrides.
+ * 2. Use new_description when supplied, otherwise the indexed source description.
+ * 3. Remove previously generated Picks and support files that are no longer needed.
+ * 4. Resolve references recursively, copy dependencies into skillset/infra, and rewrite paths.
+ * 5. Make Picks model- and user-invokable, then synchronize plugin entries and local discovery.
+ * Validate the complete result before writing; --check verifies without changing files.
+ */
 import { basename, join, resolve } from "node:path";
+import { expectedAgents } from "@glass/scripts/agents";
+import { isLegacySkillLink } from "@glass/scripts/local-skills";
+import { validateSkillManifest } from "@glass/scripts/skill-manifest";
 import { fs } from "zx";
-import { expectedAgents } from "../../../../scripts/agents.js";
-import { isLegacySkillLink } from "../../../../scripts/local-skills.js";
-import { validateSkillManifest } from "../../../../scripts/skill-manifest.js";
 import { ExtractionGraph, parseRules, rulesPath } from "./extraction-graph.js";
 import {
   type GeneratedFile,

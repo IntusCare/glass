@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./agents": "./agents.ts",
+    "./agent-profiles": "./agent-profiles.ts",
+    "./local-skills": "./local-skills.ts",
+    "./skill-manifest": "./skill-manifest.ts"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.json --watch",

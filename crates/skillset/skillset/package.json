@@ -12,6 +12,7 @@
     "index-skills": "bun skillset/index-skills.ts"
   },
   "dependencies": {
+    "@glass/scripts": "workspace:*",
     "papaparse": "5.5.3",
     "zx": "8.8.5"
   },

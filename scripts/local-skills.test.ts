@@ -5,7 +5,7 @@ import { fs } from "zx";
 import { syncLocalSkills } from "./local-skills.js";
 
 const fixtures: string[] = [];
-const generated = "crates/skillset/skillset/skillset";
+const generated = "crates/skillset/skillset/skillset/skillset";
 
 afterEach(async () => {
   await Promise.all(fixtures.splice(0).map((path) => fs.remove(path)));

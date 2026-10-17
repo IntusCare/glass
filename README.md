@@ -14,7 +14,7 @@
 
 My agent skills that I use every day to do real engineering - not vibe coding.
 
-Glass ships the reviewed Picks in [`skills.csv`](./crates/skillset/skillset/skillset/skills.csv), as committed copies that work without source submodules. The current Pick is [workon](./crates/skillset/skillset/skillset/eng/workon/SKILL.md). The engineering principles below describe the wider source collections; selection determines which workflows are installed.
+Glass ships the reviewed Picks in [`skills.csv`](./crates/skillset/skillset/skillset/skills.csv), as committed copies that work without source submodules. The current Pick is [workon](./crates/skillset/skillset/skillset/skillset/eng/workon/SKILL.md). The engineering principles below describe the wider source collections; selection determines which workflows are installed.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
@@ -191,7 +191,7 @@ Software engineering fundamentals matter more than ever. These skills are my bes
 
 ### Model-invoked
 
-- **[workon](./crates/skillset/skillset/skillset/eng/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
+- **[workon](./crates/skillset/skillset/skillset/skillset/eng/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
 
 Every Pick supports automatic selection and explicit invocation. Workflow prerequisites and confirmation steps still apply. Required unpicked skills ship as support instructions rather than additional discoverable skills.
 

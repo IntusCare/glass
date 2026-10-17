@@ -3,7 +3,7 @@ import { basename, dirname, join, resolve } from "node:path";
 import { z } from "zod";
 import { fs } from "zx";
 
-const skillsDirectories = ["crates/skillset/skillset/skillset"];
+const skillsDirectories = ["crates/skillset/skillset/skillset/skillset"];
 const buckets = [
   "engineering",
   "productivity",
@@ -28,9 +28,7 @@ async function discoverSkills(repo: string) {
   const skills = new Map<string, string>();
   for (const skillsDirectory of skillsDirectories) {
     if (!(await fs.pathExists(join(repo, skillsDirectory)))) {
-      throw new Error(
-        `Missing ${skillsDirectory}. Run \`git submodule update --init\` before refreshing links.`,
-      );
+      continue;
     }
     const entries: Dirent[] = await fs.readdir(join(repo, skillsDirectory), {
       withFileTypes: true,
@@ -95,7 +93,7 @@ function isManagedLink(name: string, target: string) {
   return (
     isLegacySkillLink(name, target) ||
     new RegExp(
-      `^\\.\\./\\.\\./crates/skillset/skillset/skillset/[a-z0-9-]+/${name}$`,
+      `^\\.\\./\\.\\./crates/skillset/skillset/skillset/skillset/[a-z0-9-]+/${name}$`,
     ).test(target)
   );
 }

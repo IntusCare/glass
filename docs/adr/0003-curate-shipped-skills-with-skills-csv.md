@@ -2,7 +2,7 @@
 
 The plugin now draws on four suites under `crates/skillset/` (Glass's own plus the mattpocock, gstack, and impeccable submodules), and upstream trees carry skills we do not want to ship: fixtures, per-harness duplicates, OpenClaw variants, and buckets upstream itself does not promote. Until now the manifest was derived from hard-coded glob patterns per suite (`crates/skillset/glass/engineering/*`, `crates/skillset/gstack/*`, ...), so every upstream addition shipped automatically and every exclusion needed a new pattern.
 
-We decided to curate instead: `bun run index-skills` indexes every `SKILL.md` across the suites into `crates/skillset/skillset/skillset/skills.csv`, and a human reviews each row, marking it `picked` or `skipped` and optionally giving it a new category or name. Only `picked` rows ship; a downstream generator materialises them under `crates/skillset/skillset/skillset/<category>/<name>`, which also gives installers that fetch without submodules a committed copy to load.
+We decided to curate instead: `bun run index-skills` indexes every `SKILL.md` across the suites into `crates/skillset/skillset/skillset/skills.csv`, and a human reviews each row, marking it `picked` or `skipped` and optionally giving it a new category or name. Only `picked` rows ship; a downstream generator materialises them under `crates/skillset/skillset/skillset/skillset/<category>/<name>`, inside the dedicated `skillset/` output directory beside the tooling. This gives installers that fetch without submodules a committed copy to load.
 
 ## Considered options
 
@@ -14,7 +14,7 @@ We decided to curate instead: `bun run index-skills` indexes every `SKILL.md` ac
 ## Consequences
 
 - Required supporting files, including scripts and assets, must be copied out of the source submodules into the committed output, with references updated to their generated locations. Installed skills cannot rely on the source submodules being present. Extraction follows local dependencies recursively and fails on unresolved local dependencies; external installations remain explicit prerequisites.
-- Support material lives under `crates/skillset/skillset/skillset/infra/<suite>/<source-relative-path>`, shared across Picks while preserving the source directory structure. Unpicked skill bodies are named `instructions.md` instead of `SKILL.md`. The `infra` category is reserved for support material.
+- Support material lives under `crates/skillset/skillset/skillset/skillset/infra/<suite>/<source-relative-path>`, shared across Picks while preserving the source directory structure. Unpicked skill bodies are named `instructions.md` instead of `SKILL.md`. The `infra` category is reserved for support material.
 - Final Pick names must be globally unique, even across categories. Frontmatter and references follow the final names; collisions and ambiguous references are errors.
 - Explicit, checked-in dependency and rewrite rules supplement automatic reference detection, including conventions that construct paths dynamically. Recognized but unresolved references fail extraction. Representative extracted skills must be validated without the source submodules present.
 - Generated-file ownership is tracked. Extraction removes obsolete generated files when Picks are removed, skipped, or renamed, and removes support material no remaining Pick needs. It preserves unrelated files and stops if a generated file has been manually edited; durable edits belong in sources or CSV overrides.

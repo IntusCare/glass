@@ -2,8 +2,9 @@ import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fs } from "zx";
 
-export const outputRoot = "crates/skillset/skillset/skillset";
-export const statePath = `${outputRoot}/extracted.json`;
+export const toolingRoot = "crates/skillset/skillset/skillset";
+export const outputRoot = `${toolingRoot}/skillset`;
+export const statePath = `${toolingRoot}/extracted.json`;
 export const manifestPath = ".claude-plugin/plugin.json";
 
 export type GeneratedFile =
@@ -75,13 +76,16 @@ function equal(a: unknown, b: unknown) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
-function ownedPath(path: string) {
+function ownedPath(path: string, allowPreviousLayout = false) {
   safePath(path);
   return (
     path !== statePath &&
-    (new RegExp(
-      `^${outputRoot}/(?:infra/[^/]+/.+|[a-z0-9-]+/[a-z0-9-]+/.+)$`,
-    ).test(path) ||
+    ((allowPreviousLayout ? [outputRoot, toolingRoot] : [outputRoot]).some(
+      (root) =>
+        new RegExp(
+          `^${root}/(?:infra/[^/]+/.+|[a-z0-9-]+/[a-z0-9-]+/.+)$`,
+        ).test(path),
+    ) ||
       /^\.devin\/skills\/[a-z0-9-]+$/.test(path) ||
       path === ".claude/skills" ||
       path === ".agents/skills")
@@ -111,7 +115,8 @@ export async function syncGenerated(
       throw new Error(`Invalid generated inventory: ${statePath}`);
     previous = parsed;
     for (const path of Object.keys(previous.files)) {
-      if (!ownedPath(path)) throw new Error(`Invalid owned path: ${path}`);
+      if (!ownedPath(path, true))
+        throw new Error(`Invalid owned path: ${path}`);
     }
   }
   const manifestFile = await inspect(repo, manifestPath);
