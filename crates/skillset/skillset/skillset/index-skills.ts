@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Index all the skills in crates/skillset/ except crates/skillset/skillset and patch skills.csv removing removed skills and adding new skills. skills.csv should contain the following columns:
- * - status: new/deleted/picked
+ * - status: new/deleted/picked/skipped
  * - path: path to the skill relative to the crates/skillset directory.
  * - category: The category of the skill
  * - name: the name of the skill
@@ -45,13 +45,15 @@ type Skill = {
   frontmatter: Record<string, unknown>;
 };
 
+const glassBlob = "https://github.com/intuscare/glass/blob/main";
+
 const urlRules: Record<
   string,
   (repo: string, skill: Skill) => Promise<string> | string
 > = {
   glass: async (repo, { category, name }) =>
     (await fs.pathExists(join(repo, "docs", category, `${name}.md`)))
-      ? `https://github.com/intuscare/glass/blob/main/docs/${category}/${name}.md`
+      ? `${glassBlob}/docs/${category}/${name}.md`
       : "",
   mattpocock: async (repo, { suite, category, name }) =>
     (await fs.pathExists(
@@ -144,7 +146,7 @@ async function urlFor(repo: string, skill: Skill) {
     text(skill.frontmatter.url) ||
     text(skill.frontmatter.homepage) ||
     (await urlRules[skill.suite]?.(repo, skill)) ||
-    ""
+    `${glassBlob}/${suitesRoot}/${skill.path}/SKILL.md`
   );
 }
 
