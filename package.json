@@ -23,12 +23,9 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "test": "turbo run test",
-    "link-skills": "bun run extract-skills",
-    "extract-skills": "bun crates/skillset/skillset/skillset/extract-skills.ts",
-    "index-skills": "bun crates/skillset/skillset/skillset/index-skills.ts",
-    "agents": "bun run extract-skills",
     "check": "bun run lint && turbo run build typecheck test check",
     "changeset": "bun node_modules/.bin/changeset",
+    "e": "bun run --filter '*'",
     "version": "bun run changeset version && bun scripts/sync-plugin-version.mjs",
     "check-plugin-version": "bun scripts/sync-plugin-version.mjs --check"
   },
