@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 /**
  * Index all the skills in crates/skillset/ except crates/skillset/skillset and patch skills.csv removing removed skills and adding new skills. skills.csv should contain the following columns:
  * - status: new/deleted/picked
@@ -103,7 +104,7 @@ export async function discoverSkills(repo: string): Promise<Skill[]> {
     skills.push({
       suite,
       path: skillDir,
-      category: parent === "skills" ? suite : parent ?? suite,
+      category: parent === "skills" ? suite : (parent ?? suite),
       name: text(frontmatter.name) || basename(skillDir),
       description: text(frontmatter.description),
       frontmatter,
