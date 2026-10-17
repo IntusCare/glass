@@ -79,8 +79,13 @@ function text(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function log(message: string) {
+  if (process.env.QUIET !== "true") console.error(`[index-skills] ${message}`);
+}
+
 export async function discoverSkills(repo: string): Promise<Skill[]> {
   const root = join(repo, suitesRoot);
+  log(`scanning ${root} for */**/SKILL.md`);
   const skills: Skill[] = [];
   for await (const file of new Bun.Glob("*/**/SKILL.md").scan({
     cwd: root,
@@ -89,17 +94,28 @@ export async function discoverSkills(repo: string): Promise<Skill[]> {
     const skillDir = dirname(file);
     const segments = skillDir.split("/");
     const suite = segments[0] ?? "";
-    if (
-      excludedSuites.has(suite) ||
-      segments.some(
-        (segment, index) => index > 0 && excludedSegments.has(segment),
-      )
-    )
+    if (excludedSuites.has(suite)) {
+      log(`skip ${skillDir}: suite "${suite}" is excluded`);
       continue;
-    if ((await fs.lstat(join(root, skillDir))).isSymbolicLink()) continue;
+    }
+    const excluded = segments.find(
+      (segment, index) => index > 0 && excludedSegments.has(segment),
+    );
+    if (excluded) {
+      log(`skip ${skillDir}: path contains "${excluded}"`);
+      continue;
+    }
+    if ((await fs.lstat(join(root, skillDir))).isSymbolicLink()) {
+      log(`skip ${skillDir}: symlink alias`);
+      continue;
+    }
     const frontmatter = parseFrontmatter(
       await fs.readFile(join(root, file), "utf8"),
     );
+    if (!Object.keys(frontmatter).length)
+      log(`warn ${skillDir}: no parseable frontmatter`);
+    else if (!text(frontmatter.description))
+      log(`warn ${skillDir}: no description in frontmatter`);
     const parent = segments.length > 1 ? segments[segments.length - 2] : suite;
     skills.push({
       suite,
@@ -110,6 +126,14 @@ export async function discoverSkills(repo: string): Promise<Skill[]> {
       frontmatter,
     });
   }
+  const perSuite = new Map<string, number>();
+  for (const { suite } of skills)
+    perSuite.set(suite, (perSuite.get(suite) ?? 0) + 1);
+  log(
+    `found ${skills.length} skills (${[...perSuite]
+      .map(([suite, count]) => `${suite}: ${count}`)
+      .join(", ")})`,
+  );
   return skills.sort((a, b) =>
     a.path < b.path ? -1 : a.path > b.path ? 1 : 0,
   );
@@ -168,6 +192,8 @@ export async function indexSkills(
   for (const skill of await discoverSkills(repo)) {
     const row = previous.get(skill.path);
     previous.delete(skill.path);
+    if (!row) log(`new ${skill.path}`);
+    else if (row.status === "deleted") log(`back ${skill.path} (was deleted)`);
     rows.push({
       status: !row || row.status === "deleted" ? "new" : row.status,
       path: skill.path,
@@ -179,7 +205,10 @@ export async function indexSkills(
       url: await urlFor(repo, skill),
     });
   }
-  for (const row of previous.values()) rows.push({ ...row, status: "deleted" });
+  for (const row of previous.values()) {
+    if (row.status !== "deleted") log(`deleted ${row.path} (gone from disk)`);
+    rows.push({ ...row, status: "deleted" });
+  }
   if (!rows.length) {
     throw new Error(
       `No skills found under ${suitesRoot}. Run \`git submodule update --init\`.`,
@@ -190,13 +219,22 @@ export async function indexSkills(
 
 export async function syncSkillsCsv(repo: string, write = false) {
   const file = join(repo, csvPath);
-  const current = (await fs.pathExists(file))
-    ? await fs.readFile(file, "utf8")
-    : "";
-  const rows = await indexSkills(repo, parseCsv(current));
+  const exists = await fs.pathExists(file);
+  const current = exists ? await fs.readFile(file, "utf8") : "";
+  const existing = parseCsv(current);
+  log(
+    exists
+      ? `read ${existing.length} rows from ${file}`
+      : `no csv at ${file}, starting empty`,
+  );
+  const rows = await indexSkills(repo, existing);
   const next = serializeCsv(rows);
   const stale = next !== current;
-  if (stale && write) await fs.outputFile(file, next);
+  if (stale && write) {
+    await fs.outputFile(file, next);
+    log(`wrote ${rows.length} rows to ${file}`);
+  }
+  if (!stale) log(`${file} is up to date, not writing`);
   if (stale && !write) {
     throw new Error(`${csvPath} is stale. Run \`bun run index-skills\`.`);
   }
@@ -218,6 +256,8 @@ if (import.meta.main) {
     args.find((arg) => !arg.startsWith("--")) ??
       join(import.meta.dir, "../../../.."),
   );
+  log(`repo root: ${repo} (cwd: ${process.cwd()})`);
+  log(check ? "mode: --check (never writes)" : "mode: write");
   const summary = await syncSkillsCsv(repo, !check);
   console.log(
     `${relative(repo, join(repo, csvPath))}: ${summary.total} skills, ${
