@@ -490,6 +490,24 @@ test("Markdown examples do not turn API routes or illustrative imports into pack
   expect(content).toContain(example);
 });
 
+test("bracketed placeholder paths in prose are neither copied nor rewritten", async () => {
+  const repo = await fixture();
+  const line =
+    "Disk paths stay `~/.claude/skills/gstack/[skill-name]/SKILL.md`.";
+  await skill(repo, "glass/engineering/start", `${line}\n`);
+  await pick(repo, ["glass/engineering/start"]);
+  await extractSkills(repo, true);
+  const content = await fs.readFile(
+    join(repo, output, "eng/begin/SKILL.md"),
+    "utf8",
+  );
+  expect(content).toContain(line);
+  const generated = await fs.glob(`${output}/**/*`, { cwd: repo });
+  expect(
+    generated.filter((path: string) => path.includes("[skill-name]")),
+  ).toEqual([]);
+});
+
 test("legacy agent migration refuses edited profiles before removing any generated content", async () => {
   const repo = await fixture();
   const checklist = "# Security\nCheck authorization.\n";

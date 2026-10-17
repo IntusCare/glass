@@ -260,6 +260,7 @@ export class ExtractionGraph {
       if (path.startsWith("/") || path.startsWith("~")) return;
       path = posix.normalize(posix.join(posix.dirname(from), path));
     }
+    if (/\[[^\]]*\]/.test(path)) return;
     if (/[$*<>]/.test(path))
       throw new Error(
         `${from}: dynamic reference "${value}" needs an explicit extraction rule`,
