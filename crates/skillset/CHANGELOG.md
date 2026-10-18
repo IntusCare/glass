@@ -1,5 +1,11 @@
 # @glass/skills
 
+## 1.4.0
+
+### Minor Changes
+
+- [`5b37b77`](https://github.com/IntusCare/glass/commit/5b37b77fbe8b9ca23ea890bd32fb1b43a7a69679) Thanks [@amit-bansil](https://github.com/amit-bansil)! - Ship 34 curated Picks as stubs that forward to upstream suites (mattpocock/skills, gstack, impeccable) installed on your machine by `crates/skillset/skillset/setup.sh`, instead of vendoring or submoduling those suites. Picks are grouped under `all`, `doc`, `eng`, `meta`, and `ui`, several under new names (for example `debug`, `grill`, `ui`). `workon` remains Glass-owned. Install the upstream suites with `setup.sh` before using a stub Pick.
+
 ## 1.3.1
 
 ### Patch Changes
