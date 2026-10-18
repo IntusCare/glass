@@ -9,7 +9,8 @@
     "test": "QUIET=true bun test skillset/*.test.ts",
     "check": "bun skillset/index-skills.ts --check && bun skillset/extract-skills.ts --check",
     "skillset.extract": "bun skillset/extract-skills.ts",
-    "skillset.index": "bun skillset/index-skills.ts"
+    "skillset.index": "bun skillset/index-skills.ts",
+    "skillset.pick": "bun skillset/pick-skills.ts"
   },
   "dependencies": {
     "@glass/scripts": "workspace:*",

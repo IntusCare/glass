@@ -1,0 +1,6 @@
+---
+name: debug
+description: "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow."
+---
+
+Invoke `/mattpocock:diagnosing-bugs` with the user's arguments and do nothing else.
