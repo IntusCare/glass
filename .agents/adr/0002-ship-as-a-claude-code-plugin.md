@@ -39,3 +39,7 @@ Verified 2026-08-05, on Claude Code 2.1.222, against the live listing:
 - `claude plugin details glass-skills` then reports version 1.2.0 and loads the promoted skills.
 - The listing's `source` is `{"source": "url", "url": "https://github.com/intuscare/glass.git", "sha": …}`: the **sha is pinned**, so a release reaches installed users when that pin moves, not the moment we tag. At the time of writing the pin sits two commits behind `main`, which is why it lists 22 skills rather than the 24 in `plugin.json`.
 - The in-session `/plugin install glass-skills` was **not** exercised: `/plugin` is unavailable in headless (`claude -p`) sessions. It runs the same resolver as the CLI, and the documented example form is `/plugin install <name>@claude-plugins-official`.
+
+## Update, 2026-10-18
+
+The plugin is renamed `glass`, and this repo is not in Claude Code's official marketplace under either name: the 2026-08-05 update above described the upstream `mattpocock-skills` listing, inherited when this repo forked. The documented route is again this repo's own marketplace (`claude plugin marketplace add intuscare/glass`, then `claude plugin install glass@glass`). Verified against `anthropics/claude-plugins-official`'s `marketplace.json` on 2026-10-18.

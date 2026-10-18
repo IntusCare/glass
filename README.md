@@ -26,7 +26,7 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when Anthropic's marketplace picks up my releases, so you subscribe rather than fork. **[skills.sh](https://skills.sh/intuscare/glass)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle from this repo's own marketplace, so you subscribe rather than fork. **[skills.sh](https://skills.sh/intuscare/glass)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -34,24 +34,18 @@ Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.co
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugins install glass-skills
+claude plugin marketplace add intuscare/glass
+claude plugin install glass@glass
 ```
 
 Or, from inside a session:
 
 ```
-/plugin install glass-skills
+/plugin marketplace add intuscare/glass
+/plugin install glass@glass
 ```
 
-It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
-
-**Stuck on an old version?** `claude plugin list` shows what you have, and [`.claude-plugin/plugin.json`](./.claude-plugin/plugin.json) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
-
-```bash
-claude plugin uninstall glass-skills@claude-plugins-official
-claude plugin marketplace add intuscare/glass
-claude plugin install glass-skills@glass
-```
+Updates are off by default for marketplaces outside Anthropic's. Turn on auto-update for `glass` under `/plugin` → Marketplaces, or pull a release by hand with `claude plugin marketplace update glass`. `claude plugin list` shows what you have, and [`.claude-plugin/plugin.json`](./.claude-plugin/plugin.json) shows the latest release.
 
 </details>
 
