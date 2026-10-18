@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Write a minimal SKILL.md for every row marked `picked` in skills.csv,
- * under <new_category|category>/<new_name|name>/ next to this script.
+ * under <category>/<category>-<name>/ next to this script.
  * Existing SKILL.md files are left untouched.
  */
 
@@ -57,10 +57,10 @@ export async function pickSkills(
     const category = row.new_category || row.category;
     const name = row.new_name || row.name;
     const description = row.new_description || row.description;
-    const dir = join(root, category, name);
+    const dir = join(root, category, `${category}-${name}`);
     const target = join(dir, "SKILL.md");
     if (await fs.pathExists(target)) {
-      skipped.push(`${category}/${name}`);
+      skipped.push(`${category}/${category}-${name}`);
       continue;
     }
     await fs.ensureDir(dirname(target));
@@ -68,7 +68,7 @@ export async function pickSkills(
       target,
       skillMd(`${category}-${name}`, description, `/${suite}:${cmd}`),
     );
-    created.push(`${category}/${name}`);
+    created.push(`${category}/${category}-${name}`);
   }
   return { created, skipped };
 }

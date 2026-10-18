@@ -22,7 +22,12 @@ async function writePick(
   description: string,
   frontmatterName?: string,
 ) {
-  const dir = join(repo, "crates/skillset/skillset", category, name);
+  const dir = join(
+    repo,
+    "crates/skillset/skillset",
+    category,
+    `${category}-${name}`,
+  );
   await fs.ensureDir(dir);
   await fs.writeFile(
     join(dir, "SKILL.md"),
@@ -56,8 +61,8 @@ test("writes plugin.json skills sorted and preserves other keys", async () => {
   expect(json).toEqual({
     name: "fixture",
     skills: [
-      "./crates/skillset/skillset/all/alpha",
-      "./crates/skillset/skillset/eng/beta",
+      "./crates/skillset/skillset/all/all-alpha",
+      "./crates/skillset/skillset/eng/eng-beta",
     ],
     agents: [],
   });
@@ -72,7 +77,7 @@ test("creates, repoints and prunes .devin/skills symlinks", async () => {
   await fs.symlink("../stale", join(linksDir, "gone"));
   await indexMetadata(repo, { check: false });
   expect(await fs.readlink(join(linksDir, "eng-beta"))).toBe(
-    "../../crates/skillset/skillset/eng/beta",
+    "../../crates/skillset/skillset/eng/eng-beta",
   );
   // The old basename-style link is pruned.
   expect(await fs.pathExists(join(linksDir, "beta"))).toBe(false);
@@ -95,7 +100,7 @@ test("rewrites the README block grouped by category", async () => {
   await indexMetadata(repo, { check: false });
   const next = await fs.readFile(join(repo, "README.md"), "utf8");
   expect(next).toContain(
-    `<!-- picks:start -->\n\n#### all\n\n- **[all-alpha](./crates/skillset/skillset/all/alpha/SKILL.md)**: First.\n\n#### eng\n\n- **[eng-beta](./crates/skillset/skillset/eng/beta/SKILL.md)**: Second sentence test.\n\n<!-- picks:end -->`,
+    `<!-- picks:start -->\n\n#### all\n\n- **[all-alpha](./crates/skillset/skillset/all/all-alpha/SKILL.md)**: First.\n\n#### eng\n\n- **[eng-beta](./crates/skillset/skillset/eng/eng-beta/SKILL.md)**: Second sentence test.\n\n<!-- picks:end -->`,
   );
   expect(next).toContain("Trailing content stays.");
   expect(next).toContain("# Fixture");
@@ -113,14 +118,26 @@ test("colliding category-folder names throw naming both dirs", async () => {
   await writePick("a-b", "c", "A.");
   await writePick("a", "b-c", "B.");
   await expect(findPicks(repo)).rejects.toThrow(
-    /duplicate pick name "a-b-c" in crates\/skillset\/skillset\/(a-b\/c|a\/b-c) and crates\/skillset\/skillset\/(a-b\/c|a\/b-c)/,
+    /duplicate pick name "a-b-c" in crates\/skillset\/skillset\/(a-b\/a-b-c|a\/a-b-c) and crates\/skillset\/skillset\/(a-b\/a-b-c|a\/a-b-c)/,
   );
 });
 
-test("frontmatter name not matching category-folder throws", async () => {
+test("frontmatter name not matching folder throws", async () => {
   await writePick("eng", "beta", "B.", "eng-wrong");
   await expect(findPicks(repo)).rejects.toThrow(
-    'frontmatter name "eng-wrong" in crates/skillset/skillset/eng/beta does not match "eng-beta"',
+    'frontmatter name "eng-wrong" in crates/skillset/skillset/eng/eng-beta does not match folder "eng-beta"',
+  );
+});
+
+test("folder missing the category prefix throws", async () => {
+  const dir = join(repo, "crates/skillset/skillset/eng/beta");
+  await fs.ensureDir(dir);
+  await fs.writeFile(
+    join(dir, "SKILL.md"),
+    "---\nname: beta\ndescription: B.\n---\n\nBody.\n",
+  );
+  await expect(findPicks(repo)).rejects.toThrow(
+    'folder "beta" in crates/skillset/skillset/eng/beta must start with "eng-"',
   );
 });
 

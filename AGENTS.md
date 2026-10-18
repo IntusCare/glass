@@ -1,4 +1,4 @@
-Picks live at `crates/skillset/skillset/<category>/<name>/SKILL.md`, grouped by category folders (`all`, `doc`, `eng`, `meta`, `ui`). Glass-owned skills like `eng/workon` are authored there directly. The upstream suites [mattpocock/skills](https://github.com/mattpocock/skills), [garrytan/gstack](https://github.com/garrytan/gstack), and [pbakaus/impeccable](https://github.com/pbakaus/impeccable) are installed on the machine by [`crates/skillset/skillset/setup.sh`](./crates/skillset/skillset/setup.sh), not vendored; nothing of theirs is copied into this repo. A stub Pick forwards to its upstream invocation: `Invoke \`/<suite>:<skill>\` with the user's arguments and do nothing else.`
+Picks live at `crates/skillset/skillset/<category>/<category>-<name>/SKILL.md`, grouped by category folders (`all`, `doc`, `eng`, `meta`, `ui`). Glass-owned skills like `eng/eng-workon` are authored there directly. The upstream suites [mattpocock/skills](https://github.com/mattpocock/skills), [garrytan/gstack](https://github.com/garrytan/gstack), and [pbakaus/impeccable](https://github.com/pbakaus/impeccable) are installed on the machine by [`crates/skillset/skillset/setup.sh`](./crates/skillset/skillset/setup.sh), not vendored; nothing of theirs is copied into this repo. A stub Pick forwards to its upstream invocation: `Invoke \`/<suite>:<skill>\` with the user's arguments and do nothing else.`
 
 The reviewed [`skills.csv`](./crates/skillset/skillset/skills.csv) selects what ships. It is hand-maintained: set `status` to `picked` and optionally override `new_category`, `new_name`, or `new_description`. Workflow:
 
@@ -11,7 +11,7 @@ Install commands are copied verbatim from [.agents/install-block.md](./.agents/i
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
-`.devin/skills/<category>-<name>` links to each Pick, with `.agents/skills` and `.claude/skills` pointing there; `bun run skillset.index` keeps them in sync so discovery cannot drift from the Picks. A Pick's frontmatter `name` is `<category>-<name>` (for example `eng-workon`), enforced by `bun run check`.
+`.devin/skills/<category>-<name>` links to each Pick, with `.agents/skills` and `.claude/skills` pointing there; `bun run skillset.index` keeps them in sync so discovery cannot drift from the Picks. A Pick's folder and frontmatter `name` are both `<category>-<name>` (for example `eng-workon`), enforced by `bun run check`.
 
 Picks are model-invoked and user-reachable. See [.agents/invocation.md](./.agents/invocation.md).
 

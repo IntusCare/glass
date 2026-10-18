@@ -43,14 +43,18 @@ export async function findPicks(repo: string): Promise<Pick[]> {
     const dir = dirname(path);
     const category = dir.split("/").at(-2) ?? "";
     const folder = dir.split("/").at(-1) ?? "";
-    const expected = `${category}-${folder}`;
+    if (!folder.startsWith(`${category}-`)) {
+      throw new Error(
+        `folder "${folder}" in ${dir} must start with "${category}-"`,
+      );
+    }
     const frontmatter = parseFrontmatter(
       await fs.readFile(join(repo, path), "utf8"),
     );
-    const name = String(frontmatter.name ?? expected);
-    if (name !== expected) {
+    const name = String(frontmatter.name ?? folder);
+    if (name !== folder) {
       throw new Error(
-        `frontmatter name "${name}" in ${dir} does not match "${expected}"`,
+        `frontmatter name "${name}" in ${dir} does not match folder "${folder}"`,
       );
     }
     const existing = picks.find((pick) => pick.name === name);

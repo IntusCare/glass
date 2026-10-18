@@ -1,6 +1,6 @@
 # Writing docs pages
 
-Glass-owned skills in `crates/skillset/skillset/<category>/` have a human-facing **docs page** at `docs/<category>/<skill-name>.md`. For upstream suites, the installed skill source is the authority. The published URL is `https://aihero.dev/skills-<skill-name>` regardless of category. Stub Picks that only forward to an upstream suite get no docs page.
+Glass-owned skills in `crates/skillset/skillset/<category>/<category>-<skill-name>/` have a human-facing **docs page** at `docs/<category>/<skill-name>.md`. For upstream suites, the installed skill source is the authority. The published URL is `https://aihero.dev/skills-<skill-name>` regardless of category. Stub Picks that only forward to an upstream suite get no docs page.
 
 Glass-owned skills are **model-invoked** and can also be invoked explicitly. A reader still needs to recognise when a skill fits and which decisions remain theirs. Remembering that map is **cognitive load**. The job of a docs page is to relieve it: to orient one reader around one skill so they can hold it in their head, know when to reach for it, and see where it sits in the system. The pages are collectively a distributed router; each is a node.
 
