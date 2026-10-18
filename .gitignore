@@ -1,6 +1,7 @@
 node_modules
 .claude/*
 !.claude/skills
+!.claude/CLAUDE.md
 .turbo
 dist
 coverage
