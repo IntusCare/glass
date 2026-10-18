@@ -16,10 +16,10 @@ async function fixture(pluginVersion: string) {
     name: "glass",
     private: true,
   });
-  await fs.outputJson(join(repo, "crates/skillset/glass/package.json"), {
+  await fs.outputJson(join(repo, "crates/skillset/package.json"), {
     version: "1.3.1",
   });
-  await fs.outputJson(join(repo, "crates/skillset/mattpocock/package.json"), {
+  await fs.outputJson(join(repo, "crates/skillset/other/package.json"), {
     version: "9.9.9",
   });
   await fs.outputJson(join(repo, ".claude-plugin/plugin.json"), {

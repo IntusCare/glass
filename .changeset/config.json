@@ -17,7 +17,6 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@glass/scripts",
-    "@glass/skillset"
+    "@glass/scripts"
   ]
 }

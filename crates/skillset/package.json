@@ -1,6 +1,6 @@
 {
-  "name": "@glass/skillset",
-  "version": "0.0.0",
+  "name": "glass-skills",
+  "version": "1.3.1",
   "private": true,
   "type": "module",
   "description": "Stubs picked skills from skills.csv",

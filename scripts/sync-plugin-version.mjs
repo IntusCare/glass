@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copies crates/skillset/glass/package.json's version into .claude-plugin/plugin.json.
+// Copies crates/skillset/package.json's version into .claude-plugin/plugin.json.
 // Runs as part of `bun run version`, immediately after `changeset version`.
 // With --check it changes nothing and exits 1 if the two versions differ.
 
@@ -11,10 +11,7 @@ const repo = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pluginPath = join(repo, ".claude-plugin", "plugin.json");
 
 const { version } = JSON.parse(
-  readFileSync(
-    join(repo, "crates", "skillset", "glass", "package.json"),
-    "utf8",
-  ),
+  readFileSync(join(repo, "crates", "skillset", "package.json"), "utf8"),
 );
 const source = readFileSync(pluginPath, "utf8");
 const plugin = JSON.parse(source);
@@ -26,7 +23,7 @@ if (plugin.version === version) {
 
 if (process.argv.includes("--check")) {
   console.error(
-    `plugin.json version is ${plugin.version}, crates/skillset/glass/package.json is ${version}. Run \`bun scripts/sync-plugin-version.mjs\`.`,
+    `plugin.json version is ${plugin.version}, crates/skillset/package.json is ${version}. Run \`bun scripts/sync-plugin-version.mjs\`.`,
   );
   process.exit(1);
 }
