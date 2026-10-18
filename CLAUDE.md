@@ -24,7 +24,7 @@ The extractor copies required support material and rewrites local references. Un
 
 ### gstack
 
-[garrytan/gstack](https://github.com/garrytan/gstack) is the submodule at `crates/skillset/gstack`. Picks and their required dependencies are copied out of it. Dynamic runtime paths require explicit dependency or rewrite rules; see the extraction workflow.
+[garrytan/gstack](https://github.com/garrytan/gstack) is the submodule at `crates/skillset/gstack`. gstack is vendored whole: when any gstack row is picked, extraction copies the suite to `crates/skillset/skillset/skillset/vendor/gstack/` and rewrites its `~/.claude/skills/gstack/` style install prefixes to the `${CLAUDE_PLUGIN_ROOT:-.}`-anchored vendor path instead of resolving per-token dependencies. See [extraction workflow](./docs/extract-skills.md) and [ADR 0004](./docs/adr/0004-vendor-gstack-whole.md).
 
 Required gstack review checklists become `<name>-reviewer` agent profiles under generated `infra/`, registered in the plugin's `agents` array. The renderer and its description map live in `scripts/agents.ts`. Copied upstream prose is exempt from the no-em-dash rule. Never edit generated files by hand: update source or extraction rules, then run `bun run extract-skills`. `bun run agents` is an alias for that same extraction.
 

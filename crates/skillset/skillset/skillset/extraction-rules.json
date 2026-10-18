@@ -1,7 +1,0 @@
-{
-  "files": {
-    "gstack/benchmark/SKILL.md": {
-      "external": ["$GSTACK_STATE_ROOT/analytics/"]
-    }
-  }
-}
