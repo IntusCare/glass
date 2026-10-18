@@ -1,5 +1,5 @@
 ---
-name: grill-no-write
+name: all-grill-no-write
 description: A relentless interview to sharpen a plan or design.
 ---
 

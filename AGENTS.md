@@ -11,7 +11,7 @@ Install commands are copied verbatim from [.agents/install-block.md](./.agents/i
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
-`.devin/skills/<name>` links to each Pick, with `.agents/skills` and `.claude/skills` pointing there; `bun run skillset.index` keeps them in sync so discovery cannot drift from the Picks.
+`.devin/skills/<category>-<name>` links to each Pick, with `.agents/skills` and `.claude/skills` pointing there; `bun run skillset.index` keeps them in sync so discovery cannot drift from the Picks. A Pick's frontmatter `name` is `<category>-<name>` (for example `eng-workon`), enforced by `bun run check`.
 
 Picks are model-invoked and user-reachable. See [.agents/invocation.md](./.agents/invocation.md).
 

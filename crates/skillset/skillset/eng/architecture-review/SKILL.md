@@ -1,5 +1,5 @@
 ---
-name: architecture-review
+name: eng-architecture-review
 description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
 ---
 

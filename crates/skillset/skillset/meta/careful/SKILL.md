@@ -1,5 +1,5 @@
 ---
-name: careful
+name: meta-careful
 description: Safety guardrails for destructive commands. (gstack)
 ---
 

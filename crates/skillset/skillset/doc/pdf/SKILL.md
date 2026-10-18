@@ -1,5 +1,5 @@
 ---
-name: pdf
+name: doc-pdf
 description: Turn any markdown file into a publication-quality PDF. (gstack)
 ---
 

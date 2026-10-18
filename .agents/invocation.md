@@ -19,7 +19,7 @@ Router prose naming a workflow is guidance, not permission to execute it. Workfl
 
 ## Repository-local discovery
 
-`.devin/skills/<name>` links to a Pick. `.agents/skills` and `.claude/skills` link to `.devin/skills` for Codex and Claude Code compatibility. All links are relative.
+`.devin/skills/<category>-<name>` links to a Pick, matching the Pick's frontmatter `name` (`<category>-<name>`, enforced by `bun run check`). `.agents/skills` and `.claude/skills` link to `.devin/skills` for Codex and Claude Code compatibility. All links are relative.
 
 Run `bun run skillset.index` from `crates/skillset` after changing Picks or `skills.csv`; it maintains the links, the plugin manifest, and the README block. `bun run check` fails when they drift.
 

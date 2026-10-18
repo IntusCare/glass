@@ -1,5 +1,5 @@
 ---
-name: benchmark
+name: eng-benchmark
 description: Web performance regression detection. (gstack)
 ---
 

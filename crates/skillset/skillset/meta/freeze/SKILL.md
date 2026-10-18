@@ -1,5 +1,5 @@
 ---
-name: freeze
+name: meta-freeze
 description: Restrict file edits to a specific directory for the session. (gstack)
 ---
 

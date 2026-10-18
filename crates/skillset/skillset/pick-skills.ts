@@ -64,7 +64,10 @@ export async function pickSkills(
       continue;
     }
     await fs.ensureDir(dirname(target));
-    await fs.writeFile(target, skillMd(name, description, `/${suite}:${cmd}`));
+    await fs.writeFile(
+      target,
+      skillMd(`${category}-${name}`, description, `/${suite}:${cmd}`),
+    );
     created.push(`${category}/${name}`);
   }
   return { created, skipped };

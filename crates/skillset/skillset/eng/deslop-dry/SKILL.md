@@ -1,5 +1,5 @@
 ---
-name: deslop-dry
+name: eng-deslop-dry
 description: Find worthwhile shared-code extractions in recent work. (gstack)
 ---
 

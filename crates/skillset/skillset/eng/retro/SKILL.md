@@ -1,5 +1,5 @@
 ---
-name: retro
+name: eng-retro
 description: Conduct a retrospective on a coding session.
 ---
 

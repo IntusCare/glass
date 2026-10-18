@@ -1,5 +1,5 @@
 ---
-name: wait-what
+name: all-wait-what
 description: "Stop; that last message did not land: re-pitch it."
 ---
 

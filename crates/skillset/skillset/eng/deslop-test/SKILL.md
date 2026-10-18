@@ -1,5 +1,5 @@
 ---
-name: deslop-test
+name: eng-deslop-test
 description: Find low-value or duplicate tests and the test-only code they keep alive. (gstack)
 ---
 

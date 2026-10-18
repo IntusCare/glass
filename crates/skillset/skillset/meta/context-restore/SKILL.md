@@ -1,5 +1,5 @@
 ---
-name: context-restore
+name: meta-context-restore
 description: Restore working context saved earlier by /context-save. (gstack)
 ---
 

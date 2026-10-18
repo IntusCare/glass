@@ -1,5 +1,5 @@
 ---
-name: workon
+name: eng-workon
 description: Start work on a Jira ticket by creating or switching to its branch and moving the ticket to In Progress. Use when the user says "workon" or "work on" with a Jira key or URL, or wants a branch for a Jira ticket.
 ---
 

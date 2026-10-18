@@ -1,5 +1,5 @@
 ---
-name: implement-mega
+name: eng-implement-mega
 description: Implement the result of /to-spec and /to-tickets in code.
 ---
 
