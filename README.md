@@ -14,7 +14,7 @@
 
 My agent skills that I use every day to do real engineering - not vibe coding.
 
-Glass ships the reviewed Picks in [`skills.csv`](./crates/skillset/skillset/skillset/skills.csv), as committed copies that work without source submodules. The current Pick is [workon](./crates/skillset/skillset/skillset/skillset/eng/workon/SKILL.md). The engineering principles below describe the wider source collections; selection determines which workflows are installed.
+Glass ships the reviewed Picks listed in [`skills.csv`](./crates/skillset/skillset/skills.csv), including the Glass-owned [workon](./crates/skillset/skillset/eng/workon/SKILL.md) skill and stubs that forward to upstream suites installed on your machine. The engineering principles below describe the wider source collections; selection determines which workflows are installed.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
@@ -45,7 +45,7 @@ Or, from inside a session:
 
 It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./crates/skillset/glass/CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
+**Stuck on an old version?** `claude plugin list` shows what you have, and [`.claude-plugin/plugin.json`](./.claude-plugin/plugin.json) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
 
 ```bash
 claude plugin uninstall glass-skills@claude-plugins-official
@@ -62,7 +62,7 @@ claude plugin install glass-skills@glass
 npx skills@latest add intuscare/glass
 ```
 
-Pick the skills you want, and which coding agents to install them on. For the curated set and its shared support files, use the plugin bundle. An installer that copies only individual skill directories must also preserve their relative paths to `infra/`.
+Pick the skills you want, and which coding agents to install them on. For the curated set, use the plugin bundle. Stub Picks only forward to their upstream suite, so they need that suite installed on your machine via [`setup.sh`](./crates/skillset/skillset/setup.sh).
 
 A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
@@ -103,8 +103,8 @@ This is just the same in the AI age. There is a communication gap between you an
 
 **The Fix** is to use:
 
-- [`/grill-me`](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md) - for non-code uses
-- [`/grill-with-docs`](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./crates/skillset/mattpocock/skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
+- [`/grill-me`](./crates/skillset/skillset/all/grill-no-write/SKILL.md) - for non-code uses
+- [`/grill-with-docs`](./crates/skillset/skillset/all/grill/SKILL.md) - same as [`/grill-me`](./crates/skillset/skillset/all/grill-no-write/SKILL.md), but adds more goodies (see below)
 
 These are my most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
 
@@ -134,7 +134,7 @@ This concision pays off session after session.
 
 </details>
 
-This is built into [`/grill-with-docs`](./crates/skillset/mattpocock/skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
+This is built into [`/grill-with-docs`](./crates/skillset/skillset/all/grill/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
 
 It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
 
@@ -159,9 +159,9 @@ It's time to look at your feedback loops. Without feedback on how the code it pr
 
 For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
 
-I've built a **[`/tdd`](./crates/skillset/mattpocock/skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
+I've built a **[`/tdd`](./crates/skillset/skillset/eng/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
 
-For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/mattpocock/skills/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
+For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/skillset/eng/debug/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
 
 ### #4: We Built A Ball Of Mud
 
@@ -179,9 +179,9 @@ For debugging, I've also built a **[`/diagnosing-bugs`](./crates/skillset/mattpo
 
 This is built in to every layer of these skills:
 
-- [`/to-spec`](./crates/skillset/mattpocock/skills/engineering/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
+- [`/to-spec`](./crates/skillset/skillset/eng/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
 
-And crucially, [`/improve-codebase-architecture`](./crates/skillset/mattpocock/skills/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
+And crucially, [`/improve-codebase-architecture`](./crates/skillset/skillset/eng/architecture-review/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
 
 ### Summary
 
