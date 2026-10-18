@@ -6,7 +6,10 @@
   "description": "Stubs picked skills from skills.csv",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "skillset.pick": "bun skillset/pick-skills.ts"
+    "check": "bun skillset/index-metadata.ts --check",
+    "test": "bun test skillset/*.test.ts",
+    "skillset.pick": "bun skillset/pick-skills.ts",
+    "skillset.index": "bun skillset/index-metadata.ts"
   },
   "dependencies": {
     "@glass/scripts": "workspace:*",

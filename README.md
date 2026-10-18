@@ -191,12 +191,63 @@ Software engineering fundamentals matter more than ever. These skills are my bes
 
 ### Model-invoked
 
-- **[workon](./crates/skillset/skillset/skillset/skillset/eng/workon/SKILL.md)**: Start a Jira ticket: switch to its branch, move it to In Progress, and link the Devin session.
+<!-- picks:start -->
 
-Every Pick supports automatic selection and explicit invocation. Workflow prerequisites and confirmation steps still apply. Required unpicked skills ship as support instructions rather than additional discoverable skills.
+#### all
+
+- **[grill](./crates/skillset/skillset/all/grill/SKILL.md)**: A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.
+- **[grill-no-write](./crates/skillset/skillset/all/grill-no-write/SKILL.md)**: A relentless interview to sharpen a plan or design.
+- **[grill-to-questionnaire](./crates/skillset/skillset/all/grill-to-questionnaire/SKILL.md)**: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+- **[teach](./crates/skillset/skillset/all/teach/SKILL.md)**: Teach the user a new skill or concept, within this workspace.
+- **[wait-what](./crates/skillset/skillset/all/wait-what/SKILL.md)**: Stop; that last message did not land: re-pitch it.
+
+#### doc
+
+- **[diagram](./crates/skillset/skillset/doc/diagram/SKILL.md)**: Turn an English description (or mermaid source) into a diagram triplet: the source, an editable .excalidraw file you can open on excalidraw.com, and rendered SVG + PNG.
+- **[pdf](./crates/skillset/skillset/doc/pdf/SKILL.md)**: Turn any markdown file into a publication-quality PDF.
+- **[research](./crates/skillset/skillset/doc/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo.
+
+#### eng
+
+- **[architecture-design](./crates/skillset/skillset/eng/architecture-design/SKILL.md)**: Shared vocabulary for designing deep modules.
+- **[architecture-review](./crates/skillset/skillset/eng/architecture-review/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+- **[benchmark](./crates/skillset/skillset/eng/benchmark/SKILL.md)**: Web performance regression detection.
+- **[debug](./crates/skillset/skillset/eng/debug/SKILL.md)**: Diagnosis loop for hard bugs and performance regressions.
+- **[deslop-dry](./crates/skillset/skillset/eng/deslop-dry/SKILL.md)**: Find worthwhile shared-code extractions in recent work.
+- **[deslop-test](./crates/skillset/skillset/eng/deslop-test/SKILL.md)**: Find low-value or duplicate tests and the test-only code they keep alive.
+- **[dx-review](./crates/skillset/skillset/eng/dx-review/SKILL.md)**: Live developer experience audit.
+- **[grill-mega](./crates/skillset/skillset/eng/grill-mega/SKILL.md)**: Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.
+- **[implement](./crates/skillset/skillset/eng/implement/SKILL.md)**: Implement a piece of work based on a spec or set of tickets.
+- **[implement-mega](./crates/skillset/skillset/eng/implement-mega/SKILL.md)**: Implement the result of /to-spec and /to-tickets in code.
+- **[model](./crates/skillset/skillset/eng/model/SKILL.md)**: Build and sharpen a project's domain model.
+- **[retro](./crates/skillset/skillset/eng/retro/SKILL.md)**: Conduct a retrospective on a coding session.
+- **[setup-ts-deep-modules](./crates/skillset/skillset/eng/setup-ts-deep-modules/SKILL.md)**: Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files.
+- **[tdd](./crates/skillset/skillset/eng/tdd/SKILL.md)**: Test-driven development.
+- **[to-spec](./crates/skillset/skillset/eng/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed.
+- **[to-tickets](./crates/skillset/skillset/eng/to-tickets/SKILL.md)**: Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).
+- **[workon](./crates/skillset/skillset/eng/workon/SKILL.md)**: Start work on a Jira ticket by creating or switching to its branch and moving the ticket to In Progress.
+
+#### meta
+
+- **[careful](./crates/skillset/skillset/meta/careful/SKILL.md)**: Safety guardrails for destructive commands.
+- **[context-restore](./crates/skillset/skillset/meta/context-restore/SKILL.md)**: Restore working context saved earlier by /context-save.
+- **[context-save](./crates/skillset/skillset/meta/context-save/SKILL.md)**: Save working context.
+- **[freeze](./crates/skillset/skillset/meta/freeze/SKILL.md)**: Restrict file edits to a specific directory for the session.
+- **[guard](./crates/skillset/skillset/meta/guard/SKILL.md)**: Full safety mode: destructive command warnings + directory-scoped edits.
+- **[unfreeze](./crates/skillset/skillset/meta/unfreeze/SKILL.md)**: Clear the freeze boundary set by /freeze, allowing edits to all directories again.
+
+#### ui
+
+- **[prototype](./crates/skillset/skillset/ui/prototype/SKILL.md)**: Build a throwaway prototype to answer a design question.
+- **[shotgun](./crates/skillset/skillset/ui/shotgun/SKILL.md)**: Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate.
+- **[ui](./crates/skillset/skillset/ui/ui/SKILL.md)**: Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, empty states, and native iOS or Android screens.
+
+<!-- picks:end -->
+
+Every Pick supports automatic selection and explicit invocation. Workflow prerequisites and confirmation steps still apply.
 
 ### Source collections and curation
 
-The source suites are Glass's own [`glass/`](./crates/skillset/glass/), [mattpocock/skills](https://github.com/mattpocock/skills), [garrytan/gstack](https://github.com/garrytan/gstack), and [pbakaus/impeccable](https://github.com/pbakaus/impeccable). The upstream suites are pinned submodules, left unmodified. Their full catalogs are available for review in the CSV, but only Picks ship.
+Picks live at [`crates/skillset/skillset/<category>/<name>/`](./crates/skillset/skillset/). Glass-owned skills are authored there directly. The upstream suites [mattpocock/skills](https://github.com/mattpocock/skills), [garrytan/gstack](https://github.com/garrytan/gstack), and [pbakaus/impeccable](https://github.com/pbakaus/impeccable) are installed on the machine by [`setup.sh`](./crates/skillset/skillset/setup.sh) and invoked as `/<suite>:<skill>`; nothing of theirs is copied into this repo. A stub Pick is a small `SKILL.md` that forwards to the upstream invocation.
 
-Contributors initialize submodules, run `bun run index-skills`, review Picks and overrides, then run `bun run extract-skills`. Commit the generated copies and links together. `bun run check` verifies that source, CSV, output, and discovery agree. See [the extraction workflow](./docs/extract-skills.md) for reference rules, cleanup, and validation. Installed copies do not require submodules.
+The pick list is the hand-maintained [`skills.csv`](./crates/skillset/skillset/skills.csv): mark a row `picked`, optionally overriding `new_category`, `new_name`, or `new_description`. Run `bun run skillset.pick` to write missing stubs (existing files are never overwritten), then `bun run skillset.index` to regenerate the plugin manifest, discovery links, and the list above, all from `crates/skillset`. Commit the stubs and regenerated metadata together. `bun run check` fails when any of them are stale.
