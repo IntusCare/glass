@@ -3,13 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Indexes the skills in every suite under crates/skillset into skills.csv",
+  "description": "Stubs picked skills from skills.csv",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "QUIET=true bun test skillset/*.test.ts",
-    "check": "bun skillset/index-skills.ts --check && bun skillset/extract-skills.ts --check",
-    "skillset.extract": "bun skillset/extract-skills.ts",
-    "skillset.index": "bun skillset/index-skills.ts",
     "skillset.pick": "bun skillset/pick-skills.ts"
   },
   "dependencies": {

@@ -13,8 +13,7 @@
     "apps/*",
     "packages/*",
     "scripts",
-    "crates/skillset/glass",
-    "crates/skillset/skillset"
+    "crates/skillset"
   ],
   "scripts": {
     "build": "turbo run build",
