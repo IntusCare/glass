@@ -1,4 +1,4 @@
-# glass-skills
+# @glass/skills
 
 ## 1.3.1
 

@@ -25,7 +25,7 @@ Import specifiers may contain at most one `../` segment. Use workspace package e
 
 Use Bun for dependency installation and scripts. Run `bun run check` to verify formatting, lint, TypeScript, builds, tests, and Pick metadata. Run `bun run check-plugin-version` separately before releasing.
 
-The root package orchestrates workspaces. `crates/skillset/package.json` owns the plugin release version under the `glass-skills` package name so existing changesets still resolve; `CHANGELOG.md` lives beside it. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
+The root package orchestrates workspaces. `crates/skillset/package.json` owns the plugin release version as the `@glass/skills` package; `CHANGELOG.md` lives beside it. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
 
 Markdown files are importable. Bun's default `md` loader renders them to HTML, so add `with { type: "text" }` to get the raw Markdown string: `import readme from "../README.md" with { type: "text" };`. Either way the import is a `string`, typed by `types/markdown.d.ts`, which the root `tsconfig.json` includes for every workspace. See `scripts/markdown-import.test.ts`.
 
