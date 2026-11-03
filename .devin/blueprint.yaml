@@ -1,0 +1,7 @@
+maintenance: |
+  git submodule update --init
+  bun install
+knowledge:
+  - name: check
+    contents: |
+      Run `bun run check`, then `git checkout -- AGENTS.md` (turbo rewrites the symlink).
