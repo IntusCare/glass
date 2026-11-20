@@ -1,10 +1,10 @@
 {
   "name": "glass",
   "owner": {
-    "name": "Black Glass",
-    "url": "https://www.blackglass.com"
+    "name": "Amit Bansil",
+    "url": "https://bansil.org"
   },
-  "description": "Black Glass's agent skills marketplace: the glass plugin, installed straight from the repo.",
+  "description": "Software Factory",
   "plugins": [
     {
       "name": "glass",
