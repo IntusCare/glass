@@ -3,4 +3,4 @@ name: eng-to-spec
 description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
 ---
 
-Invoke `/mattpocock:to-spec` with the user's arguments and do nothing else.
+Invoke `/mattpocock-skills:to-spec` with the user's arguments and do nothing else.

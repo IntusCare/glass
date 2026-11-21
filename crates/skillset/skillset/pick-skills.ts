@@ -24,6 +24,11 @@ export type Row = {
   url: string;
 };
 
+/** skills.csv path prefixes whose installed plugin goes by a different name. */
+export const pluginNames: Record<string, string> = {
+  mattpocock: "mattpocock-skills",
+};
+
 function yamlScalar(value: string): string {
   return /[:#"]/.test(value) || value !== value.trim()
     ? JSON.stringify(value)
@@ -52,7 +57,8 @@ export async function pickSkills(
   const skipped: string[] = [];
   for (const row of data) {
     if (row.status !== "picked") continue;
-    const suite = row.path.split("/")[0];
+    const folder = row.path.split("/")[0] ?? "";
+    const suite = pluginNames[folder] ?? folder;
     const cmd = basename(row.path);
     const category = row.new_category || row.category;
     const name = row.new_name || row.name;
