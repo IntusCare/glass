@@ -17,13 +17,13 @@ Picks are model-invoked and user-reachable. See [.agents/invocation.md](./.agent
 
 Glass skills have a human-facing page at `docs/<category>/<skill-name>.md`. When changing one, re-sync its page following [.agents/writing-docs.md](./.agents/writing-docs.md).
 
-No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, changesets, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution.
+No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution.
 
 ## Monorepo tooling
 
 Import specifiers may contain at most one `../` segment. Use workspace package exports or configured aliases for deeper imports.
 
-Use Bun for dependency installation and scripts. Run `bun run check` to verify formatting, lint, TypeScript, builds, tests, and Pick metadata. Run `bun run check-plugin-version` separately before releasing.
+Use Bun for dependency installation and scripts. Run `bun run check` to verify formatting, lint, TypeScript, builds, tests, and Pick metadata. Every push to `main` runs `bun run skillset.bump` in the Release workflow, which bumps the minor version of `@glass/skills` and `.claude-plugin/plugin.json` together, then commits and tags `vX.Y.0`.
 
 The root package orchestrates workspaces. `crates/skillset/package.json` owns the plugin release version as the `@glass/skills` package; `CHANGELOG.md` lives beside it. Release tooling lives in the private `@glass/scripts` workspace. New applications and libraries go under `apps/*` and `packages/*`; their TypeScript configs extend the root `tsconfig.json`.
 

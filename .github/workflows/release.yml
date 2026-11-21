@@ -1,5 +1,9 @@
 name: Release
 
+# Every push to main ships a new minor version of the plugin. The bump commit
+# is pushed with GITHUB_TOKEN, which does not trigger workflows, so this does
+# not loop; the `if` below guards against it anyway.
+
 on:
   push:
     branches:
@@ -9,14 +13,16 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Version
+    name: Bump version
+    if: "!startsWith(github.event.head_commit.message, 'chore: release v')"
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,12 +40,9 @@ jobs:
       - name: Check
         run: bun run check
 
-      - name: Create Version Pull Request
-        uses: changesets/action@v1
-        with:
-          version: bun run version
-          publish: bun run changeset tag
-          commit: "chore: version skills"
-          title: "chore: version skills"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Bump minor version
+        working-directory: crates/skillset
+        run: echo "VERSION=$(bun run --silent skillset.bump)" >> "$GITHUB_ENV"
+
+      - name: Commit, tag, and push
+        run: 'test -n "$VERSION" && git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -am "chore: release v$VERSION" && git tag "v$VERSION" && git push origin HEAD:main "v$VERSION"'

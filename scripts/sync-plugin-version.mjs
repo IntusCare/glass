@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Copies crates/skillset/package.json's version into .claude-plugin/plugin.json.
-// Runs as part of `bun run version`, immediately after `changeset version`.
+// `bun run skillset.bump` already writes both files; this repairs drift by hand.
 // With --check it changes nothing and exits 1 if the two versions differ.
 
 import { readFileSync, writeFileSync } from "node:fs";

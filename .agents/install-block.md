@@ -1,6 +1,6 @@
 # The canonical install block
 
-One install story, one wording. `README.md`, `.changeset/*`, and every page under `docs/` must say **this** and nothing else. Change it here first, then propagate.
+One install story, one wording. `README.md` and every page under `docs/` must say **this** and nothing else. Change it here first, then propagate.
 
 `glass` installs from this repo's own marketplace, `.claude-plugin/marketplace.json` (marketplace name `glass`). It is not listed in Claude Code's official marketplace, so never tell users there is nothing to add first. Auto-update is off by default for marketplaces outside Anthropic's ([discover-plugins](https://code.claude.com/docs/en/discover-plugins)); never promise that updates arrive automatically.
 
